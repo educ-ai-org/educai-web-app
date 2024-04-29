@@ -11,7 +11,9 @@ export default function Leaderboard () {
                 </Box>
                 <Typography>Alunos que mais acertaram questões</Typography>
             </Box>
-            <Box></Box>
+            <Box>
+                
+            </Box>
         </Box>
     )
 }
