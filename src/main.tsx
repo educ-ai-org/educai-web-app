@@ -7,7 +7,6 @@ import LandingPage from './pages/LandingPage'
 import Turmas from './pages/Turmas'
 import Turma from './pages/Turma'
 import Login from './pages/Login'
-
 import {
   createBrowserRouter,
   RouterProvider,
@@ -24,7 +23,7 @@ const router = createBrowserRouter([
     element: <Turmas />,
   },
   {
-    path: '/turma/:id',
+    path: '/turma', // tem que fazer um jeito de passar o id da turma (tenho que ver como fazer isso no react-router-dom)
     element: <Turma />,
   },
   {
