@@ -1,5 +1,7 @@
 import axios, { AxiosInstance } from 'axios'
 import { UserLogin } from '../types/Login'
+import UserAuthReturn from '../types/UserAuthReturn'
+import getPostsByClassroomIdResult from '../types/GetPostsByClassRoomIdResult'
 
 type ClientType = 'ia-api' | 'api'
 
@@ -16,9 +18,15 @@ export default class Client {
   }
 
   async login(
-    body: UserLogin 
-  ) {
-    return (await this.axios.get('login', { data: body })).data
+    body: UserLogin
+  ): Promise<UserAuthReturn> {
+    return (await this.axios.get('user/auth', { data: body })).data
+  }
+
+  async getPostsByClassroomId( // esse endpoint precisa implementar no backend
+    classroomId: string
+  ): Promise<getPostsByClassroomIdResult>{
+    return (await this.axios.get(`classroom/${classroomId}/posts`)).data
   }
 
   // outros métodos vcs devem criar um tipo na pasta types, copiem o UserLogin e alterem conforme a necessidade
