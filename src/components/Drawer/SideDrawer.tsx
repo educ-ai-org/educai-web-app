@@ -4,11 +4,11 @@ import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box/Box'
 
 export default function SideDrawer() {
-  const home = './IconSideBar/home_icon.svg'
-  const turma = './IconSideBar/turma_icon.svg'
-  const material = './IconSideBar/material.svg'
-  const chat = './IconSideBar/chat.svg'
-  const logout = './IconSideBar/logout.svg'
+  const home = '../../public/IconSideBar/home_icon.svg'
+  const turma = '../../public/IconSideBar/turma_icon.svg'
+  const material = '../../public/IconSideBar/material.svg'
+  const chat = '../../public/IconSideBar/chat.svg'
+  const logout = '../../public/IconSideBar/logout.svg'
 
   return (
     <Box

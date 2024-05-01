@@ -14,5 +14,8 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    "semi": ["error", "never"], // Proibir ponto e vírgula
+    "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1 }], // Máximo de uma linha vazia
+    "@typescript-eslint/no-explicit-any": "off" // Permitir any
   },
 }

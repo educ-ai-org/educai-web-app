@@ -1,8 +1,8 @@
-import { FaInstagram } from "react-icons/fa";
-import Logo from "../Logo/Logo";
-import { BsTwitterX } from "react-icons/bs";
-import { RiFacebookFill } from "react-icons/ri";
-import Typography from "../Typography/Typography";
+import { FaInstagram } from "react-icons/fa"
+import Logo from "../Logo/Logo"
+import { BsTwitterX } from "react-icons/bs"
+import { RiFacebookFill } from "react-icons/ri"
+import Typography from "../Typography/Typography"
 
 export default function Footer() {
     return (

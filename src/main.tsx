@@ -7,11 +7,12 @@ import LandingPage from './pages/LandingPage'
 import Turmas from './pages/Turmas'
 import Turma from './pages/Turma'
 import Login from './pages/Login'
+import Teste from './pages/Teste'
+
 import {
   createBrowserRouter,
   RouterProvider,
 } from 'react-router-dom'
-import NewPostButton from './components/NewPostButton/NewPostButton'
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/teste',
-    element: <NewPostButton />,
+    element: <Teste />
   }
 ])
 

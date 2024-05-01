@@ -1,8 +1,9 @@
-import NewPostButton from '../components/NewPostButton/NewPostButton'
 import PageHeader from '../components/PageHeader/PageHeader'
 import Layout from './Layout'
 import Box from '@mui/material/Box/Box'
 import Post from '../components/Post/Post'
+import Modal from '../components/Modal/Modal'
+import TextField from '@mui/material/TextField/TextField'
 
 export default function Turma() {
   const postProps = {
@@ -24,7 +25,13 @@ export default function Turma() {
             flexDirection: 'column',
             padding: '10px'
             }}>
-            <NewPostButton />
+
+            <Modal variantButton='lg' titulo='Novo Post' icone='../../public/IconsPages/turma.svg' altIcone='Pessoas agrupadas' textoBotaoAbrirModal='Novo Post' textoBotaoConfirmar='Postar'>
+              <TextField id='outlined-basic' variant='outlined' label='Título*'/>
+              <TextField id='outlined-basic' variant='outlined' label='Descrição*'/>
+              <TextField id='outlined-basic' variant='outlined' label='Upload de arquivo'/>
+            </Modal>
+
             <Box sx={{ display: 'flex', gap: '16px', flexDirection: 'column' }}>
               <Post dtPublicacao={postProps.dtPublicacao} title={postProps.title}/>
               <Post dtPublicacao={postProps.dtPublicacao} title={postProps.title}/>
