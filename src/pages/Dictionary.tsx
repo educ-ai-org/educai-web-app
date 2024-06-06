@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import IconButton from '@mui/material/IconButton'
 import BookIcon from '@mui/icons-material/Book'
 import { useEffect, useState } from 'react'

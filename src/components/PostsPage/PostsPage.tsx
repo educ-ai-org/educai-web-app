@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 import TextField from '@mui/material/TextField/TextField'
 import Modal from '../Modal/Modal'
 import Box from '@mui/material/Box/Box'
@@ -21,19 +23,19 @@ export default function PostsPage(props: postsPageProps) {
     const { classroomId } = props
 
     const client = useClient()
-    const [posts, setPosts] = useState<PostType[]>([])  
+    const [posts, setPosts] = useState<PostType[]>([])
 
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [file, setFile] = useState<File | null>(null)
     const [datePosting, setDatePosting] = useState('')
 
-    const [modal, setModal] = useState<{ isLoading: boolean, isOpen: boolean, type: 'EDIT' | 'DELETE' | null }>({
+    const [modal, _setModal] = useState<{ isLoading: boolean, isOpen: boolean, type: 'EDIT' | 'DELETE' | null }>({
         isLoading: false,
         isOpen: false,
         type: null
     })
-    
+
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [modalIsLoading, setModalIsLoading] = useState(false)
 
@@ -95,23 +97,23 @@ export default function PostsPage(props: postsPageProps) {
                 iconeReact={
                     <Box sx={{ backgroundColor: '#F1EBFF', borderRadius: '4px', padding: '8px' }}>
                       <TbSchool color='#341069' size={30} />
-                    </Box>      
+                    </Box>
                 }
                 altIcone='Pessoas agrupadas'
                 textoBotaoAbrirModal='Novo Post'
                 showModal={modalIsOpen}
-                onClose={() => { 
+                onClose={() => {
                     setModalIsOpen(false)
                     setFile(null)
                 }}
                 onOpen={() => setModalIsOpen(true)}
             >
-                <TextField 
-                id='outlined-basic' 
-                variant='outlined' 
-                label='Título*' 
+                <TextField
+                id='outlined-basic'
+                variant='outlined'
+                label='Título*'
                 onChange={(e) => setTitle(e.target.value)}/>
-                
+
                 <TextField id='outlined-basic'
                  variant='outlined'
                 label='Descrição*'
@@ -136,7 +138,7 @@ export default function PostsPage(props: postsPageProps) {
                         borderRadius: '10px',
                         fontWeight: 700,
                         color: '#170050'
-                    }} variant='outlined' onClick={() => 
+                    }} variant='outlined' onClick={() =>
                         {
                             setModalIsOpen(false)
                             setFile(null)

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Box from '@mui/material/Box/Box'
 import IconButton from '@mui/material/IconButton/IconButton'
 import Typography from '@mui/material/Typography/Typography'
@@ -26,7 +27,7 @@ export default function Post(post: PostProps) {
     const [text, setText] = useState(description)
     const [fileUrl, setFile] = useState(file)
     const [url, setUrl] = useState('')
-    
+
     const [modal, setModal] = useState<{ isLoading: boolean, isOpen: boolean, type: 'EDIT' | 'DELETE' | null }>({
         isLoading: false,
         isOpen: false,
