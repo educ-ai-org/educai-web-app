@@ -83,7 +83,7 @@ export default function Turma() {
               padding: '10px'
             }}>
               {tab === 'posts' && (
-                <PostsPage posts={[postProps]} />
+                <PostsPage classroomId='1' posts={[postProps]} />
               )}
               {tab === 'atividades' && (
                 selectedAtividade ? (

@@ -17,6 +17,7 @@ import { TbSchool } from 'react-icons/tb'
 
 type postsPageProps = {
     classroomId: string
+    posts?: any
 }
 
 export default function PostsPage(props: postsPageProps) {
@@ -45,7 +46,7 @@ export default function PostsPage(props: postsPageProps) {
 
     // Atualizar os campos do modal
     useEffect(() => {
-        if(modal.isOpen) {
+        if (modal.isOpen) {
             setTitle(title)
             setDescription(description)
         }
@@ -54,14 +55,14 @@ export default function PostsPage(props: postsPageProps) {
     // Carregar os posts
     useEffect(() => {
         if (classroomId) {
-          updatePosts()
+            updatePosts()
         }
     }, [classroomId])
 
     // Função de atualizar os posts
     const updatePosts = () => {
         if (classroomId) {
-          client.getPostsByClassroom(classroomId).then((data) => setPosts(data || []))
+            client.getPostsByClassroom(classroomId).then((data) => setPosts(data || []))
         }
     }
 
@@ -96,7 +97,7 @@ export default function PostsPage(props: postsPageProps) {
                 variantButton='lg' titulo='Novo Post'
                 iconeReact={
                     <Box sx={{ backgroundColor: '#F1EBFF', borderRadius: '4px', padding: '8px' }}>
-                      <TbSchool color='#341069' size={30} />
+                        <TbSchool color='#341069' size={30} />
                     </Box>
                 }
                 altIcone='Pessoas agrupadas'
@@ -109,18 +110,18 @@ export default function PostsPage(props: postsPageProps) {
                 onOpen={() => setModalIsOpen(true)}
             >
                 <TextField
-                id='outlined-basic'
-                variant='outlined'
-                label='Título*'
-                onChange={(e) => setTitle(e.target.value)}/>
+                    id='outlined-basic'
+                    variant='outlined'
+                    label='Título*'
+                    onChange={(e) => setTitle(e.target.value)} />
 
                 <TextField id='outlined-basic'
-                 variant='outlined'
-                label='Descrição*'
-                onChange={(e) => setDescription(e.target.value)}
-                 />
+                    variant='outlined'
+                    label='Descrição*'
+                    onChange={(e) => setDescription(e.target.value)}
+                />
 
-                 <FileInput id='document' onChange={handleFileChange} value={file} description='Carregar um documento' icon={<LuFile size={22} color='#7750DE' />}></FileInput>
+                <FileInput id='document' onChange={handleFileChange} value={file} description='Carregar um documento' icon={<LuFile size={22} color='#7750DE' />}></FileInput>
 
                 <Box sx={{
                     display: 'flex',
@@ -138,11 +139,10 @@ export default function PostsPage(props: postsPageProps) {
                         borderRadius: '10px',
                         fontWeight: 700,
                         color: '#170050'
-                    }} variant='outlined' onClick={() =>
-                        {
-                            setModalIsOpen(false)
-                            setFile(null)
-                        }
+                    }} variant='outlined' onClick={() => {
+                        setModalIsOpen(false)
+                        setFile(null)
+                    }
                     }>Cancelar</Button>
 
                     <LoadingButton sx={{
@@ -160,7 +160,7 @@ export default function PostsPage(props: postsPageProps) {
                 </Box>
             </Modal>
 
-            <Box sx={{ display: 'flex', gap: '16px', flexDirection: 'column', overflow: 'auto'}}>
+            <Box sx={{ display: 'flex', gap: '16px', flexDirection: 'column', overflow: 'auto' }}>
                 {Array.isArray(posts) && posts.length > 0 ? (
                     posts.map((post, index) => (
                         <Post key={index} id={post.id} datePosting={post.datePosting} title={post.title} description={post.description} file={post.file} updatePost={updatePosts} originalFileName={post.originalFileName} />
