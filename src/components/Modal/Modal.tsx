@@ -8,6 +8,7 @@ import { FiPlusCircle } from 'react-icons/fi'
 
 type ModalProps = {
   variantButton: 'sm' | 'lg' | 'novaTurma' | 'none'
+  width?: string
   titulo: string
   icone?: string
   iconeReact?: React.ReactNode
@@ -16,7 +17,7 @@ type ModalProps = {
   children: React.ReactNode
   showModal: boolean
   onClose: () => void
-  onOpen: () => void
+  onOpen?: () => void
 }
 
 export default function BasicModal(props: ModalProps) {
@@ -30,7 +31,8 @@ export default function BasicModal(props: ModalProps) {
     textoBotaoAbrirModal,
     showModal,
     onClose,
-    onOpen
+    onOpen,
+    width
   } = props
 
   const isNovaTurmaButton = titulo === 'Nova Turma'
@@ -87,7 +89,7 @@ export default function BasicModal(props: ModalProps) {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: 450,
+            width: width ? width : 450,
             display: 'flex',
             flexDirection: 'column',
             bgcolor: 'white',
@@ -106,7 +108,7 @@ export default function BasicModal(props: ModalProps) {
             }}
           >
             {iconeReact || <img src={icone} alt={altIcone} />}
-            <Typography variant='h6' component='h2'>
+            <Typography variant='h6' component='h2' sx={{ fontWeight: 700 }}>
               {titulo}
             </Typography>
           </Box>
@@ -120,7 +122,6 @@ export default function BasicModal(props: ModalProps) {
               marginBottom: '10px'
             }}
           />
-
           {children}
         </Box>
       </Modal>

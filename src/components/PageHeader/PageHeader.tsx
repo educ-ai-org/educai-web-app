@@ -11,6 +11,7 @@ import Modal from '../Modal/Modal'
 import Button from '@mui/material/Button'
 import { LoadingButton } from '@mui/lab'
 import SearchBar from '../SearchBar/SearchBar'
+import { TbSchool } from 'react-icons/tb'
 
 type Tab = 'posts' | 'atividades' | 'pessoas'
 
@@ -29,8 +30,16 @@ type PageHeaderProps = {
 export default function PageHeader(PageHeaderProps: PageHeaderProps) {
   const { title, showButton, search, createClassroom } = PageHeaderProps
 
+  const tabName: { [key: string]: Tab } = {
+    posts: 'posts',
+    atividades: 'atividades',
+    pessoas: 'pessoas',
+    'criar-atividade': 'atividades',
+    'criar-atividade-ia': 'atividades',
+  }
+
   const actualTab = PageHeaderProps.tab ? PageHeaderProps.tab : new URLSearchParams(window.location.search).get('tab')
-  const [tab, setTab] = useState<Tab>(actualTab ? actualTab as Tab : 'posts')
+  const [tab, setTab] = useState<Tab>(actualTab ? tabName[actualTab] as Tab : 'posts')
   const navigate = useNavigate()
   const [name, setName] = useState('')
   const [subject, setSubject] = useState('')
@@ -118,7 +127,11 @@ export default function PageHeader(PageHeaderProps: PageHeaderProps) {
             textoBotaoAbrirModal='Nova Turma'
             altIcone='Nova Turma'
             variantButton='novaTurma'
-            icone='/iconsPages/plus-circle.svg'
+            iconeReact={
+              <Box sx={{ backgroundColor: '#F1EBFF', borderRadius: '4px', padding: '8px' }}>
+                <TbSchool color='#341069' size={30} />
+              </Box>      
+            }
             showModal={modalIsOpen}
             onClose={() => setModalIsOpen(false)}
             onOpen={() => setModalIsOpen(true)}
@@ -140,23 +153,29 @@ export default function PageHeader(PageHeaderProps: PageHeaderProps) {
               marginTop: '10px'
             }}>
               <Button sx={{
-                color: 'black',
                 borderColor: '#5D1EF4',
                 '&:hover': {
-                  backgroundColor: '#D8D8D8'
+                    backgroundColor: '#D8D8D8'
                 },
                 paddingY: '12px',
-                width: '48%'
+                width: '48%',
+                textTransform: 'none',
+                borderRadius: '10px',
+                fontWeight: 700,
+                color: '#170050'
               }} variant='outlined' onClick={() => setModalIsOpen(false)}>Cancelar</Button>
 
               <LoadingButton sx={{
                 backgroundColor: '#6730EC',
                 color: 'white',
                 '&:hover': {
-                  backgroundColor: '#4D1EAD'
+                    backgroundColor: '#4D1EAD'
                 },
                 paddingY: '12px',
-                width: '48%'
+                width: '48%',
+                textTransform: 'none',
+                borderRadius: '10px',
+                fontWeight: 700
               }} variant='contained' onClick={createClass} loading={modalIsLoading}>Criar turma</LoadingButton>
             </Box>
           </Modal>

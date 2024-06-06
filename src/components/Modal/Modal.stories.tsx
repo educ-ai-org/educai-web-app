@@ -11,7 +11,7 @@ export const Example = () => {
     <Modal 
       variantButton='lg' 
       titulo='Novo Post' 
-      icone='/IconsPages/turma.svg' 
+      icone='\iconsPages\turma.svg' 
       altIcone='Pessoas agrupadas' 
       textoBotaoAbrirModal='Novo Post' 
       showModal={true} 

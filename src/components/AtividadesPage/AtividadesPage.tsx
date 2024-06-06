@@ -4,9 +4,11 @@ import Atividade from '../Atividade/Atividade'
 import { useState } from 'react'
 import Divider from '@mui/material/Divider'
 import Typography from '@mui/material/Typography/Typography'
-import AssignmentIcon from '@mui/icons-material/Assignment'
-import BasicModal from '../Modal/Modal'
+import Modal from '../Modal/Modal'
 import { useNavigate } from 'react-router-dom'
+import { TbSchool } from 'react-icons/tb'
+import { BsStars } from 'react-icons/bs'
+import { FaBook } from 'react-icons/fa'
 
 type AtividadePageProps = {
     atividades: {
@@ -24,20 +26,28 @@ type AtividadePageProps = {
 
 export default function AtividadesPage(props: AtividadePageProps) {
     const { atividades, onSelectAtividade, classRoomId } = props
+    const [modalIsOpen, setModalIsOpen] = useState(false)
     const navigate = useNavigate()
 
     const handleManualCreate = () => {
         setModalIsOpen(false)
-        navigate(`/turma/criar-atividade?classRoomId=${classRoomId}?tab=atividades`)
+        navigate(`/turma/${classRoomId}?tab=criar-atividade`)
     }
 
-    const [modalIsOpen, setModalIsOpen] = useState(false)
+    const handleIACreate = () => {
+        setModalIsOpen(false)
+        navigate(`/turma/${classRoomId}?tab=criar-atividade-ia`)
+    }
+
     return (
         <>
-            <BasicModal
-                variantButton='lg' titulo='Nova atividade'
+            <Modal
+                variantButton='lg' 
+                titulo='Nova atividade'
                 iconeReact={
-                    <AssignmentIcon />
+                    <Box sx={{ backgroundColor: '#F1EBFF', borderRadius: '4px', padding: '8px' }}>
+                        <TbSchool color='#341069' size={30} />
+                    </Box>      
                 }
                 altIcone='Caderno de atividade'
                 textoBotaoAbrirModal='Nova Atividade'
@@ -53,33 +63,8 @@ export default function AtividadesPage(props: AtividadePageProps) {
                     gap: '20px',
                 }}>
                     <Button sx={{
-                        color: 'black',
-                        borderColor: '#5D1EF4',
-                        '&:hover': {
-                            backgroundColor: '#D8D8D8'
-                        },
-                        paddingY: '12px',
-                        width: '90%',
-                        textTransform: 'none'
-                    }} variant='outlined'
-                    onClick={handleManualCreate}>Montar Questionário Manual</Button>
-
-                    <Box sx={{
-                        width: '90%',
                         display: 'flex',
-                        alignItems: 'center',
-                        gap: '8px'
-                    }}>
-                    <Divider sx={{
-                        width: '40%',
-                    }} />
-                    <Typography sx={{fontSize: '12px'}}>ou</Typography>
-                    <Divider sx={{
-                        width: '40%',
-                    }} />
-                    </Box>
-
-                    <Button sx={{
+                        justifyContent: 'flex-start',
                         backgroundColor: '#6730EC',
                         color: 'white',
                         '&:hover': {
@@ -87,10 +72,44 @@ export default function AtividadesPage(props: AtividadePageProps) {
                         },
                         paddingY: '12px',
                         width: '90%',
+                        borderRadius: '10px',
                         textTransform: 'none',
-                    }} variant='contained'>Gerar Questionário por IA</Button>
+                        fontWeight: 700
+                    }}
+                    startIcon={<FaBook color='#FFF' size={18}/>} 
+                    variant='contained'
+                    onClick={handleManualCreate}>Montar Questionário Manual</Button>
+
+                    <Box sx={{
+                        width: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '8px',
+                    }}>
+                        <Divider sx={{width: '40%'}}/>
+                        <Typography sx={{fontSize: '12px'}}>ou</Typography>
+                        <Divider sx={{width: '40%'}} />
+                    </Box>
+
+                    <Button sx={{
+                        display: 'flex',
+                        justifyContent: 'flex-start',
+                        color: 'black',
+                        borderColor: '#5D1EF4',
+                        '&:hover': {
+                            backgroundColor: '#D8D8D8'
+                        },
+                        paddingY: '12px',
+                        width: '90%',
+                        textTransform: 'none',
+                        borderRadius: '10px',
+                        fontWeight: 700
+                    }} variant='outlined'
+                    startIcon={<BsStars color='#6730EC' size={22}/>}
+                    onClick={handleIACreate}>Gerar Questionário por IA</Button>
                 </Box>
-            </BasicModal>
+            </Modal>
 
             <Box sx={{ display: 'flex', gap: '16px', flexDirection: 'column' }}>
                 {atividades.map((atividade, index) => (
