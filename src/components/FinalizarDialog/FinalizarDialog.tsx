@@ -8,7 +8,6 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
-import 'dayjs/locale/pt-BR'
 
 type FinalizarDialogProps = {
   enabled: boolean
@@ -48,9 +47,9 @@ export default function FinalizarDialog(props: FinalizarDialogProps) {
 
   return (
     <>
-      <LoadingButton 
-        sx={{ paddingInline: '80px', borderRadius: '10px', textTransform: 'none', fontWeight: 600, backgroundColor: '#7750DE'}} 
-        variant='contained' 
+      <LoadingButton
+        sx={{ paddingInline: '80px', borderRadius: '10px', textTransform: 'none', fontWeight: 600, backgroundColor: '#7750DE'}}
+        variant='contained'
         onClick={handleOpen}
         disabled={!enabled}>
           Finalizar
@@ -64,7 +63,7 @@ export default function FinalizarDialog(props: FinalizarDialogProps) {
         iconeReact={
           <Box sx={{ backgroundColor: '#F1EBFF', borderRadius: '4px', padding: '8px' }}>
             <TbSchool color='#341069' size={30} />
-          </Box>      
+          </Box>
         }
         showModal={open}
         onClose={handleClose}
@@ -78,8 +77,8 @@ export default function FinalizarDialog(props: FinalizarDialogProps) {
         />
         <LocalizationProvider adapterLocale="pt-BR" dateAdapter={AdapterDayjs}>
           <DemoContainer components={['DatePicker']}>
-            <DatePicker 
-              sx={{ 
+            <DatePicker
+              sx={{
                 width: '100%',
                 '& .MuiSvgIcon-root': {
                   color: '#7750DE',
