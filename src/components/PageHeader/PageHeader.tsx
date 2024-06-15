@@ -3,15 +3,12 @@ import Box from '@mui/material/Box/Box'
 import Divider from '@mui/material/Divider/Divider'
 import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs/Tabs'
-import TextField from '@mui/material/TextField/TextField'
 import Typography from '@mui/material/Typography/Typography'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Modal from '../Modal/Modal'
-import Button from '@mui/material/Button'
-import { LoadingButton, Skeleton } from '@mui/lab'
+import Skeleton from '@mui/lab/Skeleton'
 import SearchBar from '../SearchBar/SearchBar'
-import { TbSchool } from 'react-icons/tb'
+import NewClassroomModal from './NewClassroomModal'
 
 type Tab = 'posts' | 'atividades' | 'pessoas'
 
@@ -53,7 +50,7 @@ export default function PageHeader(PageHeaderProps: PageHeaderProps) {
   const classroomId = PageHeaderProps.classroomId
 
   const createClass = () => {
-    if(name && subject && createClassroom) {
+    if (name && subject && createClassroom) {
       setModalIsLoading(true)
       createClassroom(name, subject).finally(() => {
         setModalIsLoading(false)
@@ -81,7 +78,7 @@ export default function PageHeader(PageHeaderProps: PageHeaderProps) {
         justifyContent: 'space-between'
       }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-          <img src={iconPath ? iconPath :'/iconsPages/turma.svg'} alt='Pessoas agrupadas' />
+          <img src={iconPath ? iconPath : '/iconsPages/turma.svg'} alt='Pessoas agrupadas' />
           <Typography variant='h5' sx={{
             fontWeight: '700'
           }}>
@@ -130,63 +127,17 @@ export default function PageHeader(PageHeaderProps: PageHeaderProps) {
         }
 
         {showButton && (
-          <Modal
-            titulo='Nova Turma'
-            textoBotaoAbrirModal='Nova Turma'
-            altIcone='Nova Turma'
-            variantButton='novaTurma'
-            iconeReact={
-              <Box sx={{ backgroundColor: '#F1EBFF', borderRadius: '4px', padding: '8px' }}>
-                <TbSchool color='#341069' size={30} />
-              </Box>
-            }
-            showModal={modalIsOpen}
-            onClose={() => setModalIsOpen(false)}
-            onOpen={() => setModalIsOpen(true)}
-          >
-            <TextField
-              variant='outlined'
-              label='Nome*'
-              onChange={(e) => setName(e.target.value)}
-              />
-            <TextField
-             variant='outlined'
-             label='Matéria*'
-              onChange={(e) => setSubject(e.target.value)}
-            />
-
-            <Box sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              marginTop: '10px'
-            }}>
-              <Button sx={{
-                borderColor: '#5D1EF4',
-                '&:hover': {
-                    backgroundColor: '#D8D8D8'
-                },
-                paddingY: '12px',
-                width: '48%',
-                textTransform: 'none',
-                borderRadius: '10px',
-                fontWeight: 700,
-                color: '#170050'
-              }} variant='outlined' onClick={() => setModalIsOpen(false)}>Cancelar</Button>
-
-              <LoadingButton sx={{
-                backgroundColor: '#6730EC',
-                color: 'white',
-                '&:hover': {
-                    backgroundColor: '#4D1EAD'
-                },
-                paddingY: '12px',
-                width: '48%',
-                textTransform: 'none',
-                borderRadius: '10px',
-                fontWeight: 700
-              }} variant='contained' onClick={createClass} loading={modalIsLoading}>Criar turma</LoadingButton>
-            </Box>
-          </Modal>
+          <NewClassroomModal
+            createClass={createClass}
+            setModalIsLoading={setModalIsLoading}
+            setModalIsOpen={setModalIsOpen}
+            modalIsOpen={modalIsOpen}
+            setName={setName}
+            name={name}
+            setSubject={setSubject}
+            subject={subject}
+            modalIsLoading={modalIsLoading}
+          />
         )}
       </Box>
       <Divider sx={{

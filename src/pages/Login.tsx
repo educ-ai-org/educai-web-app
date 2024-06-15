@@ -1,5 +1,4 @@
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
 import Checkbox from '@mui/material/Checkbox'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
@@ -11,12 +10,22 @@ import SlideLogin from '../components/SlidesLogin/SlidesLogin'
 import useClient from '../lib/client/useClient'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { LoadingButton } from '@mui/lab'
+import InputAdornment from '@mui/material/InputAdornment'
+import IconButton from '@mui/material/IconButton'
+import Visibility from '@mui/icons-material/Visibility'
+import VisibilityOff from '@mui/icons-material/VisibilityOff'
+import FormControl from '@mui/material/FormControl'
+import OutlinedInput from '@mui/material/OutlinedInput'
+import InputLabel from '@mui/material/InputLabel'
 
 export default function Login() {
     const client = useClient()
     const navigate = useNavigate()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [showPassword, setShowPassword] = useState(false)
+    
     const errorToast = (message: string) => {
         toast.error(message, {
             position: 'bottom-right',
@@ -31,7 +40,7 @@ export default function Login() {
     }
 
     useEffect(() => {
-        const onEnter = (e : any) => {
+        const onEnter = (e: any) => {
             if (e.key === 'Enter') {
                 handleLogin.execute
             }
@@ -54,6 +63,14 @@ export default function Login() {
             }
         })
     })
+
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword)
+    }
+
+    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault()
+    }
 
     return (
         <Box sx={{
@@ -97,13 +114,25 @@ export default function Login() {
                         label='E-mail'
                         onChange={(e) => setEmail(e.target.value)}
                     />
-
-                    <TextField
-                        variant='outlined'
-                        type='password'
-                        label='Senha'
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
+                    <FormControl variant='outlined'>
+                        <InputLabel htmlFor='outlined-adornment-password'>Senha</InputLabel>
+                        <OutlinedInput
+                            type={showPassword ? 'text' : 'password'}
+                            label='Senha'
+                            onChange={(e) => setPassword(e.target.value)}
+                            endAdornment={
+                                <InputAdornment position='end'>
+                                    <IconButton
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge='end'
+                                    >
+                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+                        />
+                    </FormControl>
                     <Box sx={{
                         display: 'flex',
                         alignItems: 'center'
@@ -112,8 +141,9 @@ export default function Login() {
                         <Typography variant='body2'>Mantenha-me conectado</Typography>
                     </Box>
 
-                    <Button variant='contained'
+                    <LoadingButton variant='contained'
                         onClick={handleLogin.execute}
+                        loading={handleLogin.loading}
                         sx={{
                             backgroundColor: '#6730EC',
                             color: 'white',
@@ -122,7 +152,8 @@ export default function Login() {
                             },
                             paddingY: '12px'
                         }} >
-                        <Typography variant='body2' color='white'>Entrar</Typography> </Button>
+                        Entrar
+                    </LoadingButton>
 
                     <Box sx={{
                         display: 'flex',
