@@ -9,29 +9,18 @@ import { useNavigate } from 'react-router-dom'
 import Logo from '../components/Logo/Logo'
 import SlideLogin from '../components/SlidesLogin/SlidesLogin'
 import useClient from '../lib/client/useClient'
-import { ToastContainer, toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import Snackbar from '@mui/material/Snackbar'
+import Alert from '@mui/material/Alert'
 
 export default function Login() {
     const client = useClient()
     const navigate = useNavigate()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const errorToast = (message: string) => {
-        toast.error(message, {
-            position: 'bottom-right',
-            autoClose: 2600,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: 'light'
-        })
-    }
+    const [snackBar, setSnackBar] = useState({ open: false, message: '' })
 
     useEffect(() => {
-        const onEnter = (e : any) => {
+        const onEnter = (e: any) => {
             if (e.key === 'Enter') {
                 handleLogin.execute
             }
@@ -41,7 +30,7 @@ export default function Login() {
 
     const handleLogin = useAsyncCallback(async () => {
         if (email === '' || password === '') {
-            errorToast('Preencha todos os campos antes de realizar o login.')
+            setSnackBar({ open: true, message: 'Preencha todos os campos' })
             return
         }
         await client.login({ email, password }).then((res) => {
@@ -50,7 +39,7 @@ export default function Login() {
         }).catch((e) => {
             console.log(e)
             if (e.name === 'AxiosError') {
-                errorToast('Email ou senha invalidos, tente novamente.')
+                setSnackBar({ open: true, message: 'Usuário ou senha inválidos' })
             }
         })
     })
@@ -133,18 +122,22 @@ export default function Login() {
                     </Box>
                 </Box>
             </Box>
-            <ToastContainer
-                position='bottom-right'
-                autoClose={2600}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme='light'
-            />
+            <Snackbar
+                open={snackBar.open}
+                autoHideDuration={3000}
+                onClose={() => setSnackBar({ open: false, message: '' })}
+                message={snackBar.message}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+            >
+                <Alert
+                    onClose={() => setSnackBar({ open: false, message: '' })}
+                    severity='error'
+                    variant='filled'
+                    sx={{ width: '100%' }}
+                >
+                    {snackBar.message}
+                </Alert>
+            </Snackbar>
         </Box>
     )
 }
