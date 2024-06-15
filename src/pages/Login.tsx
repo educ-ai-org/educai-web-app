@@ -17,6 +17,7 @@ export default function Login() {
     const navigate = useNavigate()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    
     const errorToast = (message: string) => {
         toast.error(message, {
             position: 'bottom-right',
