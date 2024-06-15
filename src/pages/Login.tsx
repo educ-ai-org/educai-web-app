@@ -25,7 +25,7 @@ export default function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [showPassword, setShowPassword] = useState(false)
-
+    
     const errorToast = (message: string) => {
         toast.error(message, {
             position: 'bottom-right',
