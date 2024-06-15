@@ -2,7 +2,6 @@
 import IconButton from '@mui/material/IconButton'
 import BookIcon from '@mui/icons-material/Book'
 import { useEffect, useState } from 'react'
-import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
 import DialogContent from '@mui/material/DialogContent'
 import DialogTitle from '@mui/material/DialogTitle'
@@ -13,6 +12,7 @@ import { DictonaryResponse } from '../lib/types/DictonaryResponse'
 import VolumeUpIcon from '@mui/icons-material/VolumeUpRounded'
 import { Stack } from '../lib/stack'
 import Divider from '@mui/material/Divider'
+import { LoadingButton } from '@mui/lab'
 
 const stack = new Stack<string>()
 
@@ -22,6 +22,7 @@ export default function Dictionary() {
     const [resultData, setResultData] = useState<DictonaryResponse | null>(null)
     const client = useClient()
     const [history, setHistory] = useState<string[]>([])
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         setHistory([...stack.storage])
@@ -46,6 +47,7 @@ export default function Dictionary() {
     }
 
     const handleSearch = async (word: string) => {
+        setLoading(true)
         if (word !== search) {
             setSearch(word)
         }
@@ -55,6 +57,7 @@ export default function Dictionary() {
             stack.push(search)
             setHistory([...stack.storage])
         }
+        setLoading(false)
     }
 
     const listenAudio = (audioUrl: string) => {
@@ -125,12 +128,13 @@ export default function Dictionary() {
                                 borderRadius: '10px'
                             }
                         }} />
-                        <Button
+                        <LoadingButton
                             sx={{ marginLeft: 1, height: '100%', padding: '16px', paddingX: '40px', borderRadius: '10px', fontWeight: 'bold'}}
                             variant='contained'
+                            loading={loading}
                             color='primary'
                             onClick={() => handleSearch(search)}
-                        >Buscar</Button>
+                        >Buscar</LoadingButton>
                     </Box>
                     <Box sx={{ marginTop: '16px' }}>
                         <Typography variant='h6' sx={{ fontWeight: 'bold' }}>Histórico de Pesquisa</Typography>
