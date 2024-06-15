@@ -152,7 +152,7 @@ export default function Login() {
                             },
                             paddingY: '12px'
                         }} >
-                        <Typography variant='body2' color='white'>Entrar</Typography>
+                        Entrar
                     </LoadingButton>
 
                     <Box sx={{
