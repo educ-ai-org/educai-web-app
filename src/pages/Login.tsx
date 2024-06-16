@@ -1,5 +1,4 @@
 import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
 import Checkbox from '@mui/material/Checkbox'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
@@ -9,15 +8,36 @@ import { useNavigate } from 'react-router-dom'
 import Logo from '../components/Logo/Logo'
 import SlideLogin from '../components/SlidesLogin/SlidesLogin'
 import useClient from '../lib/client/useClient'
-import Snackbar from '@mui/material/Snackbar'
-import Alert from '@mui/material/Alert'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { LoadingButton } from '@mui/lab'
+import InputAdornment from '@mui/material/InputAdornment'
+import IconButton from '@mui/material/IconButton'
+import Visibility from '@mui/icons-material/Visibility'
+import VisibilityOff from '@mui/icons-material/VisibilityOff'
+import FormControl from '@mui/material/FormControl'
+import OutlinedInput from '@mui/material/OutlinedInput'
+import InputLabel from '@mui/material/InputLabel'
 
 export default function Login() {
     const client = useClient()
     const navigate = useNavigate()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [snackBar, setSnackBar] = useState({ open: false, message: '' })
+    const [showPassword, setShowPassword] = useState(false)
+    
+    const errorToast = (message: string) => {
+        toast.error(message, {
+            position: 'bottom-right',
+            autoClose: 2600,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'light'
+        })
+    }
 
     useEffect(() => {
         const onEnter = (e: any) => {
@@ -30,7 +50,7 @@ export default function Login() {
 
     const handleLogin = useAsyncCallback(async () => {
         if (email === '' || password === '') {
-            setSnackBar({ open: true, message: 'Preencha todos os campos' })
+            errorToast('Preencha todos os campos antes de realizar o login.')
             return
         }
         await client.login({ email, password }).then((res) => {
@@ -39,10 +59,18 @@ export default function Login() {
         }).catch((e) => {
             console.log(e)
             if (e.name === 'AxiosError') {
-                setSnackBar({ open: true, message: 'Usuário ou senha inválidos' })
+                errorToast('Email ou senha invalidos, tente novamente.')
             }
         })
     })
+
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword)
+    }
+
+    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault()
+    }
 
     return (
         <Box sx={{
@@ -86,13 +114,25 @@ export default function Login() {
                         label='E-mail'
                         onChange={(e) => setEmail(e.target.value)}
                     />
-
-                    <TextField
-                        variant='outlined'
-                        type='password'
-                        label='Senha'
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
+                    <FormControl variant='outlined'>
+                        <InputLabel htmlFor='outlined-adornment-password'>Senha</InputLabel>
+                        <OutlinedInput
+                            type={showPassword ? 'text' : 'password'}
+                            label='Senha'
+                            onChange={(e) => setPassword(e.target.value)}
+                            endAdornment={
+                                <InputAdornment position='end'>
+                                    <IconButton
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge='end'
+                                    >
+                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+                        />
+                    </FormControl>
                     <Box sx={{
                         display: 'flex',
                         alignItems: 'center'
@@ -101,8 +141,9 @@ export default function Login() {
                         <Typography variant='body2'>Mantenha-me conectado</Typography>
                     </Box>
 
-                    <Button variant='contained'
+                    <LoadingButton variant='contained'
                         onClick={handleLogin.execute}
+                        loading={handleLogin.loading}
                         sx={{
                             backgroundColor: '#6730EC',
                             color: 'white',
@@ -111,7 +152,8 @@ export default function Login() {
                             },
                             paddingY: '12px'
                         }} >
-                        <Typography variant='body2' color='white'>Entrar</Typography> </Button>
+                        Entrar
+                    </LoadingButton>
 
                     <Box sx={{
                         display: 'flex',
@@ -122,22 +164,18 @@ export default function Login() {
                     </Box>
                 </Box>
             </Box>
-            <Snackbar
-                open={snackBar.open}
-                autoHideDuration={3000}
-                onClose={() => setSnackBar({ open: false, message: '' })}
-                message={snackBar.message}
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-            >
-                <Alert
-                    onClose={() => setSnackBar({ open: false, message: '' })}
-                    severity='error'
-                    variant='filled'
-                    sx={{ width: '100%' }}
-                >
-                    {snackBar.message}
-                </Alert>
-            </Snackbar>
+            <ToastContainer
+                position='bottom-right'
+                autoClose={2600}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme='light'
+            />
         </Box>
     )
 }
