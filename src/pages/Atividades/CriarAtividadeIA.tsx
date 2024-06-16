@@ -12,6 +12,8 @@ import { IoIosArrowDown } from 'react-icons/io'
 import useClient from '../../lib/client/useAIClient'
 import { GenerateQuestionPayload } from '../../lib/types/GenerateQuestionPayload'
 import { useNavigate } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 export default function CriarAtividadeIA() {
 	const StyledButton = styled(Button)({
@@ -19,20 +21,20 @@ export default function CriarAtividadeIA() {
 		gap: '8px',
 		backgroundColor: '#FFF',
 		color: '#170050',
-		border: '1px solid #6730EC', 
-		borderRadius: '10px', 
+		border: '1px solid #6730EC',
+		borderRadius: '10px',
 		fontSize: '18px',
 		fontWeight: 'bold',
 		textTransform: 'none',
-		transition: 'background-color 0.3s, box-shadow 0.3s', 
+		transition: 'background-color 0.3s, box-shadow 0.3s',
 		padding: '12px',
 		width: '48%',
 		'&:hover': {
-			backgroundColor: '#E6CCFF', 
+			backgroundColor: '#E6CCFF',
 		}
 	})
 
-    const client = useClient()
+	const client = useClient()
 	const navigate = useNavigate()
 	const url = new URL(window.location.href)
 	const pathSegments = url.pathname.split('/')
@@ -52,55 +54,73 @@ export default function CriarAtividadeIA() {
 	}
 
 	const [document, setDocument] = useState<File | null>(null)
-    const [audio, setAudio] = useState<File | null>(null)
-    const [instrucoes, setInstrucoes] = useState<string>('')
-    const [linkYoutube, setLinkYoutube] = useState<string>('')
-	
+	const [audio, setAudio] = useState<File | null>(null)
+	const [instrucoes, setInstrucoes] = useState<string>('')
+	const [linkYoutube, setLinkYoutube] = useState<string>('')
+
 	const [numberOfQuestions, setNumberOfQuestions] = useState<number>(0)
 	const [difficulty, setDifficulty] = useState<string>('')
 	const [theme, setTheme] = useState<string>('')
-    const [relatedTheme, setRelatedTheme] = useState<string>('')
-    const [errorMessage, setErrorMessage] = useState<string>('')
+	const [relatedTheme, setRelatedTheme] = useState<string>('')
+	const [errorMessage, setErrorMessage] = useState<string>('')
 	const [isLoading, setIsLoading] = useState<boolean>(false)
 
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>, set: React.Dispatch<React.SetStateAction<File | null>>) => {
-        set(event.target.files ? event.target.files[0] : null)
-    }
+	const errorToast = (message: string) => {
+		toast.error(message, {
+			position: 'bottom-right',
+			autoClose: 2600,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: 'light',
+		})
+	}
 
-    const handleValueChange = (event: string, set: React.Dispatch<React.SetStateAction<string>>) => {
-        set(event)
-    }
+	const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>, set: React.Dispatch<React.SetStateAction<File | null>>) => {
+		set(event.target.files ? event.target.files[0] : null)
+	}
+
+	const handleValueChange = (event: string, set: React.Dispatch<React.SetStateAction<string>>) => {
+		set(event)
+	}
 
 	const handleClick = async () => {
-        if (!instrucoes && !linkYoutube && !audio && !document || (!theme || !relatedTheme || !difficulty || !numberOfQuestions)) {
-            setErrorMessage('As entradas acima devem ser preenchidas!')
-            return
-        }
+		try {
+			if (!instrucoes && !linkYoutube && !audio && !document || (!theme || !relatedTheme || !difficulty || !numberOfQuestions)) {
+				setErrorMessage('As entradas acima devem ser preenchidas!')
+				return
+			}
 
-        setIsLoading(true)
+			setIsLoading(true)
 
-        let payload = {} as GenerateQuestionPayload
+			let payload = {} as GenerateQuestionPayload
 
-        resourceType === 'linkYoutube' && (payload = { ...payload, youtubeLink: linkYoutube })
-        resourceType === 'mp3' && (payload = { ...payload, audio })
-        resourceType === 'documento' && (payload = { ...payload, document })
-        resourceType === 'instrucao' && (payload = { ...payload, instructions: instrucoes })
+			resourceType === 'linkYoutube' && (payload = { ...payload, youtubeLink: linkYoutube })
+			resourceType === 'mp3' && (payload = { ...payload, audio })
+			resourceType === 'documento' && (payload = { ...payload, document })
+			resourceType === 'instrucao' && (payload = { ...payload, instructions: instrucoes })
 
-        payload = {
-            ...payload,
-            theme,
-            relatedTheme,
-            difficulty,
-            numberOfQuestions
-        } as GenerateQuestionPayload
+			payload = {
+				...payload,
+				theme,
+				relatedTheme,
+				difficulty,
+				numberOfQuestions
+			} as GenerateQuestionPayload
 
-        const response = await client.generateQuestion(payload)
+			const response = await client.generateQuestion(payload)
 
-		navigate(`/turma/${classroomId}?tab=criar-atividade`, { state: { questions: response } })
-        
-        setErrorMessage('')
-        setIsLoading(false)
-    }
+			navigate(`/turma/${classroomId}?tab=criar-atividade`, { state: { questions: response } })
+
+			setErrorMessage('')
+			setIsLoading(false)
+		} catch (error) {
+			errorToast('Erro ao gerar questionário!')
+			setIsLoading(false)
+		}
+	}
 
 	return (
 		<>
@@ -109,16 +129,16 @@ export default function CriarAtividadeIA() {
 
 				<Typography sx={{ fontSize: 26, fontWeight: 600, textAlign: 'center' }}>
 					<>
-						Qual tipo de entrada você fornecerá para <br/> a criação do questionário?
+						Qual tipo de entrada você fornecerá para <br /> a criação do questionário?
 					</>
 				</Typography>
 
-				<Divider sx={{width: '60%'}} />
+				<Divider sx={{ width: '60%' }} />
 
-				<Box sx={{display: 'flex', justifyContent: 'space-between', width: '70%'}}>
+				<Box sx={{ display: 'flex', justifyContent: 'space-between', width: '70%' }}>
 					<StyledButton
 						variant="contained"
-						startIcon={<IoChatbubblesOutline color='#6730EC' size={28}/>}
+						startIcon={<IoChatbubblesOutline color='#6730EC' size={28} />}
 						onClick={() => handleOpen('instrucao')}
 					>
 						Instruções
@@ -126,17 +146,17 @@ export default function CriarAtividadeIA() {
 
 					<StyledButton
 						variant="contained"
-						startIcon={<CiMusicNote1 color='#6730EC' size={28}/>}
+						startIcon={<CiMusicNote1 color='#6730EC' size={28} />}
 						onClick={() => handleOpen('mp3')}
 					>
 						MP3
 					</StyledButton>
 				</Box>
 
-				<Box sx={{display: 'flex', justifyContent: 'space-between', width: '70%'}}>
+				<Box sx={{ display: 'flex', justifyContent: 'space-between', width: '70%' }}>
 					<StyledButton
 						variant="contained"
-						startIcon={<RiLink color='#6730EC' size={28}/>}
+						startIcon={<RiLink color='#6730EC' size={28} />}
 						onClick={() => handleOpen('linkYoutube')}
 					>
 						Link do Youtube
@@ -144,7 +164,7 @@ export default function CriarAtividadeIA() {
 
 					<StyledButton
 						variant="contained"
-						startIcon={<LuFile color='#6730EC' size={28}/>}
+						startIcon={<LuFile color='#6730EC' size={28} />}
 						onClick={() => handleOpen('documento')}
 					>
 						Documento
@@ -160,7 +180,7 @@ export default function CriarAtividadeIA() {
 					iconeReact={
 						<Box sx={{ backgroundColor: '#F1EBFF', borderRadius: '4px', padding: '8px' }}>
 							<TbSchool color='#341069' size={30} />
-						</Box>      
+						</Box>
 					}
 					showModal={open}
 					onClose={handleClose}
@@ -219,20 +239,20 @@ export default function CriarAtividadeIA() {
 						}
 					</Box>
 
-					<Box sx={{display: 'flex', gap: '32px', width: '100%'}}>
-						<Box sx={{width: '100%'}}>
-							<Box sx={{display: 'flex'}}>
-								<Typography sx={{fontSize: '16px', fontWeight: 400, color: '#000'}}>Dificuldade:</Typography>
-								<Typography sx={{fontSize: '16px', fontWeight: 400, color: 'red'}}>*</Typography>
+					<Box sx={{ display: 'flex', gap: '32px', width: '100%' }}>
+						<Box sx={{ width: '100%' }}>
+							<Box sx={{ display: 'flex' }}>
+								<Typography sx={{ fontSize: '16px', fontWeight: 400, color: '#000' }}>Dificuldade:</Typography>
+								<Typography sx={{ fontSize: '16px', fontWeight: 400, color: 'red' }}>*</Typography>
 							</Box>
 
 							<Select
 								IconComponent={props => <IoIosArrowDown {...props} color='#7750DE' size={25} />}
-								sx={{width: '100%'}}
+								sx={{ width: '100%' }}
 								displayEmpty
 								value={difficulty}
 								onChange={(event) => handleValueChange(event.target.value as string, setDifficulty)}
-							>   
+							>
 								<MenuItem disabled value=''>
 									<em>Dificuldade</em>
 								</MenuItem>
@@ -242,20 +262,20 @@ export default function CriarAtividadeIA() {
 							</Select>
 						</Box>
 
-						<Box sx={{width: '100%'}}>
-							<Box sx={{display: 'flex'}}>
-								<Typography sx={{fontSize: '16px', fontWeight: 400, color: '#000'}}>Quantidade:</Typography>
-								<Typography sx={{fontSize: '16px', fontWeight: 400, color: 'red'}}>*</Typography>
+						<Box sx={{ width: '100%' }}>
+							<Box sx={{ display: 'flex' }}>
+								<Typography sx={{ fontSize: '16px', fontWeight: 400, color: '#000' }}>Quantidade:</Typography>
+								<Typography sx={{ fontSize: '16px', fontWeight: 400, color: 'red' }}>*</Typography>
 							</Box>
-							
+
 							<Select
 								IconComponent={props => <IoIosArrowDown {...props} color='#7750DE' size={25} />}
 								native={false}
-								sx={{width: '100%'}}
+								sx={{ width: '100%' }}
 								displayEmpty
 								value={numberOfQuestions}
 								onChange={(event) => setNumberOfQuestions(event.target.value as number)}
-							>   
+							>
 								<MenuItem disabled value={0}>
 									<em>Quantidade</em>
 								</MenuItem>
@@ -268,11 +288,11 @@ export default function CriarAtividadeIA() {
 						</Box>
 					</Box>
 
-					<Box sx={{display: 'flex', gap: '32px', width: '100%'}}>
-						<Box sx={{width: '100%'}}>
-							<Box sx={{display: 'flex', alignItems: 'center'}}>
-								<Typography sx={{fontSize: '16px', fontWeight: 400, color: '#000'}}>Tema das questões:</Typography>
-								
+					<Box sx={{ display: 'flex', gap: '32px', width: '100%' }}>
+						<Box sx={{ width: '100%' }}>
+							<Box sx={{ display: 'flex', alignItems: 'center' }}>
+								<Typography sx={{ fontSize: '16px', fontWeight: 400, color: '#000' }}>Tema das questões:</Typography>
+
 								<Tooltip title="Qual o tema didático da questão?" arrow>
 									<IconButton disableRipple size='small'>
 										<RiQuestionLine color='#7750DE' />
@@ -287,16 +307,16 @@ export default function CriarAtividadeIA() {
 							/>
 						</Box>
 
-						<Box sx={{width: '100%', alignItems: 'center'}}>
-							<Box sx={{display: 'flex'}}>
-								<Typography sx={{fontSize: '16px', fontWeight: 400, color: '#000'}}>Relacionar a:</Typography>
+						<Box sx={{ width: '100%', alignItems: 'center' }}>
+							<Box sx={{ display: 'flex' }}>
+								<Typography sx={{ fontSize: '16px', fontWeight: 400, color: '#000' }}>Relacionar a:</Typography>
 								<Tooltip title="Essa questão deve ser relacionada a qual tema?" arrow>
 									<IconButton disableRipple size='small'>
 										<RiQuestionLine color='#7750DE' />
 									</IconButton>
 								</Tooltip>
 							</Box>
-							
+
 							<TextField
 								onChange={(event) => handleValueChange(event.target.value, setRelatedTheme)}
 								placeholder='Ex: Tecnologia'
@@ -305,7 +325,7 @@ export default function CriarAtividadeIA() {
 						</Box>
 					</Box>
 
-					{errorMessage && 
+					{errorMessage &&
 						<Typography sx={{ color: '#FF0000', fontWeight: 400, fontSize: 14, marginTop: '10px' }}>
 							{errorMessage}
 						</Typography>
@@ -344,6 +364,18 @@ export default function CriarAtividadeIA() {
 					</Box>
 				</Modal>
 			</Box>
+			<ToastContainer
+				position='bottom-right'
+				autoClose={2600}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme='light'
+			/>
 		</>
 	)
 }
