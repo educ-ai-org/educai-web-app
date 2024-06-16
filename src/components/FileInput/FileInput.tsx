@@ -6,9 +6,15 @@ interface FileInputProps {
     icon?: React.ReactNode
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
     value: File | null
+    error?: boolean
 }
 
 export default function FileInput(props: FileInputProps) {
+    const { error } = props
+    const borderColor = error ? '#FF0000' : '#BEBEBE'
+    const color = error ? '#FF0000' : '#545454'
+    const border = `1px solid ${borderColor}`
+
     return (
         <label htmlFor={`fileInput-${props.id}`} style={{width: '100%'}}>
             <Box
@@ -18,8 +24,8 @@ export default function FileInput(props: FileInputProps) {
                     display: 'inline-flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: props.value ? '#7750DE' : '#545454',
-                    border: '1px solid #BEBEBE',
+                    color: props.value ? '#7750DE' : color,
+                    border,
                     borderRadius: '6px',
                     padding: '24px 16px',
                     gap: '10px',

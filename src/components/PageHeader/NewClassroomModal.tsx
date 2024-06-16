@@ -2,7 +2,7 @@ import { LoadingButton } from '@mui/lab'
 import { Box, TextField, Button } from '@mui/material'
 import Modal from '../Modal/Modal'
 import { TbSchool } from 'react-icons/tb'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 type NewClassroomModalProps = {
     createClass: () => void
@@ -41,6 +41,11 @@ export default function NewClassroomModal(props: NewClassroomModalProps) {
 
         createClass()
     }
+
+    useEffect(() => {
+        if (name) setNameError(false)
+        if (subject) setSubjectError(false)
+    }, [name, subject])
 
     const onClose = () => {
         setName('')
