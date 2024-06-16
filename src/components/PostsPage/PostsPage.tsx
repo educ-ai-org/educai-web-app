@@ -28,14 +28,18 @@ export default function PostsPage(props: postsPageProps) {
     const client = useClient()
     const [posts, setPosts] = useState<PostType[]>([])
 
-    const [title, setTitle] = useState('')
-    const [description, setDescription] = useState('')
+    const [title, setTitle] = useState<string>()
+    const [description, setDescription] = useState<string>()
     const [file, setFile] = useState<File | null>(null)
     const [datePosting, setDatePosting] = useState('')
 
     const [modalIsOpen, setModalIsOpen] = useState(false)
     const [modalIsLoading, setModalIsLoading] = useState(false)
     const [postsLoading, setPostsLoading] = useState(true)
+
+    const [titleError, setTitleError] = useState(false)
+    const [descriptionError, setDescriptionError] = useState(false)
+    const [fileError, setFileError] = useState(false)
 
     const sucessToast = (message: string) => {
         toast.success(message, {
@@ -76,6 +80,29 @@ export default function PostsPage(props: postsPageProps) {
     }
 
     const createAPost = () => {
+
+        if (!title && !description && !file) {
+            setTitleError(true)
+            setDescriptionError(true)
+            setFileError(true)
+            return
+        }
+
+        if (!title) {
+            setTitleError(true)
+            return
+        }
+
+        if (!description) {
+            setDescriptionError(true)
+            return
+        }
+
+        if (!file) {
+            setFileError(true)
+            return
+        }
+
         if (title && description && file) {
             setModalIsLoading(true)
             createPost(title, description, datePosting, file).finally(() => {
@@ -94,6 +121,22 @@ export default function PostsPage(props: postsPageProps) {
         }
     }
 
+    useEffect(() => {
+        if (title) setTitleError(false)
+        if (description) setDescriptionError(false)
+        if (file) setFileError(false)
+    }, [title, description, file])
+
+    const cleanFields = () => {
+        setTitle('')
+        setDescription('')
+        setFile(null)
+        setModalIsOpen(false)
+        setTitleError(false)
+        setDescriptionError(false)
+        setFileError(false)
+    }
+
     return (
         <>
             {role == 'TEACHER' && <Modal
@@ -106,25 +149,32 @@ export default function PostsPage(props: postsPageProps) {
                 altIcone='Pessoas agrupadas'
                 textoBotaoAbrirModal='Novo Post'
                 showModal={modalIsOpen}
-                onClose={() => {
-                    setModalIsOpen(false)
-                    setFile(null)
-                }}
+                onClose={cleanFields}
                 onOpen={() => setModalIsOpen(true)}
             >
                 <TextField
-                    id='outlined-basic'
+                    error={titleError}
+                    required
                     variant='outlined'
-                    label='Título*'
+                    label='Título'
                     onChange={(e) => setTitle(e.target.value)} />
 
-                <TextField id='outlined-basic'
+                <TextField
+                    error={descriptionError}
+                    required
                     variant='outlined'
-                    label='Descrição*'
+                    label='Descrição'
                     onChange={(e) => setDescription(e.target.value)}
                 />
 
-                <FileInput id='document' onChange={handleFileChange} value={file} description='Carregar um documento' icon={<LuFile size={22} color='#7750DE' />}></FileInput>
+                <FileInput
+                    id='document'
+                    onChange={handleFileChange}
+                    value={file}
+                    description='Carregar um documento *' // em breve deixara de ser obrigatorio
+                    icon={<LuFile size={22} color='#7750DE' />}
+                    error={fileError}
+                />
 
                 <Box sx={{
                     display: 'flex',
@@ -142,11 +192,9 @@ export default function PostsPage(props: postsPageProps) {
                         borderRadius: '10px',
                         fontWeight: 700,
                         color: '#170050'
-                    }} variant='outlined' onClick={() => {
-                        setModalIsOpen(false)
-                        setFile(null)
-                    }
-                    }>Cancelar</Button>
+                    }} variant='outlined' onClick={cleanFields}>
+                        Cancelar
+                    </Button>
 
                     <LoadingButton sx={{
                         backgroundColor: '#6730EC',
