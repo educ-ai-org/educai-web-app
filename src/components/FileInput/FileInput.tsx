@@ -25,7 +25,7 @@ export default function FileInput(props: FileInputProps) {
                     alignItems: 'center',
                     justifyContent: 'center',
                     color: props.value ? '#7750DE' : color,
-                    border: border,
+                    border,
                     borderRadius: '6px',
                     padding: '24px 16px',
                     gap: '10px',
