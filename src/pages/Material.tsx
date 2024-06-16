@@ -1,15 +1,23 @@
-import { Alert, Box, Button, FormGroup, InputAdornment, Modal, TextField, Typography } from '@mui/material'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Typography from '@mui/material/Typography'
+import FormGroup from '@mui/material/FormGroup'
+import TextField from '@mui/material/TextField'
+import InputAdornment from '@mui/material/InputAdornment'
+import Modal from '@mui/material/Modal'
 import Layout from './Layout'
 import CheckBox from '../components/CheckBox/CheckBox'
 import { IoChatbubblesOutline } from 'react-icons/io5'
 import { RiCloseFill, RiLink } from 'react-icons/ri'
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 import FileInput from '../components/FileInput/FileInput'
 import { CiMusicNote1 } from 'react-icons/ci'
 import { LuFile } from 'react-icons/lu'
 import useClient from '../lib/client/useAIClient'
 import TypingAnimation from '../components/TypingAnimation/TypingAnimation'
 import { FaFilePdf } from 'react-icons/fa6'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 export default function Material() {
     const client = useClient()
@@ -25,7 +33,19 @@ export default function Material() {
     const [documentoIsChecked, setDocumentoIsChecked] = useState<boolean>(false)
     const [linkYoutubeIsChecked, setLinkYoutubeIsChecked] = useState<boolean>(false)
     const [mp3IsChecked, setMp3IsChecked] = useState<boolean>(false)
-    const [error, setError] = useState<boolean>(false)
+
+    const errorToast = (message: string) => {
+        toast.error(message, {
+            position: 'bottom-right',
+            autoClose: 2600,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'light',
+        })
+    }
 
     const [openModal, setOpenModal] = useState<boolean>(false)
 
@@ -40,7 +60,6 @@ export default function Material() {
     }
 
     const handleClick = async () => {
-        setError(false)
         if (!instrucoes && !linkYoutube && !audio && !document) {
             setErrorMessage('Pelo menos uma entrada deve ser preenchida!')
             return
@@ -63,7 +82,7 @@ export default function Material() {
             const pdfUrl = URL.createObjectURL(pdfBlob)
             setPdfLink(pdfUrl)
         } catch (error) {
-            setError(true)
+            errorToast('Ocorreu um erro ao gerar o material didático. Tente novamente.')
         }
 
     }
@@ -72,12 +91,6 @@ export default function Material() {
         setOpenModal(false)
         setPdfLink('')
     }
-
-    useEffect(() => {
-        if (error) {
-            setOpenModal(false)
-        }
-    }, [error])
 
     return (
         <Layout>
@@ -289,11 +302,18 @@ export default function Material() {
                     }
                 </Box>
             </Modal>
-            {error && (
-                <Alert variant='outlined' severity='error' sx={{ position: 'absolute', bottom: 0, marginLeft: '20px', marginBottom: '20px' }}>
-                    Ocorreu um erro ao gerar o material didático. Tente novamente.
-                </Alert>
-            )}
+            <ToastContainer
+                position='bottom-right'
+                autoClose={2600}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme='light'
+            />
         </Layout>
     )
 }
