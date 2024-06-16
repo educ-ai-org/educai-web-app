@@ -10,6 +10,8 @@ import { v4 as uuidv4 } from 'uuid'
 import Typography from '@mui/material/Typography'
 import { AuthContext } from '../contexts/AuthContext'
 import { LoadingButton } from '@mui/lab'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios'
 
 export type Messages = {
@@ -27,6 +29,19 @@ export default function TalkWithEdu() {
   const [messages, setMessages] = useState<Messages[]>([])
   const [pdfLink, setPdfLink] = useState<string>('')
   const [isFeedbackLoading, setFeedbackLoading] = useState<boolean>(false)
+
+  const errorToast = (message: string) => {
+    toast.error(message, {
+      position: 'bottom-right',
+      autoClose: 2600,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
+    })
+  }
 
   const fetchTTS = async (text: string) => {
     const response = await axios.post(
@@ -62,14 +77,18 @@ export default function TalkWithEdu() {
     setResponse('')
     setIsLoading(true)
     if (audioBlobUrl) {
-      console.log('Sending audio to Edu')
-      const audioBuffer = await fetch(audioBlobUrl).then(response => response.arrayBuffer())
-      const fileName = uuidv4() + '.mp3'
-      const transcribeResponse = await client.transcribe(audioBuffer, fileName)
-      setTranscription(transcribeResponse.data.text)
-      const eduResponse = await client.getResponse(transcribeResponse.data.text)
-      setResponse(eduResponse.response)
-      setIsLoading(false)
+      try {
+        const audioBuffer = await fetch(audioBlobUrl).then(response => response.arrayBuffer())
+        const fileName = uuidv4() + '.mp3'
+        const transcribeResponse = await client.transcribe(audioBuffer, fileName)
+        setTranscription(transcribeResponse.data.text)
+        const eduResponse = await client.getResponse(transcribeResponse.data.text)
+        setResponse(eduResponse.response)
+        setIsLoading(false)
+      } catch (error) {
+        setIsLoading(false)
+        errorToast('Erro ao enviar áudio para o Edu')
+      }
     }
   }
 
@@ -155,6 +174,18 @@ export default function TalkWithEdu() {
           </Box>
         </Box>
       </Box>
+      <ToastContainer
+        position='bottom-right'
+        autoClose={2600}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme='light'
+      />
     </Layout>
   )
 }
