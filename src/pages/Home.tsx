@@ -120,7 +120,7 @@ export default function Home() {
 
   return (
     <Layout>
-      <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column' }} >
+      <Box sx={{ width: '100%', height:'100%', display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center'}} >
         <Box sx={{ width: '100%', justifyContent: 'center', display: 'flex' }}>
           <PageHeader
             search={{ searchValue: search, setSearchValue: setSearch, onSearch: searchClassrooms }}
@@ -130,9 +130,13 @@ export default function Home() {
           />
         </Box>
         <Box sx={{
-          display: 'grid', padding: '24px 42px', gap: 2,
-          gridTemplateColumns: 'repeat(auto-fill, minmax(20%, 1fr))', gridTemplateRows: 'max-content',
-          flex: '1', overflowY: 'auto'
+          width: '95%',
+          flexWrap: 'wrap',
+          display: 'flex',
+          flexDirection: 'row',
+          overflowY: 'auto',
+          height: '85%',
+          alignContent: 'start',
         }}>
           {turmas && !turmaSearch && turmas.map((turma, index) => (
             <Turma
