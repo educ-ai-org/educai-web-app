@@ -101,7 +101,7 @@ export default function Turma(props: TurmaProps) {
     }
 
     return (
-        <Box>
+        <>
             <Box sx={{
                 cursor: 'pointer',
                 width: '16vw',
@@ -109,7 +109,9 @@ export default function Turma(props: TurmaProps) {
                 border: '1px solid #BEBEBE',
                 borderRadius: '10px',
                 boxShadow: '0px 2px 3px 1px #00000012',
-                userSelect: 'none'
+                userSelect: 'none',
+                marginBottom: '36px',
+                marginRight: '54px'
             }} onClick={onClick}>
                 <Box sx={{
                     width: '100%',
@@ -245,6 +247,6 @@ export default function Turma(props: TurmaProps) {
                     </Box>
                 </Modal>
             </Box>
-        </Box>
+        </>
     )
 }
