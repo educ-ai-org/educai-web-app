@@ -72,8 +72,8 @@ export default function Participant(props: ParticipantProps) {
             </Box>
             <Box>
                 <Modal
-                    titulo='Remover Usuário'
-                    altIcone='Remover Usuário'
+                    titulo='Remover Integrante'
+                    altIcone='Remover Integrante'
                     variantButton='none'
                     iconeReact={
                         <Box sx={{ backgroundColor: '#F1EBFF', borderRadius: '4px', padding: '8px' }}>
