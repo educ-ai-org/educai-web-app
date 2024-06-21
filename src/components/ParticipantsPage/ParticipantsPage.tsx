@@ -135,10 +135,10 @@ export default function ParticipantsPage(props: ParticipantsPageProps) {
                     </Box>
                     <div className='content-none w-[100%] h-[1px] bg-gradient-to-r from-gradientPurple' />
                     <Box sx={{ marginTop: '10px' }}>
-                        {participants.map((participant) => {
+                        {participants.map((participant, index) => {
                             if (participant.role === 'TEACHER') {
                                 return (
-                                    <Participant name={participant.name} url={participant.profilePicture} id={participant.id} updateParticipants={updateParticipants} />
+                                    <Participant key={index} name={participant.name} url={participant.profilePicture} id={participant.id} updateParticipants={updateParticipants} />
                                 )
                             }
                         })}
@@ -157,10 +157,10 @@ export default function ParticipantsPage(props: ParticipantsPageProps) {
                     </Box>
                     <div className='content-none w-[100%] h-[1px] bg-gradient-to-r from-gradientPurple' />
                     <Box sx={{ marginTop: '10px' }}>
-                        {participants.map((participant) => {
+                        {participants.map((participant, index) => {
                             if (participant.role === 'STUDENT') {
                                 return (
-                                    <Participant name={participant.name} url={participant.profilePicture} id={participant.id} updateParticipants={updateParticipants} />
+                                    <Participant key={index} name={participant.name} url={participant.profilePicture} id={participant.id} updateParticipants={updateParticipants} />
                                 )
                             }
                         })}
