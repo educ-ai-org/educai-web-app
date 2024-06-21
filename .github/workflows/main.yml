@@ -36,9 +36,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: web-app
-        path: |
-          dist/
-          nginx.conf
+        path: dist/
 
     - name: Bump version and push tag
       id: tag_version
