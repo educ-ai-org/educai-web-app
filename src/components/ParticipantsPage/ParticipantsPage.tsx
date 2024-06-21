@@ -39,6 +39,13 @@ export default function ParticipantsPage(props: ParticipantsPageProps) {
         })
     }, [classroomId])
 
+    const updateParticipants = () => {
+        client.getParticipantsById(classroomId).then((res: any) => {
+            setParticipants(res)
+            setLoading(false)
+        })
+    }
+
     const sucessToast = (message: string) => {
         toast.success(message, {
             position: 'bottom-right',
@@ -131,7 +138,7 @@ export default function ParticipantsPage(props: ParticipantsPageProps) {
                         {participants.map((participant) => {
                             if (participant.role === 'TEACHER') {
                                 return (
-                                    <Participant name={participant.name} url={participant.profilePicture} />
+                                    <Participant name={participant.name} url={participant.profilePicture} id={participant.id} updateParticipants={updateParticipants} />
                                 )
                             }
                         })}
@@ -153,7 +160,7 @@ export default function ParticipantsPage(props: ParticipantsPageProps) {
                         {participants.map((participant) => {
                             if (participant.role === 'STUDENT') {
                                 return (
-                                    <Participant name={participant.name} url={participant.profilePicture} />
+                                    <Participant name={participant.name} url={participant.profilePicture} id={participant.id} updateParticipants={updateParticipants} />
                                 )
                             }
                         })}
