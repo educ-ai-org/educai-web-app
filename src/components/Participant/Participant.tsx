@@ -4,9 +4,10 @@ import CloseIcon from '@mui/icons-material/Close'
 import Modal from '../Modal/Modal'
 import Button from '@mui/material/Button'
 import LoadingButton from '@mui/lab/LoadingButton'
-import { useState } from 'react'
+import { useState, useContext} from 'react'
 import { FiTrash2 } from 'react-icons/fi'
 import useClient from '../../lib/client/useClient'
+import { AuthContext } from '../../contexts/AuthContext'
 
 type ParticipantProps = {
     id: string
@@ -18,6 +19,7 @@ type ParticipantProps = {
 export default function Participant(props: ParticipantProps) {
     const { name, url, id, updateParticipants } = props
     const client = useClient()
+    const { role } = useContext(AuthContext)
     const picture = url === null ? 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' : url
     const [modal, setModal] = useState<{ isLoading: boolean, isOpen: boolean }>({
         isLoading: false,
@@ -42,6 +44,15 @@ export default function Participant(props: ParticipantProps) {
         })
     }
 
+    const hoverStyles = role === 'TEACHER' ? {
+        backgroundColor: '#f5f5f5',
+        '.closeIcon': {
+            display: 'block'
+        }
+    } : {
+        backgroundColor: '#f5f5f5'
+    }
+
     return (
         <>
             <Box sx={{
@@ -51,12 +62,7 @@ export default function Participant(props: ParticipantProps) {
                 borderRadius: '8px',
                 paddingRight: '8px',
                 width: '95%',
-                ':hover': {
-                    backgroundColor: '#f5f5f5',
-                    '.closeIcon': {
-                        display: 'block'
-                    }
-                }
+                ':hover': hoverStyles
             }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', padding: '8px', gap: '5px' }}>
                     <img src={picture} style={{ width: '30px', height: '30px', borderRadius: '50%', marginRight: '8px' }} />
