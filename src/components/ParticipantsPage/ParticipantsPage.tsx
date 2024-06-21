@@ -32,19 +32,18 @@ export default function ParticipantsPage(props: ParticipantsPageProps) {
 
     const client = useClient()
 
-    useEffect(() => {
-        client.getParticipantsById(classroomId).then((res: any) => {
-            setParticipants(res)
-            setLoading(false)
-        })
-    }, [classroomId])
-
     const updateParticipants = () => {
         client.getParticipantsById(classroomId).then((res: any) => {
             setParticipants(res)
             setLoading(false)
         })
     }
+
+    useEffect(() => {
+        if (classroomId) {
+            updateParticipants()
+        }
+    }, [classroomId])
 
     const sucessToast = (message: string) => {
         toast.success(message, {
@@ -77,7 +76,7 @@ export default function ParticipantsPage(props: ParticipantsPageProps) {
         setModalIsOpen(false)
         navigate(0)
         setInviteLoading(false)
-        sucessToast('Integrante conviado com sucesso!')
+        sucessToast('Integrante convidado com sucesso!')
     }
 
     return (
