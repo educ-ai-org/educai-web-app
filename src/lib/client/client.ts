@@ -45,7 +45,7 @@ export default class Client {
       error => {
         const originalRequest = error.config
 
-        if (error?.response?.status === 500 && !originalRequest?._retry && error?.response?.data?.message.includes('Token has expired')) {
+        if (error.response.status === 500 && !originalRequest._retry && error.response.data.message.includes('Token has expired')) {
           originalRequest._retry = true
 
           return this.refreshToken().then(response => {
@@ -213,7 +213,6 @@ export default class Client {
     return (await this.axios.post('/generate-questions', formData)).data
   }
 
-  // outros métodos vcs devem criar um tipo na pasta types, copiem o UserLogin e alterem conforme a necessidade
   async getWordDefinition(word: string): Promise<DictonaryResponse> {
     return (await this.axios.get(`/dictionary/${word}/definition`)).data
   }
@@ -251,6 +250,10 @@ export default class Client {
     body: { name: string, email: string, role: string }
   ): Promise<void> {
     return (await this.axios.post(`/classroom/${classroomId}/invite`, body))
+  }
+
+  async deleteUser(userId: string): Promise<void> {
+    return (await this.axios.delete(`/user/${userId}`))
   }
 
   async getFeedback(
