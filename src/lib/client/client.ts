@@ -45,7 +45,7 @@ export default class Client {
       error => {
         const originalRequest = error.config
 
-        if (error.response.status === 500 && !originalRequest._retry && error.response.data.message.includes('Token has expired')) {
+        if (error?.response?.status === 500 && !originalRequest?._retry && error?.response?.data?.message.includes('Token has expired')) {
           originalRequest._retry = true
 
           return this.refreshToken().then(response => {
