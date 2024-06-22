@@ -8,18 +8,19 @@ import { useState, useContext} from 'react'
 import { FiTrash2 } from 'react-icons/fi'
 import useClient from '../../lib/client/useClient'
 import { AuthContext } from '../../contexts/AuthContext'
+import { useNavigate } from 'react-router-dom'
 
 type ParticipantProps = {
     id: string
     name: string
     url: string
-    updateParticipants: () => void
     classroomId: string 
 }
 
 export default function Participant(props: ParticipantProps) {
-    const { name, url, id, updateParticipants, classroomId } = props
+    const { name, url, id, classroomId } = props
     const client = useClient()
+    const navigate = useNavigate()
     const { role } = useContext(AuthContext)
     const picture = url === null ? 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' : url
     const [modal, setModal] = useState<{ isLoading: boolean, isOpen: boolean }>({
@@ -34,7 +35,7 @@ export default function Participant(props: ParticipantProps) {
                 isLoading: false,
                 isOpen: false
             })
-            updateParticipants()
+            navigate(0)
         })
     }
 
