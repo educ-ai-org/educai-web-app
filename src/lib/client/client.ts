@@ -213,7 +213,6 @@ export default class Client {
     return (await this.axios.post('/generate-questions', formData)).data
   }
 
-  // outros métodos vcs devem criar um tipo na pasta types, copiem o UserLogin e alterem conforme a necessidade
   async getWordDefinition(word: string): Promise<DictonaryResponse> {
     return (await this.axios.get(`/dictionary/${word}/definition`)).data
   }
@@ -251,6 +250,10 @@ export default class Client {
     body: { name: string, email: string, role: string }
   ): Promise<void> {
     return (await this.axios.post(`/classroom/${classroomId}/invite`, body))
+  }
+
+  async removeUserClassroom(classroomId: string, userId: string): Promise<void> {
+    return (await this.axios.delete(`classroom/${classroomId}/user/${userId}`))
   }
 
   async getFeedback(
