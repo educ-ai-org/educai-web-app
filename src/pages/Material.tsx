@@ -59,17 +59,34 @@ export default function Material() {
         set(event)
     }
 
+    const isValidYoutubeUrl = (url: string) => {
+        const regex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/
+        return regex.test(url)
+    }
+
+    const extractYoutubeId = (url: string) => {
+        const regex = /v=([a-zA-Z0-9_-]{11})/
+        const match = url.match(regex)
+        console.log(match)
+        return match ? match[1] : null
+    }
+
     const handleClick = async () => {
         if (!instrucoes && !linkYoutube && !audio && !document) {
             setErrorMessage('Pelo menos uma entrada deve ser preenchida!')
             return
         }
 
+        if (linkYoutubeIsChecked && !isValidYoutubeUrl(linkYoutube)) {
+            setErrorMessage('Por favor, insira um link válido do YouTube!')
+            return
+        }
+
         setErrorMessage('')
 
         let payload = {}
-
-        linkYoutubeIsChecked && (payload = { ...payload, youtubeLink: linkYoutube })
+        const youtubeId = linkYoutubeIsChecked ? extractYoutubeId(linkYoutube) : null
+        linkYoutubeIsChecked && (payload = { ...payload, youtubeLink: youtubeId })
         mp3IsChecked && (payload = { ...payload, audio })
         documentoIsChecked && (payload = { ...payload, document })
         instrucoesIsChecked && (payload = { ...payload, instructions: instrucoes })
@@ -83,6 +100,7 @@ export default function Material() {
             setPdfLink(pdfUrl)
         } catch (error) {
             errorToast('Ocorreu um erro ao gerar o material didático. Tente novamente.')
+            setOpenModal(false)
         }
 
     }
