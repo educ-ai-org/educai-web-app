@@ -21,7 +21,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true)
   const [turmaSearch, setTurmaSearch] = useState<TurmaType | null>(null)
   const regex = /[^a-zA-Z0-9\s]/g
-  const errorToast = (message : string) => {
+  const errorToast = (message: string) => {
     toast.error(message, {
       position: 'bottom-right',
       autoClose: 2600,
@@ -31,7 +31,7 @@ export default function Home() {
       draggable: true,
       progress: undefined,
       theme: 'light',
-      })
+    })
   }
 
   const handleClick = (classroomId: string) => {
@@ -49,7 +49,7 @@ export default function Home() {
   }
 
   function binarySearch(turmas: TurmasType, title: string): TurmaType | null {
-    if(regex.test(title)) {
+    if (regex.test(title)) {
       errorToast('Caracteres especiais são invalidos.')
     }
 
@@ -107,20 +107,29 @@ export default function Home() {
       errorToast('Não foi possivel criar a turma, atente-se aos caracteres especiais.')
       return
     }
+    try {
+      const result = await client.createClassroom({ title, course }).then(() => updateClassrooms())
+      return result
+    } catch (error) {
+      errorToast('Não foi possivel criar a turma.')
+    }
 
-    return await client.createClassroom({ title, course }).then(() => updateClassrooms())
   }
 
   const updateClassrooms = () => {
-    client.getUserClassrooms().then((data) => {
-      setTurmas(data)
-      setLoading(false)
-    })
+    try {
+      client.getUserClassrooms().then((data) => {
+        setTurmas(data)
+        setLoading(false)
+      })
+    } catch (error) {
+      errorToast('Não foi possivel carregar as turmas.')
+    }
   }
 
   return (
     <Layout>
-      <Box sx={{ width: '100%', height:'100%', display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }} >
+      <Box sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }} >
         <Box sx={{ width: '100%', justifyContent: 'center', display: 'flex' }}>
           <PageHeader
             search={{ searchValue: search, setSearchValue: setSearch, onSearch: searchClassrooms }}
@@ -155,7 +164,7 @@ export default function Home() {
             Array.from({ length: 8 }).map((_, index) => (
               <Skeleton variant='rounded' width='95%' height={120} key={index} />
             )
-          ))}
+            ))}
           {turmas.length === 0 && !loading && (
             <Typography variant='h6' align='center' sx={{ fontSize: '16px' }}>
               Poxa! Nenhuma turma encontrada.. 😕
