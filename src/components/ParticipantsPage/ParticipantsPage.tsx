@@ -137,7 +137,7 @@ export default function ParticipantsPage(props: ParticipantsPageProps) {
                         {participants.map((participant, index) => {
                             if (participant.role === 'TEACHER') {
                                 return (
-                                    <Participant key={index} name={participant.name} url={participant.profilePicture} id={participant.id} updateParticipants={updateParticipants} />
+                                    <Participant key={index} name={participant.name} url={participant.profilePicture} id={participant.id} updateParticipants={updateParticipants} classroomId={classroomId} />
                                 )
                             }
                         })}
@@ -159,7 +159,7 @@ export default function ParticipantsPage(props: ParticipantsPageProps) {
                         {participants.map((participant, index) => {
                             if (participant.role === 'STUDENT') {
                                 return (
-                                    <Participant key={index} name={participant.name} url={participant.profilePicture} id={participant.id} updateParticipants={updateParticipants} />
+                                    <Participant key={index} name={participant.name} url={participant.profilePicture} id={participant.id} updateParticipants={updateParticipants} classroomId={classroomId} />
                                 )
                             }
                         })}

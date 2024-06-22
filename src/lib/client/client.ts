@@ -252,8 +252,8 @@ export default class Client {
     return (await this.axios.post(`/classroom/${classroomId}/invite`, body))
   }
 
-  async deleteUser(userId: string): Promise<void> {
-    return (await this.axios.delete(`/user/${userId}`))
+  async removeUserClassroom(classroomId: string, userId: string): Promise<void> {
+    return (await this.axios.delete(`classroom/${classroomId}/user/${userId}`))
   }
 
   async getFeedback(

@@ -14,10 +14,11 @@ type ParticipantProps = {
     name: string
     url: string
     updateParticipants: () => void
+    classroomId: string 
 }
 
 export default function Participant(props: ParticipantProps) {
-    const { name, url, id, updateParticipants } = props
+    const { name, url, id, updateParticipants, classroomId } = props
     const client = useClient()
     const { role } = useContext(AuthContext)
     const picture = url === null ? 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png' : url
@@ -26,9 +27,9 @@ export default function Participant(props: ParticipantProps) {
         isOpen: false,
     })
 
-    const deleteUser = () => {
+    const removeUser = () => {
         setModal({ ...modal, isLoading: true })
-        client.deleteUser(id).finally(() => {
+        client.removeUserClassroom(classroomId, id).finally(() => {
             setModal({
                 isLoading: false,
                 isOpen: false
@@ -85,7 +86,7 @@ export default function Participant(props: ParticipantProps) {
                     onOpen={() => setModal({ ...modal, isOpen: true })}
                 >
                     <Typography sx={{ fontSize: 16, color: '#5E5E5E' }}>
-                        Tem certeza que deseja remover esse usuário <strong>{name}?</strong>
+                        Tem certeza que deseja remover <strong>{name}</strong> da turma?
                     </Typography>
 
                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -113,7 +114,7 @@ export default function Participant(props: ParticipantProps) {
                             textTransform: 'none',
                             borderRadius: '10px',
                             fontWeight: 700
-                        }} variant='contained' onClick={deleteUser}
+                        }} variant='contained' onClick={removeUser}
                             loading={modal.isLoading}>Sim</LoadingButton>
                     </Box>
                 </Modal>
