@@ -1,14 +1,13 @@
-import { Box, Button, FormControlLabel, FormGroup, InputAdornment, MenuItem, Radio, RadioGroup, Select, TextField, Typography } from '@mui/material'
+import { Box, Button, FormControlLabel, FormGroup, InputAdornment, Radio, RadioGroup, TextField, Typography } from '@mui/material'
 import { IoChatbubblesOutline } from 'react-icons/io5'
 import { RiLink } from 'react-icons/ri'
 import React, { useState } from 'react'
 import { CiMusicNote1 } from 'react-icons/ci'
 import { LuFile } from 'react-icons/lu'
 import FileInput from '../FileInput/FileInput'
-import { Question } from '../../lib/types/Question' 
+import { Question } from '../../lib/types/Question'
 import { LoadingButton } from '@mui/lab'
-import { GenerateQuestionPayload } from '../../lib/types/GenerateQuestionPayload' 
-import { IoIosArrowDown } from 'react-icons/io'
+import { GenerateQuestionPayload } from '../../lib/types/GenerateQuestionPayload'
 import useClient from '../../lib/client/useAIClient'
 
 interface GerarQuestaoModalProps {
@@ -18,7 +17,7 @@ interface GerarQuestaoModalProps {
 
 export default function GerarQuestaoModal(props: GerarQuestaoModalProps) {
     const { handleAddQuestion, handleCancel } = props
-    
+
     const client = useClient()
 
     const [document, setDocument] = useState<File | null>(null)
@@ -70,28 +69,22 @@ export default function GerarQuestaoModal(props: GerarQuestaoModalProps) {
         } as GenerateQuestionPayload
 
         const response = await client.generateQuestion(payload)
-        
+
         handleAddQuestion(response[0])
-        
+
         setErrorMessage('')
         setIsLoading(false)
     }
 
     return (
         <Box sx={{ width: '100%', padding: '25px 50px', display: 'flex', flexDirection: 'column', minHeight: '40vh', gap: '16px' }}>
-            <Select
-                IconComponent={props => <IoIosArrowDown {...props} color='#7750DE' size={25} />}
-                displayEmpty
-                value={difficulty}
-                onChange={(event) => handleValueChange(event.target.value as string, setDifficulty)}
-            >   
-                <MenuItem disabled value=''>
-                    <em>Dificuldade</em>
-                </MenuItem>
-                <MenuItem value={'easy'}>Fácil</MenuItem>
-                <MenuItem value={'medium'}>Médio</MenuItem>
-                <MenuItem value={'hard'}>Difícil</MenuItem>
-            </Select>
+
+            <TextField
+                label='Dificuldade'
+                onChange={(event) => handleValueChange(event.target.value, setDifficulty)}
+                placeholder='Ex: Fácil'
+                sx={{ fontSize: '16px', width: '100%' }}
+            />
 
             <TextField
                 label='Conteúdo da questão'
@@ -106,7 +99,7 @@ export default function GerarQuestaoModal(props: GerarQuestaoModalProps) {
                 placeholder='Ex: Tecnologia'
                 sx={{ fontSize: '16px', width: '100%' }}
             />
-            
+
             <Box sx={{ paddingBottom: '20px' }}>
                 <Typography sx={{ color: '#545454', fontWeight: 400, fontSize: 16, marginBottom: '6px' }}>
                     Escolha uma entradas:
@@ -183,7 +176,7 @@ export default function GerarQuestaoModal(props: GerarQuestaoModalProps) {
                 }
             </Box>
 
-            {errorMessage && 
+            {errorMessage &&
                 <Typography sx={{ color: '#FF0000', fontWeight: 400, fontSize: 14, marginTop: '10px' }}>
                     {errorMessage}
                 </Typography>
@@ -218,7 +211,7 @@ export default function GerarQuestaoModal(props: GerarQuestaoModalProps) {
                         textTransform: 'none',
                         borderRadius: '10px',
                         fontWeight: 700
-                    }} 
+                    }}
                     variant='contained'
                     loading={isLoading}
                     onClick={handleClick}>
