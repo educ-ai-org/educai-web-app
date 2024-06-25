@@ -1,5 +1,5 @@
 import { LoadingButton } from '@mui/lab'
-import { Box, Button, Divider, IconButton, InputAdornment, MenuItem, Select, TextField, Tooltip, Typography, styled } from '@mui/material'
+import { Box, Button, Divider, IconButton, InputAdornment, TextField, Tooltip, Typography, styled } from '@mui/material'
 import { useState } from 'react'
 import { CiMusicNote1 } from 'react-icons/ci'
 import { IoChatbubblesOutline } from 'react-icons/io5'
@@ -8,7 +8,6 @@ import { RiLink, RiQuestionLine } from 'react-icons/ri'
 import { TbSchool } from 'react-icons/tb'
 import Modal from '../../components/Modal/Modal'
 import FileInput from '../../components/FileInput/FileInput'
-import { IoIosArrowDown } from 'react-icons/io'
 import useClient from '../../lib/client/useAIClient'
 import { GenerateQuestionPayload } from '../../lib/types/GenerateQuestionPayload'
 import { useNavigate } from 'react-router-dom'
@@ -246,20 +245,12 @@ export default function CriarAtividadeIA() {
 								<Typography sx={{ fontSize: '16px', fontWeight: 400, color: 'red' }}>*</Typography>
 							</Box>
 
-							<Select
-								IconComponent={props => <IoIosArrowDown {...props} color='#7750DE' size={25} />}
-								sx={{ width: '100%' }}
-								displayEmpty
-								value={difficulty}
-								onChange={(event) => handleValueChange(event.target.value as string, setDifficulty)}
+							<TextField
+								onChange={(event) => handleValueChange(event.target.value, setDifficulty)}
+								placeholder='Ex: Fácil'
+								sx={{ fontSize: '16px', width: '100%' }}
 							>
-								<MenuItem disabled value=''>
-									<em>Dificuldade</em>
-								</MenuItem>
-								<MenuItem value={'easy'}>Fácil</MenuItem>
-								<MenuItem value={'medium'}>Médio</MenuItem>
-								<MenuItem value={'hard'}>Difícil</MenuItem>
-							</Select>
+							</TextField>
 						</Box>
 
 						<Box sx={{ width: '100%' }}>
@@ -268,23 +259,12 @@ export default function CriarAtividadeIA() {
 								<Typography sx={{ fontSize: '16px', fontWeight: 400, color: 'red' }}>*</Typography>
 							</Box>
 
-							<Select
-								IconComponent={props => <IoIosArrowDown {...props} color='#7750DE' size={25} />}
-								native={false}
-								sx={{ width: '100%' }}
-								displayEmpty
-								value={numberOfQuestions}
-								onChange={(event) => setNumberOfQuestions(event.target.value as number)}
-							>
-								<MenuItem disabled value={0}>
-									<em>Quantidade</em>
-								</MenuItem>
-								{
-									[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((value) => (
-										<MenuItem key={value} value={value}>{value}</MenuItem>
-									))
-								}
-							</Select>
+							<TextField
+								onChange={(event) => setNumberOfQuestions(parseInt(event.target.value))}
+								type='number'
+								placeholder='Ex: 5'
+								sx={{ fontSize: '16px', width: '100%' }}
+							/>
 						</Box>
 					</Box>
 
