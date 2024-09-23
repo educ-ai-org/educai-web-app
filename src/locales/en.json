@@ -52,6 +52,22 @@
   "footer": {
     "copyright": "© 2024 Copyright by educ.ai"
   },
+  "login": {
+    "email": "Email",
+    "password": "Password",
+    "keep_me_connected": "Keep me connected",
+    "login": "Login",
+    "fill_all_fields": "Fill in all fields before logging in.",
+    "invalid_credentials": "Invalid email or password, please try again."
+  },
+  "slide_login": {
+    "revolutionizing_education": "Revolutionizing Education",
+    "education_description": "The AI that transforms your way of learning languages. Making it more interactive, adaptable, effective.",
+    "languages_at_your_reach": "Languages at Your Reach",
+    "languages_description": "Explore new languages with AI support. Customized for your learning to flow naturally.",
+    "smart_fluency": "Smart Fluency",
+    "fluency_description": "AI that understands your pace. Learn languages with activities that adapt to you."
+  },
   "about_us": {
     "mission_statement": "OUR MISSION IS TO INNOVATE LANGUAGE TEACHING IN BRAZIL, BELIEVING THAT THE AI AND HUMAN CONNECTION IS THE KEY."
   },

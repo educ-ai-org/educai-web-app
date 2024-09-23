@@ -52,6 +52,22 @@
   "footer": {
     "copyright": "© 2024 Direitos autorais por educ.ai"
   },
+  "login": {
+    "email": "E-mail",
+    "password": "Senha",
+    "keep_me_connected": "Mantenha-me conectado",
+    "login": "Entrar",
+    "fill_all_fields": "Preencha todos os campos antes de realizar o login.",
+    "invalid_credentials": "Email ou senha inválidos, tente novamente."
+  },
+  "slide_login": {
+    "revolutionizing_education": "Revolucionando a Educação",
+    "education_description": "A IA que transforma seu jeito de aprender idiomas. Tornando-o mais interativo, adaptável, eficaz.",
+    "languages_at_your_reach": "Idiomas ao Seu Alcance",
+    "languages_description": "Explore novos idiomas com suporte de IA. Personalizado para o seu aprendizado fluir naturalmente.",
+    "smart_fluency": "Fluência Inteligente",
+    "fluency_description": "IA que entende seu ritmo. Aprenda idiomas com atividades que se adaptam a você."
+  },
   "about_us": {
     "mission_statement": "NOSSA MISSÃO É INOVAR O ENSINO DE LÍNGUAS NO BRASIL, ACREDITANDO QUE A CONEXÃO ENTRE IA E HUMANOS É A CHAVE."
   },

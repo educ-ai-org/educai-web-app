@@ -18,14 +18,16 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import FormControl from '@mui/material/FormControl'
 import OutlinedInput from '@mui/material/OutlinedInput'
 import InputLabel from '@mui/material/InputLabel'
+import { useTranslation } from 'react-i18next'
 
 export default function Login() {
     const client = useClient()
     const navigate = useNavigate()
+    const { t } = useTranslation()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [showPassword, setShowPassword] = useState(false)
-    
+
     const errorToast = (message: string) => {
         toast.error(message, {
             position: 'bottom-right',
@@ -42,15 +44,19 @@ export default function Login() {
     useEffect(() => {
         const onEnter = (e: any) => {
             if (e.key === 'Enter') {
-                handleLogin.execute
+                handleLogin.execute()
             }
         }
         window.addEventListener('keypress', onEnter)
-    })
+
+        return () => {
+            window.removeEventListener('keypress', onEnter)
+        }
+    }, [])
 
     const handleLogin = useAsyncCallback(async () => {
         if (email === '' || password === '') {
-            errorToast('Preencha todos os campos antes de realizar o login.')
+            errorToast(t('login.fill_all_fields'))
             return
         }
         await client.login({ email, password }).then((res) => {
@@ -59,7 +65,7 @@ export default function Login() {
         }).catch((e) => {
             console.log(e)
             if (e.name === 'AxiosError') {
-                errorToast('Email ou senha invalidos, tente novamente.')
+                errorToast(t('login.invalid_credentials'))
             }
         })
     })
@@ -111,14 +117,14 @@ export default function Login() {
                 }}>
                     <TextField
                         variant='outlined'
-                        label='E-mail'
+                        label={t('login.email')}
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <FormControl variant='outlined'>
-                        <InputLabel htmlFor='outlined-adornment-password'>Senha</InputLabel>
+                        <InputLabel htmlFor='outlined-adornment-password'>{t('login.password')}</InputLabel>
                         <OutlinedInput
                             type={showPassword ? 'text' : 'password'}
-                            label='Senha'
+                            label={t('login.password')}
                             onChange={(e) => setPassword(e.target.value)}
                             endAdornment={
                                 <InputAdornment position='end'>
@@ -138,7 +144,7 @@ export default function Login() {
                         alignItems: 'center'
                     }}>
                         <Checkbox defaultChecked />
-                        <Typography variant='body2'>Mantenha-me conectado</Typography>
+                        <Typography variant='body2'>{t('login.keep_me_connected')}</Typography>
                     </Box>
 
                     <LoadingButton variant='contained'
@@ -152,7 +158,7 @@ export default function Login() {
                             },
                             paddingY: '12px'
                         }} >
-                        Entrar
+                        {t('login.login')}
                     </LoadingButton>
 
                     <Box sx={{
