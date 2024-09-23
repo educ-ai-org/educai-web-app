@@ -14,6 +14,7 @@ import useClient from '../../lib/client/useClient'
 import { AuthContext } from '../../contexts/AuthContext'
 import { TbEdit } from 'react-icons/tb'
 import { FiTrash2 } from 'react-icons/fi'
+import { useTranslation } from 'react-i18next'
 
 interface TurmaProps extends TurmaType {
     isTeacher: boolean
@@ -25,6 +26,7 @@ export default function Turma(props: TurmaProps) {
     const client = useClient()
     const { role } = useContext(AuthContext)
     const { title, course, nextSubmission, studentsCount, isTeacher, id, onClick, updateClassrooms } = props
+    const { t } = useTranslation()
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
     const open = Boolean(anchorEl)
     const [modal, setModal] = useState<{ isLoading: boolean, isOpen: boolean, type: 'EDIT' | 'DELETE' | null }>({
@@ -42,7 +44,7 @@ export default function Turma(props: TurmaProps) {
     }
 
     useEffect(() => {
-        if(modal.isOpen) {
+        if (modal.isOpen) {
             setName(title)
             setSubject(course)
         }
@@ -68,7 +70,7 @@ export default function Turma(props: TurmaProps) {
     }
 
     const deleteClassroom = () => {
-        setModal({...modal, isLoading: true})
+        setModal({ ...modal, isLoading: true })
         client.deleteClassroom(id).finally(() => {
             setModal({
                 isLoading: false,
@@ -80,14 +82,14 @@ export default function Turma(props: TurmaProps) {
     }
 
     const updateClassroomData = () => {
-        setModal({...modal, isLoading: true})
+        setModal({ ...modal, isLoading: true })
 
-        const body = {} as {title?: string, course?: string}
+        const body = {} as { title?: string, course?: string }
 
-        if(name.trim())
+        if (name.trim())
             body.title = name
 
-        if(subject.trim())
+        if (subject.trim())
             body.course = subject
 
         client.updateClassroom(id, body).finally(() => {
@@ -124,11 +126,9 @@ export default function Turma(props: TurmaProps) {
                     borderBottom: '1px solid #BEBEBE',
                     borderColor: '#BEBEBE'
                 }}>
-                    <Box sx={{ display: 'flex', flexDirection: 'row', height: '100%',
-                    width: '100%', alignItems: 'center', gap: '10px' }}>
+                    <Box sx={{ display: 'flex', flexDirection: 'row', height: '100%', width: '100%', alignItems: 'center', gap: '10px' }}>
                         <img src='/logos/bookTwo.svg' alt='Ícone de livro' style={{ width: '26px', marginBottom: '3px' }} />
-                        <Typography sx={{ fontSize: '16px', whiteSpace: 'nowrap',
-                        fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis' }}>{title}</Typography>
+                        <Typography sx={{ fontSize: '16px', whiteSpace: 'nowrap', fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis' }}>{title}</Typography>
                     </Box>
                     {role === 'TEACHER' &&
                         <IconButton sx={{ justifyContent: 'end' }} size='small' onClick={handleClick}>
@@ -142,23 +142,23 @@ export default function Turma(props: TurmaProps) {
                         onClose={handleClose}
                     >
                         <MenuItem onClick={(event) => { handleClose(event, 'edit') }}>
-                            Editar
+                            {t('turma.edit')}
                         </MenuItem>
                         <MenuItem onClick={(event) => { handleClose(event, 'delete') }}>
-                            Apagar
+                            {t('turma.delete')}
                         </MenuItem>
                     </Menu>
                 </Box>
 
                 <Box sx={{ width: '100%', height: '65%', padding: '8px 16px', display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }}>
                     <Box sx={{ display: 'flex', gap: '4px' }}>
-                        <Typography sx={{ display: 'flex', fontSize: 14, color: '#5E5E5E' }}>Disciplina: </Typography>
+                        <Typography sx={{ display: 'flex', fontSize: 14, color: '#5E5E5E' }}>{t('turma.subject')}: </Typography>
                         <Typography sx={{ color: '#5E5E5E', fontWeight: 700, fontSize: 14, overflow: 'hidden', textOverflow: 'ellipsis' }}>{course}</Typography>
                     </Box>
 
                     <Box sx={{ display: 'flex', gap: '4px' }}>
                         <Typography sx={{ display: 'flex', fontSize: 14, color: '#5E5E5E', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>
-                            {isTeacher ? 'Quantidade de alunos:' : 'Próxima entrega: ' }
+                            {isTeacher ? 'Quantidade de alunos:' : 'Próxima entrega: '}
                         </Typography>
 
                         <Typography sx={{ color: '#5E5E5E', fontWeight: 700, fontSize: 14, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
@@ -170,8 +170,8 @@ export default function Turma(props: TurmaProps) {
 
             <Box>
                 <Modal
-                    titulo={modal.type === 'DELETE' ? 'Deletar turma' : 'Editar turma'}
-                    altIcone={modal.type === 'DELETE' ? 'Deletar turma' : 'Editar turma'}
+                    titulo={modal.type === 'DELETE' ? t('turma.delete') : t('turma.update')}
+                    altIcone={modal.type === 'DELETE' ? t('turma.delete') : t('turma.edit')}
                     variantButton='none'
                     iconeReact={
                         <Box sx={{ backgroundColor: '#F1EBFF', borderRadius: '4px', padding: '8px' }}>
@@ -179,13 +179,13 @@ export default function Turma(props: TurmaProps) {
                         </Box>
                     }
                     showModal={modal.isOpen}
-                    onClose={() => setModal({...modal, isOpen: false})}
-                    onOpen={() => setModal({...modal, isOpen: true})}
+                    onClose={() => setModal({ ...modal, isOpen: false })}
+                    onOpen={() => setModal({ ...modal, isOpen: true })}
                 >
                     <Typography sx={{ fontSize: 16, color: '#5E5E5E' }}>
                         {
                             modal.type === 'DELETE'
-                            ? <>Tem certeza que deseja deletar a turma <strong>{title}?</strong></>
+                            ? t('turma.delete_confirmation', { title })
                             : 'Preencha os campos abaixo com as informações atualizadas'
                         }
                     </Typography>
@@ -195,7 +195,7 @@ export default function Turma(props: TurmaProps) {
                         <Box sx={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '12px' }}>
                             <TextField
                                 variant='outlined'
-                                label='Nome'
+                                label={t('turma.name')}
                                 onChange={(e) => {
                                     const rawValue = e.target.value
                                     const cleanValue = rawValue.replace(regex, '')
@@ -205,13 +205,12 @@ export default function Turma(props: TurmaProps) {
                             />
                             <TextField
                                 variant='outlined'
-                                label='Matéria'
+                                label={t('turma.subject')}
                                 onChange={(e) => {
                                     const rawValue = e.target.value
                                     const cleanValue = rawValue.replace(regex, '')
                                     setSubject(cleanValue)
-                                }
-                                }
+                                }}
                                 value={subject}
                             />
                         </Box>
@@ -229,7 +228,7 @@ export default function Turma(props: TurmaProps) {
                             borderRadius: '10px',
                             fontWeight: 700,
                             color: '#170050'
-                        }} variant='outlined' onClick={() => setModal({...modal, isOpen: false})}>{modal.type === 'DELETE' ? 'Não' : 'Cancelar'}</Button>
+                        }} variant='outlined' onClick={() => setModal({ ...modal, isOpen: false })}>{modal.type === 'DELETE' ? 'Não' : 'Cancelar'}</Button>
 
                         <LoadingButton sx={{
                             backgroundColor: '#6730EC',
@@ -243,7 +242,7 @@ export default function Turma(props: TurmaProps) {
                             borderRadius: '10px',
                             fontWeight: 700
                         }} variant='contained' onClick={modal.type === 'DELETE' ? deleteClassroom : updateClassroomData}
-                        loading={modal.isLoading}>{modal.type === 'DELETE' ? 'Sim' : 'Atualizar'}</LoadingButton>
+                        loading={modal.isLoading}>{modal.type === 'DELETE' ? 'Sim' : t('turma.update')}</LoadingButton>
                     </Box>
                 </Modal>
             </Box>

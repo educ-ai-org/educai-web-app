@@ -11,16 +11,19 @@ import { TurmaType, TurmasType } from '../lib/types/Turma'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Skeleton, Typography } from '@mui/material'
+import { useTranslation } from 'react-i18next'
 
 export default function Home() {
   const { role } = useContext(AuthContext)
   const client = useClient()
+  const { t } = useTranslation()
   const [turmas, setTurmas] = useState<TurmasType>([])
   const navigate = useNavigate()
   const [search, setSearch] = useState('')
   const [loading, setLoading] = useState(true)
   const [turmaSearch, setTurmaSearch] = useState<TurmaType | null>(null)
   const regex = /[^a-zA-Z0-9\s]/g
+
   const errorToast = (message: string) => {
     toast.error(message, {
       position: 'bottom-right',
@@ -44,13 +47,12 @@ export default function Home() {
 
   const searchClassrooms = () => {
     const turmasOrdenadas = mergeSort(turmas)
-
     setTurmaSearch(binarySearch(turmasOrdenadas, search))
   }
 
   function binarySearch(turmas: TurmasType, title: string): TurmaType | null {
     if (regex.test(title)) {
-      errorToast('Caracteres especiais são invalidos.')
+      errorToast(t('login.invalid_credentials'))
     }
 
     let left = 0
@@ -104,16 +106,14 @@ export default function Home() {
 
   const createClassroom = async (title: string, course: string): Promise<void> => {
     if (regex.test(title) || regex.test(course)) {
-      errorToast('Não foi possivel criar a turma, atente-se aos caracteres especiais.')
+      errorToast(t('login.invalid_credentials'))
       return
     }
     try {
-      const result = await client.createClassroom({ title, course }).then(() => updateClassrooms())
-      return result
+      await client.createClassroom({ title, course }).then(() => updateClassrooms())
     } catch (error) {
       errorToast('Não foi possivel criar a turma.')
     }
-
   }
 
   const updateClassrooms = () => {
@@ -123,7 +123,7 @@ export default function Home() {
         setLoading(false)
       })
     } catch (error) {
-      errorToast('Não foi possivel carregar as turmas.')
+      errorToast(t('login.invalid_credentials'))
     }
   }
 
@@ -165,9 +165,10 @@ export default function Home() {
               <Skeleton variant='rounded' width='95%' height={120} key={index} />
             )
             ))}
+
           {turmas.length === 0 && !loading && (
             <Typography variant='h6' align='center' sx={{ fontSize: '16px' }}>
-              Poxa! Nenhuma turma encontrada.. 😕
+              {t('home.no_class_found')}
             </Typography>
           )}
           {

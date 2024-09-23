@@ -14,7 +14,8 @@
     "changing_way": "CHANGING THE WAY YOU",
     "way": "WAY",
     "learn": "LEARN",
-    "power_ai": "WITH THE POWER OF AI"
+    "power_ai": "WITH THE POWER OF AI",
+    "no_class_found": "Oops! No classes found.. 😕"
   },
   "solutions": {
     "exercise_creation": "Create Exercises In Minutes",
@@ -67,6 +68,20 @@
     "languages_description": "Explore new languages with AI support. Customized for your learning to flow naturally.",
     "smart_fluency": "Smart Fluency",
     "fluency_description": "AI that understands your pace. Learn languages with activities that adapt to you."
+  },
+  "page_header": {
+    "posts": "Posts",
+    "atividades": "Activities",
+    "pessoas": "People",
+    "search_placeholder": "Class Name"
+  },
+  "turma": {
+    "edit": "Edit",
+    "delete": "Delete",
+    "delete_confirmation": "Are you sure you want to delete the classroom {title}?",
+    "update": "Update",
+    "name": "Name",
+    "subject": "Subject"
   },
   "about_us": {
     "mission_statement": "OUR MISSION IS TO INNOVATE LANGUAGE TEACHING IN BRAZIL, BELIEVING THAT THE AI AND HUMAN CONNECTION IS THE KEY."

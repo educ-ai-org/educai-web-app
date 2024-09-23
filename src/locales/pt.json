@@ -14,7 +14,8 @@
     "changing_way": "MUDANDO A MANEIRA COMO VOCÊ",
     "way": "MANEIRA",
     "learn": "APRENDE",
-    "power_ai": "COM O PODER DA IA"
+    "power_ai": "COM O PODER DA IA",
+    "no_class_found": "Poxa! Nenhuma turma encontrada.. 😕"
   },
   "solutions": {
     "exercise_creation": "Crie Exercícios em Minutos",
@@ -67,6 +68,20 @@
     "languages_description": "Explore novos idiomas com suporte de IA. Personalizado para o seu aprendizado fluir naturalmente.",
     "smart_fluency": "Fluência Inteligente",
     "fluency_description": "IA que entende seu ritmo. Aprenda idiomas com atividades que se adaptam a você."
+  },
+  "page_header": {
+    "posts": "Posts",
+    "atividades": "Atividades",
+    "pessoas": "Pessoas",
+    "search_placeholder": "Nome da Turma"
+  },
+  "turma": {
+    "edit": "Editar",
+    "delete": "Apagar",
+    "delete_confirmation": "Tem certeza que deseja deletar a turma {title}?",
+    "update": "Atualizar",
+    "name": "Nome",
+    "subject": "Matéria"
   },
   "about_us": {
     "mission_statement": "NOSSA MISSÃO É INOVAR O ENSINO DE LÍNGUAS NO BRASIL, ACREDITANDO QUE A CONEXÃO ENTRE IA E HUMANOS É A CHAVE."
