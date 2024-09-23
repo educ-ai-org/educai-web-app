@@ -11,8 +11,11 @@ import '../../App.css'
 
 // import required modules
 import { Pagination, Navigation } from 'swiper/modules'
+import { useTranslation } from 'react-i18next'
 
 export default function App() {
+  const { t } = useTranslation()
+
   return (
     <>
       <Swiper
@@ -28,49 +31,48 @@ export default function App() {
         className="mySwiper"
       >
         <SwiperSlide>
-            <img src='/Team/gustavo.svg'></img>
-              <div className='flex flex-col gap-2'>
-                <Typography variant='lp-name-team'>Gustavo</Typography>
-                <Typography variant='body2'>AI Engineer</Typography>
-              </div>
-          </SwiperSlide>
-        <SwiperSlide>
-        <img src='/Team/julia.svg'></img>
-            <div className='flex flex-col gap-2'>
-              <Typography variant='lp-name-team'>Julia</Typography>
-              <Typography variant='body2'>Designer e Front-End</Typography>
-            </div>
+          <img src='/Team/gustavo.svg' alt='Gustavo' />
+          <div className='flex flex-col gap-2'>
+            <Typography variant='lp-name-team'>{t('team.gustavo')}</Typography>
+            <Typography variant='body2'>{t('team.gustavo_role')}</Typography>
+          </div>
         </SwiperSlide>
         <SwiperSlide>
-        <img src='/Team/luiza.svg'></img>
-            <div className='flex flex-col gap-2'>
-              <Typography variant='lp-name-team'>Luiza</Typography>
-              <Typography variant='body2'>Back-End</Typography>
-            </div>
+          <img src='/Team/julia.svg' alt='Julia' />
+          <div className='flex flex-col gap-2'>
+            <Typography variant='lp-name-team'>{t('team.julia')}</Typography>
+            <Typography variant='body2'>{t('team.julia_role')}</Typography>
+          </div>
         </SwiperSlide>
         <SwiperSlide>
-        <img src='/Team/vitao.svg'></img>
-            <div className='flex flex-col gap-2'>
-              <Typography variant='lp-name-team'>Vitor</Typography>
-              <Typography variant='body2'>DevOps</Typography>
-            </div>
+          <img src='/Team/luiza.svg' alt='Luiza' />
+          <div className='flex flex-col gap-2'>
+            <Typography variant='lp-name-team'>{t('team.luiza')}</Typography>
+            <Typography variant='body2'>{t('team.luiza_role')}</Typography>
+          </div>
         </SwiperSlide>
         <SwiperSlide>
-        <img src='/Team/diego.svg'></img>
-            <div className='flex flex-col gap-2'>
-              <Typography variant='lp-name-team'>Diego</Typography>
-              <Typography variant='body2'>Back-End</Typography>
-            </div>
+          <img src='/Team/vitao.svg' alt='Vitor' />
+          <div className='flex flex-col gap-2'>
+            <Typography variant='lp-name-team'>{t('team.vitor')}</Typography>
+            <Typography variant='body2'>{t('team.vitor_role')}</Typography>
+          </div>
         </SwiperSlide>
         <SwiperSlide>
-        <img src='/Team/erick.svg'></img>
-            <div className='flex flex-col gap-2'>
-              <Typography variant='lp-name-team'>Erick</Typography>
-              <Typography variant='body2'>Front-End</Typography>
-            </div>
+          <img src='/Team/diego.svg' alt='Diego' />
+          <div className='flex flex-col gap-2'>
+            <Typography variant='lp-name-team'>{t('team.diego')}</Typography>
+            <Typography variant='body2'>{t('team.diego_role')}</Typography>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src='/Team/erick.svg' alt='Erick' />
+          <div className='flex flex-col gap-2'>
+            <Typography variant='lp-name-team'>{t('team.erick')}</Typography>
+            <Typography variant='body2'>{t('team.erick_role')}</Typography>
+          </div>
         </SwiperSlide>
       </Swiper>
     </>
   )
 }
-
