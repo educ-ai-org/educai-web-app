@@ -76,12 +76,10 @@
     "search_placeholder": "Nome da Turma"
   },
   "turma": {
-    "edit": "Editar",
-    "delete": "Apagar",
-    "delete_confirmation": "Tem certeza que deseja deletar a turma {title}?",
-    "update": "Atualizar",
-    "name": "Nome",
-    "subject": "Matéria"
+    "revisao": "Revisão questionário",
+    "create_activity": "Criar Atividade",
+    "create_activity_ia": "Criar Atividade IA",
+    "participants": "Participantes"
   },
   "about_us": {
     "mission_statement": "NOSSA MISSÃO É INOVAR O ENSINO DE LÍNGUAS NO BRASIL, ACREDITANDO QUE A CONEXÃO ENTRE IA E HUMANOS É A CHAVE."
