@@ -23,26 +23,68 @@
     "language_focus": "Focus On Language Practice",
     "realtime_feedback": "We Believe In Realtime Feedbacks"
   },
-  "turma": {
-    "criar_atividade_ia": "Create Activity with AI",
-    "nova_atividade": "New Activity",
-    "gerar_questionario": "Generate questionnaire",
-    "qual_tipo_entrada": "What type of input will you provide for creating the questionnaire?",
-    "dificuldade": "Difficulty:",
-    "quantidade": "Quantity:",
-    "tema_questoes": "Theme of the questions:",
-    "relacionar_a": "Relate to:",
-    "instrucoes": "Instructions",
-    "mp3": "MP3",
-    "link_youtube": "Youtube Link",
-    "documento": "Document",
-    "adicionar_nova_questao": "Add new question"
+  "pricing": {
+    "choose_plan": "CHOOSE YOUR PLAN",
+    "ready_to_join": "Ready to join the language teaching revolution?",
+    "revolution": "revolution",
+    "join_with_us": "JOIN WITH US",
+    "plus": "PLUS",
+    "premium": "PREMIUM",
+    "month": "/month",
+    "unlimited_classes": "Unlimited Classes",
+    "unlimited_students": "Unlimited Students",
+    "ai_chatbot": "AI chatbot for students",
+    "learn_more": "LEARN MORE"
   },
-  "modal": {
-    "gerar_questao": "Generate question with AI",
-    "texto_botao_gerar": "Generate questionnaire"
+  "team": {
+    "gustavo": "Gustavo",
+    "gustavo_role": "AI Engineer",
+    "julia": "Julia",
+    "julia_role": "Designer and Front-End",
+    "luiza": "Luiza",
+    "luiza_role": "Back-End",
+    "vitor": "Vitor",
+    "vitor_role": "DevOps",
+    "diego": "Diego",
+    "diego_role": "Back-End",
+    "erick": "Erick",
+    "erick_role": "Front-End"
   },
   "footer": {
     "copyright": "© 2024 Copyright by educ.ai"
+  },
+  "login": {
+    "email": "Email",
+    "password": "Password",
+    "keep_me_connected": "Keep me connected",
+    "login": "Login",
+    "fill_all_fields": "Fill in all fields before logging in.",
+    "invalid_credentials": "Invalid email or password, please try again."
+  },
+  "slide_login": {
+    "revolutionizing_education": "Revolutionizing Education",
+    "education_description": "The AI that transforms your way of learning languages. Making it more interactive, adaptable, effective.",
+    "languages_at_your_reach": "Languages at Your Reach",
+    "languages_description": "Explore new languages with AI support. Customized for your learning to flow naturally.",
+    "smart_fluency": "Smart Fluency",
+    "fluency_description": "AI that understands your pace. Learn languages with activities that adapt to you."
+  },
+  "page_header": {
+    "posts": "Posts",
+    "atividades": "Activities",
+    "pessoas": "People",
+    "search_placeholder": "Class Name"
+  },
+  "turma": {
+    "revisao": "Review questionnaire",
+    "criar_atividade": "Create Activity",
+    "criar_atividade_ia": "Create AI Activity",
+    "responder_atividade": "Answer Activity"
+  },
+  "about_us": {
+    "mission_statement": "OUR MISSION IS TO INNOVATE LANGUAGE TEACHING IN BRAZIL, BELIEVING THAT THE AI AND HUMAN CONNECTION IS THE KEY."
+  },
+  "contact": {
+    "our_team": "OUR TEAM"
   }
 }
