@@ -36,55 +36,19 @@
     "ai_chatbot": "AI chatbot for students",
     "learn_more": "LEARN MORE"
   },
-  "team": {
-    "gustavo": "Gustavo",
-    "gustavo_role": "AI Engineer",
-    "julia": "Julia",
-    "julia_role": "Designer and Front-End",
-    "luiza": "Luiza",
-    "luiza_role": "Back-End",
-    "vitor": "Vitor",
-    "vitor_role": "DevOps",
-    "diego": "Diego",
-    "diego_role": "Back-End",
-    "erick": "Erick",
-    "erick_role": "Front-End"
+  "turma": {
+    "revisao": "Review questionnaire",
+    "criar_atividade": "Create Activity",
+    "criar_atividade_ia": "Create AI Activity",
+    "responder_atividade": "Answer Activity",
+    "criar_questionario": "Create questionnaire",
+    "adicionar_nova_questao": "Add new question"
   },
   "footer": {
     "copyright": "© 2024 Copyright by educ.ai"
   },
-  "login": {
-    "email": "Email",
-    "password": "Password",
-    "keep_me_connected": "Keep me connected",
-    "login": "Login",
-    "fill_all_fields": "Fill in all fields before logging in.",
-    "invalid_credentials": "Invalid email or password, please try again."
-  },
-  "slide_login": {
-    "revolutionizing_education": "Revolutionizing Education",
-    "education_description": "The AI that transforms your way of learning languages. Making it more interactive, adaptable, effective.",
-    "languages_at_your_reach": "Languages at Your Reach",
-    "languages_description": "Explore new languages with AI support. Customized for your learning to flow naturally.",
-    "smart_fluency": "Smart Fluency",
-    "fluency_description": "AI that understands your pace. Learn languages with activities that adapt to you."
-  },
-  "page_header": {
-    "posts": "Posts",
-    "atividades": "Activities",
-    "pessoas": "People",
-    "search_placeholder": "Class Name"
-  },
-  "turma": {
-    "revisao": "Review questionnaire",
-    "create_activity": "Create Activity",
-    "create_activity_ia": "Create AI Activity",
-    "participants": "Participants"
-  },
-  "about_us": {
-    "mission_statement": "OUR MISSION IS TO INNOVATE LANGUAGE TEACHING IN BRAZIL, BELIEVING THAT THE AI AND HUMAN CONNECTION IS THE KEY."
-  },
-  "contact": {
-    "our_team": "OUR TEAM"
+  "modal": {
+    "gerar_questao": "Generate question with AI",
+    "texto_botao_gerar": "Generate AI question"
   }
 }

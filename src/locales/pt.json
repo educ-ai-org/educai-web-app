@@ -36,19 +36,13 @@
     "ai_chatbot": "Chatbot IA para alunos",
     "learn_more": "SAIBA MAIS"
   },
-  "team": {
-    "gustavo": "Gustavo",
-    "gustavo_role": "Engenheiro de IA",
-    "julia": "Julia",
-    "julia_role": "Designer e Front-End",
-    "luiza": "Luiza",
-    "luiza_role": "Back-End",
-    "vitor": "Vitor",
-    "vitor_role": "DevOps",
-    "diego": "Diego",
-    "diego_role": "Back-End",
-    "erick": "Erick",
-    "erick_role": "Front-End"
+  "turma": {
+    "revisao": "Revisão questionário",
+    "criar_atividade": "Criar Atividade",
+    "criar_atividade_ia": "Criar Atividade IA",
+    "responder_atividade": "Responder Atividade",
+    "criar_questionario": "Criar questionário",
+    "adicionar_nova_questao": "Adicionar nova questão"
   },
   "footer": {
     "copyright": "© 2024 Direitos autorais por educ.ai"
@@ -61,30 +55,8 @@
     "fill_all_fields": "Preencha todos os campos antes de realizar o login.",
     "invalid_credentials": "Email ou senha inválidos, tente novamente."
   },
-  "slide_login": {
-    "revolutionizing_education": "Revolucionando a Educação",
-    "education_description": "A IA que transforma seu jeito de aprender idiomas. Tornando-o mais interativo, adaptável, eficaz.",
-    "languages_at_your_reach": "Idiomas ao Seu Alcance",
-    "languages_description": "Explore novos idiomas com suporte de IA. Personalizado para o seu aprendizado fluir naturalmente.",
-    "smart_fluency": "Fluência Inteligente",
-    "fluency_description": "IA que entende seu ritmo. Aprenda idiomas com atividades que se adaptam a você."
-  },
-  "page_header": {
-    "posts": "Posts",
-    "atividades": "Atividades",
-    "pessoas": "Pessoas",
-    "search_placeholder": "Nome da Turma"
-  },
-  "turma": {
-    "revisao": "Revisão questionário",
-    "create_activity": "Criar Atividade",
-    "create_activity_ia": "Criar Atividade IA",
-    "participants": "Participantes"
-  },
-  "about_us": {
-    "mission_statement": "NOSSA MISSÃO É INOVAR O ENSINO DE LÍNGUAS NO BRASIL, ACREDITANDO QUE A CONEXÃO ENTRE IA E HUMANOS É A CHAVE."
-  },
-  "contact": {
-    "our_team": "NOSSO TIME"
+  "modal": {
+    "gerar_questao": "Gerar questão com IA",
+    "texto_botao_gerar": "Gerar questão IA"
   }
 }

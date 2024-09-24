@@ -15,8 +15,10 @@ import { Question } from '../lib/types/Question'
 import ParticipantsPage from '../components/ParticipantsPage/ParticipantsPage'
 import Revisao from './Revisao'
 import AnswerQuestionPage from '../components/AnswerQuestionPage/AnswerQuestionPage'
+import { useTranslation } from 'react-i18next'
 
 export default function Turma() {
+  const { t } = useTranslation()
   const client = useClient()
   const { id } = useParams()
   const [turma, setTurma] = useState<TurmaType>()
@@ -35,61 +37,27 @@ export default function Turma() {
     <Layout>
       <Box sx={{ width: '100%', overflowY: 'auto' }} >
         <Box sx={{ width: '100%', justifyContent: 'center', display: 'flex' }}>
-          <PageHeader title={tab == 'revisao' ? 'Revisão questionário' : turma?.title} iconPath={tab == 'revisao' ? '/iconsPages/bookIcon.svg' : undefined}/>
+          <PageHeader
+            title={tab === 'revisao' ? t('turma.revisao') : turma?.title}
+            iconPath={tab === 'revisao' ? '/iconsPages/bookIcon.svg' : undefined}
+          />
         </Box>
 
-        {tab === 'criar-atividade' && (
-          <>
-            <CriarAtividade questions={questions} />
-          </>
-        )}
+        {tab === 'criar-atividade' && <CriarAtividade questions={questions} />}
+        {tab === 'criar-atividade-ia' && <CriarAtividadeIA />}
+        {tab === 'revisao' && <Revisao />}
+        {tab === 'responder-atividade' && <AnswerQuestionPage />}
 
-        {tab === 'criar-atividade-ia' && (
-          <>
-            <CriarAtividadeIA />
-          </>
-        )}
-
-        {
-          tab === 'revisao' && (
-            <>
-              <Revisao />
-            </>
-          )
-        }
-
-        {
-          tab === 'responder-atividade' && (
-            <>
-              <AnswerQuestionPage />
-            </>
-          )
-        }
-
-        {tab !== 'criar-atividade' && tab !== 'criar-atividade-ia' && tab !== 'revisao' && tab !== 'responder-atividade' &&
+        {tab !== 'criar-atividade' && tab !== 'criar-atividade-ia' && tab !== 'revisao' && tab !== 'responder-atividade' && (
           <Box sx={{ width: '100%', height: '89%', display: 'flex', padding: '24px' }}>
-            <Box sx={{
-              width: '65%',
-              height: '100%',
-              gap: '16px',
-              display: 'flex',
-              flexDirection: 'column',
-              padding: '10px'
-            }}>
-              {tab === 'posts' && id &&  (
-                <PostsPage classroomId={id} />
-              )}
-              {tab === 'atividades' && (
-                <ClassWorksPage classRoomId={id as string} />
-              )}
-              {tab === 'pessoas' && (
-                <ParticipantsPage classroomId={id as string} />
-              )}
+            <Box sx={{ width: '65%', height: '100%', gap: '16px', display: 'flex', flexDirection: 'column', padding: '10px' }}>
+              {tab === 'posts' && id && <PostsPage classroomId={id} />}
+              {tab === 'atividades' && <ClassWorksPage classRoomId={id as string} />}
+              {tab === 'pessoas' && <ParticipantsPage classroomId={id as string} />}
             </Box>
-
-            <Leaderboard/>
+            <Leaderboard />
           </Box>
-        }
+        )}
       </Box>
     </Layout>
   )
