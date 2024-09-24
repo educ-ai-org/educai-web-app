@@ -23,40 +23,26 @@
     "language_focus": "Foco na Prática de Idiomas",
     "realtime_feedback": "Acreditamos em Feedbacks em Tempo Real"
   },
-  "pricing": {
-    "choose_plan": "ESCOLHA SEU PLANO",
-    "ready_to_join": "Pronto para se juntar à revolução no ensino de línguas?",
-    "revolution": "revolução",
-    "join_with_us": "JUNTE-SE A NÓS",
-    "plus": "PLUS",
-    "premium": "PREMIUM",
-    "month": "/mês",
-    "unlimited_classes": "Aulas Ilimitadas",
-    "unlimited_students": "Alunos Ilimitados",
-    "ai_chatbot": "Chatbot IA para alunos",
-    "learn_more": "SAIBA MAIS"
-  },
   "turma": {
-    "revisao": "Revisão questionário",
-    "criar_atividade": "Criar Atividade",
-    "criar_atividade_ia": "Criar Atividade IA",
-    "responder_atividade": "Responder Atividade",
-    "criar_questionario": "Criar questionário",
+    "criar_atividade_ia": "Criar Atividade com IA",
+    "nova_atividade": "Nova Atividade",
+    "gerar_questionario": "Gerar questionário",
+    "qual_tipo_entrada": "Qual tipo de entrada você fornecerá para a criação do questionário?",
+    "dificuldade": "Dificuldade:",
+    "quantidade": "Quantidade:",
+    "tema_questoes": "Tema das questões:",
+    "relacionar_a": "Relacionar a:",
+    "instrucoes": "Instruções",
+    "mp3": "MP3",
+    "link_youtube": "Link do Youtube",
+    "documento": "Documento",
     "adicionar_nova_questao": "Adicionar nova questão"
-  },
-  "footer": {
-    "copyright": "© 2024 Direitos autorais por educ.ai"
-  },
-  "login": {
-    "email": "E-mail",
-    "password": "Senha",
-    "keep_me_connected": "Mantenha-me conectado",
-    "login": "Entrar",
-    "fill_all_fields": "Preencha todos os campos antes de realizar o login.",
-    "invalid_credentials": "Email ou senha inválidos, tente novamente."
   },
   "modal": {
     "gerar_questao": "Gerar questão com IA",
-    "texto_botao_gerar": "Gerar questão IA"
+    "texto_botao_gerar": "Gerar questionário"
+  },
+  "footer": {
+    "copyright": "© 2024 Direitos autorais por educ.ai"
   }
 }

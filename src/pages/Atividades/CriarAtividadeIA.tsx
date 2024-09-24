@@ -12,10 +12,13 @@ import useClient from '../../lib/client/useAIClient'
 import { GenerateQuestionPayload } from '../../lib/types/GenerateQuestionPayload'
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
+import { useTranslation } from 'react-i18next'
 import 'react-toastify/dist/ReactToastify.css'
 
 export default function CriarAtividadeIA() {
-	const StyledButton = styled(Button)({
+	const { t } = useTranslation()
+
+	const StyledButton = styled(Button)( {
 		display: 'inline-flex',
 		gap: '8px',
 		backgroundColor: '#FFF',
@@ -127,9 +130,7 @@ export default function CriarAtividadeIA() {
 				<img src="../Illustration/Edu-Robot.svg" alt="Robo do Educ.AI" width="12%" />
 
 				<Typography sx={{ fontSize: 26, fontWeight: 600, textAlign: 'center' }}>
-					<>
-						Qual tipo de entrada você fornecerá para <br /> a criação do questionário?
-					</>
+					{t('turma.qual_tipo_entrada')}
 				</Typography>
 
 				<Divider sx={{ width: '60%' }} />
@@ -140,7 +141,7 @@ export default function CriarAtividadeIA() {
 						startIcon={<IoChatbubblesOutline color='#6730EC' size={28} />}
 						onClick={() => handleOpen('instrucao')}
 					>
-						Instruções
+						{t('turma.instrucoes')}
 					</StyledButton>
 
 					<StyledButton
@@ -148,7 +149,7 @@ export default function CriarAtividadeIA() {
 						startIcon={<CiMusicNote1 color='#6730EC' size={28} />}
 						onClick={() => handleOpen('mp3')}
 					>
-						MP3
+						{t('turma.mp3')}
 					</StyledButton>
 				</Box>
 
@@ -158,7 +159,7 @@ export default function CriarAtividadeIA() {
 						startIcon={<RiLink color='#6730EC' size={28} />}
 						onClick={() => handleOpen('linkYoutube')}
 					>
-						Link do Youtube
+						{t('turma.link_youtube')}
 					</StyledButton>
 
 					<StyledButton
@@ -166,13 +167,13 @@ export default function CriarAtividadeIA() {
 						startIcon={<LuFile color='#6730EC' size={28} />}
 						onClick={() => handleOpen('documento')}
 					>
-						Documento
+						{t('turma.documento')}
 					</StyledButton>
 				</Box>
 
 				<Modal
-					titulo='Nova Atividade'
-					textoBotaoAbrirModal='Nova Atividade'
+					titulo={t('modal.gerar_questao')}
+					textoBotaoAbrirModal={t('modal.texto_botao_gerar')}
 					altIcone='Nova Atividade'
 					variantButton='none'
 					width='50%'
@@ -241,7 +242,7 @@ export default function CriarAtividadeIA() {
 					<Box sx={{ display: 'flex', gap: '32px', width: '100%' }}>
 						<Box sx={{ width: '100%' }}>
 							<Box sx={{ display: 'flex' }}>
-								<Typography sx={{ fontSize: '16px', fontWeight: 400, color: '#000' }}>Dificuldade:</Typography>
+								<Typography sx={{ fontSize: '16px', fontWeight: 400, color: '#000' }}>{t('turma.dificuldade')}</Typography>
 								<Typography sx={{ fontSize: '16px', fontWeight: 400, color: 'red' }}>*</Typography>
 							</Box>
 
@@ -255,7 +256,7 @@ export default function CriarAtividadeIA() {
 
 						<Box sx={{ width: '100%' }}>
 							<Box sx={{ display: 'flex' }}>
-								<Typography sx={{ fontSize: '16px', fontWeight: 400, color: '#000' }}>Quantidade:</Typography>
+								<Typography sx={{ fontSize: '16px', fontWeight: 400, color: '#000' }}>{t('turma.quantidade')}</Typography>
 								<Typography sx={{ fontSize: '16px', fontWeight: 400, color: 'red' }}>*</Typography>
 							</Box>
 
@@ -271,7 +272,7 @@ export default function CriarAtividadeIA() {
 					<Box sx={{ display: 'flex', gap: '32px', width: '100%' }}>
 						<Box sx={{ width: '100%' }}>
 							<Box sx={{ display: 'flex', alignItems: 'center' }}>
-								<Typography sx={{ fontSize: '16px', fontWeight: 400, color: '#000' }}>Tema das questões:</Typography>
+								<Typography sx={{ fontSize: '16px', fontWeight: 400, color: '#000' }}>{t('turma.tema_questoes')}</Typography>
 
 								<Tooltip title="Qual o tema didático da questão?" arrow>
 									<IconButton disableRipple size='small'>
@@ -289,7 +290,7 @@ export default function CriarAtividadeIA() {
 
 						<Box sx={{ width: '100%', alignItems: 'center' }}>
 							<Box sx={{ display: 'flex' }}>
-								<Typography sx={{ fontSize: '16px', fontWeight: 400, color: '#000' }}>Relacionar a:</Typography>
+								<Typography sx={{ fontSize: '16px', fontWeight: 400, color: '#000' }}>{t('turma.relacionar_a')}</Typography>
 								<Tooltip title="Essa questão deve ser relacionada a qual tema?" arrow>
 									<IconButton disableRipple size='small'>
 										<RiQuestionLine color='#7750DE' />
@@ -327,7 +328,7 @@ export default function CriarAtividadeIA() {
 							borderRadius: '10px',
 							fontWeight: 700,
 							color: '#170050'
-						}} variant='outlined' onClick={handleClose}>Cancelar</Button>
+						}} variant='outlined' onClick={handleClose}>{t('modal.texto_botao_gerar')}</Button>
 
 						<LoadingButton sx={{
 							backgroundColor: '#6730EC',
@@ -340,7 +341,7 @@ export default function CriarAtividadeIA() {
 							textTransform: 'none',
 							borderRadius: '10px',
 							fontWeight: 700
-						}} variant='contained' loading={isLoading} onClick={handleClick}>Gerar questionário</LoadingButton>
+						}} variant='contained' loading={isLoading} onClick={handleClick}>{t('modal.texto_botao_gerar')}</LoadingButton>
 					</Box>
 				</Modal>
 			</Box>
