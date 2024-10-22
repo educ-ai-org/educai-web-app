@@ -10,7 +10,7 @@ i18n
   .init({
     fallbackLng: 'en',
     debug: true,
-    ns: ['home', 'login', 'turma', 'landingPage', 'talkWithEdu', 'material', 'criarAtividade'],
+    ns: ['home', 'login', 'turma', 'landingPage', 'talkWithEdu', 'material', 'criarAtividade', 'dictionary', 'profile', 'activity'],
     defaultNS: 'landingPage', // Adicione o namespace default correto
     interpolation: {
       escapeValue: false,

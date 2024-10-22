@@ -29,7 +29,7 @@ type PageHeaderProps = {
 
 export default function PageHeader(PageHeaderProps: PageHeaderProps) {
   const { title, showButton, search, createClassroom, iconPath } = PageHeaderProps
-  const { t } = useTranslation()
+  const { t } = useTranslation(['home'])
 
   const tabName: { [key: string]: Tab } = {
     posts: 'posts',
@@ -61,7 +61,7 @@ export default function PageHeader(PageHeaderProps: PageHeaderProps) {
     }
   }
 
-  const isTabsNecessary = title === 'Turmas' || title === 'Falando com o Edu'
+  const isTabsNecessary = title === t('page_header.turmas') || title === 'Falando com o Edu'
 
   const handleChange = (_e: React.SyntheticEvent, newTab: Tab) => {
     const url = new URL(window.location.href)
@@ -80,7 +80,7 @@ export default function PageHeader(PageHeaderProps: PageHeaderProps) {
         justifyContent: 'space-between'
       }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-          <img src={iconPath ? iconPath : '/iconsPages/turma.svg'} alt='Pessoas agrupadas' />
+          <img src={iconPath ? iconPath : '/iconsPages/turma.svg'} alt={t('page_header.pessoas')} />
           <Typography variant='h5' sx={{
             fontWeight: '700'
           }}>

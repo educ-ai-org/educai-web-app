@@ -1,0 +1,19 @@
+{
+  "dictionary": {
+    "title": "Dicionário",
+    "search": {
+      "label": "Pesquisar",
+      "button": "Buscar"
+    },
+    "searchHistory": {
+      "title": "Histórico de Pesquisa",
+      "noHistory": "Nenhuma pesquisa realizada"
+    },
+    "tooltip": {
+      "audio": "Ouvir pronúncia"
+    },
+    "result": {
+      "partOfSpeech": "Classe gramatical"
+    }
+  }
+}

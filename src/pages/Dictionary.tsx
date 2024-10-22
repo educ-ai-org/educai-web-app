@@ -13,10 +13,12 @@ import VolumeUpIcon from '@mui/icons-material/VolumeUpRounded'
 import { Stack } from '../lib/stack'
 import Divider from '@mui/material/Divider'
 import { LoadingButton } from '@mui/lab'
+import { useTranslation } from 'react-i18next'
 
 const stack = new Stack<string>()
 
 export default function Dictionary() {
+    const { t } = useTranslation()
     const [open, setOpen] = useState(false)
     const [search, setSearch] = useState('')
     const [resultData, setResultData] = useState<DictonaryResponse | null>(null)
@@ -103,15 +105,15 @@ export default function Dictionary() {
                     <Box sx={{
                         display: 'flex',
                         alignItems: 'center',
-                    }}>                    
-                    <img src='/iconsPages/iconDictionary.svg' alt='Ícone de livro' 
+                    }}>
+                    <img src='/iconsPages/iconDictionary.svg' alt={t('dictionary.title')}
                     style={{
                         marginRight: '14px',
                     }} />
                     <Typography sx={{
                         fontWeight: 'bold',
                         fontSize: '18px',
-                    }}>Dicionário</Typography>
+                    }}>{t('dictionary.title')}</Typography>
                     </Box>
                     <Divider sx={{
                         width: '100%',
@@ -122,7 +124,7 @@ export default function Dictionary() {
                 </DialogTitle>
                 <DialogContent>
                     <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: '6px' }}>
-                        <TextField label='Pesquisar' variant='outlined' fullWidth value={search} onChange={(e) => setSearch(e.target.value)}
+                        <TextField label={t('dictionary.search.label')} variant='outlined' fullWidth value={search} onChange={(e) => setSearch(e.target.value)}
                         InputProps={{
                             sx: {
                                 borderRadius: '10px'
@@ -134,12 +136,12 @@ export default function Dictionary() {
                             loading={loading}
                             color='primary'
                             onClick={() => handleSearch(search)}
-                        >Buscar</LoadingButton>
+                        >{t('dictionary.search.button')}</LoadingButton>
                     </Box>
                     <Box sx={{ marginTop: '16px' }}>
-                        <Typography variant='h6' sx={{ fontWeight: 'bold' }}>Histórico de Pesquisa</Typography>
+                        <Typography variant='h6' sx={{ fontWeight: 'bold' }}>{t('dictionary.searchHistory.title')}</Typography>
                         {history.length === 0 ? (
-                            <Typography sx={{ fontStyle: 'italic' }}>Nenhuma pesquisa realizada</Typography>
+                            <Typography sx={{ fontStyle: 'italic' }}>{t('dictionary.searchHistory.noHistory')}</Typography>
                         ) : (
                             history.map((word, index) => (
                                 <Typography key={index} sx={{
@@ -157,7 +159,7 @@ export default function Dictionary() {
                             <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'center' }}>
                                 <Typography variant='h5' sx={{ fontWeight: 'bold' }}>{resultData.word}</Typography>
                                 {resultData.audio && (
-                                    <Tooltip title='Ouvir pronúncia' placement='right'>
+                                    <Tooltip title={t('dictionary.tooltip.audio')} placement='right'>
                                         <IconButton size='small' sx={{ marginTop: '4px' }} onClick={() => listenAudio(resultData.audio)}>
                                             <VolumeUpIcon sx={{ color: '#4921a5' }} />
                                         </IconButton>
@@ -166,7 +168,7 @@ export default function Dictionary() {
                             </Box>
                             {resultData.meanings.map((meaning, index) => (
                                 <div key={index}>
-                                    <Typography variant='h6' sx={{ fontWeight: 'bold' }}>{meaning.partOfSpeech}</Typography>
+                                    <Typography variant='h6' sx={{ fontWeight: 'bold' }}>{t('dictionary.result.partOfSpeech')}: {meaning.partOfSpeech}</Typography>
                                     {meaning.definitions.map((definition, idx) => (
                                         <Typography key={idx}> - {definition}</Typography>
                                     ))}

@@ -1,0 +1,19 @@
+{
+  "dictionary": {
+    "title": "Dictionary",
+    "search": {
+      "label": "Search",
+      "button": "Search"
+    },
+    "searchHistory": {
+      "title": "Search History",
+      "noHistory": "No search performed"
+    },
+    "tooltip": {
+      "audio": "Listen to pronunciation"
+    },
+    "result": {
+      "partOfSpeech": "Part of Speech"
+    }
+  }
+}
