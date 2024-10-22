@@ -16,7 +16,7 @@ import { useTranslation } from 'react-i18next'
 export default function Home() {
   const { role } = useContext(AuthContext)
   const client = useClient()
-  const { t } = useTranslation()
+  const { t } = useTranslation(['home'])
   const [turmas, setTurmas] = useState<TurmasType>([])
   const navigate = useNavigate()
   const [search, setSearch] = useState('')

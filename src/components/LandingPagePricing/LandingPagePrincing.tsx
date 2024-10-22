@@ -12,7 +12,7 @@ const mapVariantToPadding = {
 }
 
 export default function LandingPagePrincing({ variant }: PrincingProps) {
-    const { t } = useTranslation()
+    const { t } = useTranslation('landingPage')
     const borderTop = variant === 'premium' ? 'border-t-8' : ''
     const margin = variant === 'premium' ? 'mt-4 mb-4' : 'mt-6 mb-6'
 

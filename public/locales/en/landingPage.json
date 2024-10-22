@@ -4,7 +4,8 @@
     "solutions": "SOLUTIONS",
     "pricing": "PRICING",
     "about_us": "ABOUT US",
-    "contact": "CONTACT"
+    "contact": "CONTACT",
+    "login": "LOGIN"
   },
   "home": {
     "welcome_message": "Welcome to our website",
@@ -15,17 +16,22 @@
     "way": "WAY",
     "learn": "LEARN",
     "power_ai": "WITH THE POWER OF AI",
-    "no_class_found": "Oops! No classes found.. 😕"
+    "no_class_found": "Oops! No classes found.. 😕",
+    "invalid_credentials": "Invalid credentials, please try again."
   },
   "solutions": {
     "exercise_creation": "Create Exercises In Minutes",
     "student_engagement": "Students More Engaged",
     "language_focus": "Focus On Language Practice",
-    "realtime_feedback": "We Believe In Realtime Feedbacks"
+    "realtime_feedback": "We Believe In Realtime Feedbacks",
+    "exercies": "Exercises",
+    "engaged": "Engaged",
+    "practice": "Practice",
+    "feedbacks": "Feedbacks",
+    "with_ai": "With AI Copilot"
   },
   "pricing": {
     "choose_plan": "CHOOSE YOUR PLAN",
-    "ready_to_join": "Ready to join the language teaching revolution?",
     "revolution": "revolution",
     "join_with_us": "JOIN WITH US",
     "plus": "PLUS",
@@ -34,7 +40,11 @@
     "unlimited_classes": "Unlimited Classes",
     "unlimited_students": "Unlimited Students",
     "ai_chatbot": "AI chatbot for students",
-    "learn_more": "LEARN MORE"
+    "learn_more": "LEARN MORE",
+    "plan": "PLAN",
+    "ready_to": "Ready to  ",
+    "join": "join",
+    "teaching": "the language teaching revolution"
   },
   "team": {
     "gustavo": "Gustavo",
@@ -52,34 +62,6 @@
   },
   "footer": {
     "copyright": "© 2024 Copyright by educ.ai"
-  },
-  "login": {
-    "email": "Email",
-    "password": "Password",
-    "keep_me_connected": "Keep me connected",
-    "login": "Login",
-    "fill_all_fields": "Fill in all fields before logging in.",
-    "invalid_credentials": "Invalid email or password, please try again."
-  },
-  "slide_login": {
-    "revolutionizing_education": "Revolutionizing Education",
-    "education_description": "The AI that transforms your way of learning languages. Making it more interactive, adaptable, effective.",
-    "languages_at_your_reach": "Languages at Your Reach",
-    "languages_description": "Explore new languages with AI support. Customized for your learning to flow naturally.",
-    "smart_fluency": "Smart Fluency",
-    "fluency_description": "AI that understands your pace. Learn languages with activities that adapt to you."
-  },
-  "page_header": {
-    "posts": "Posts",
-    "atividades": "Activities",
-    "pessoas": "People",
-    "search_placeholder": "Class Name"
-  },
-  "turma": {
-    "revisao": "Review questionnaire",
-    "criar_atividade": "Create Activity",
-    "criar_atividade_ia": "Create AI Activity",
-    "responder_atividade": "Answer Activity"
   },
   "about_us": {
     "mission_statement": "OUR MISSION IS TO INNOVATE LANGUAGE TEACHING IN BRAZIL, BELIEVING THAT THE AI AND HUMAN CONNECTION IS THE KEY."
