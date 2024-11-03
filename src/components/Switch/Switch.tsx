@@ -4,6 +4,7 @@ import FormGroup from '@mui/material/FormGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Switch from '@mui/material/Switch'
 import Tooltip from '@mui/material/Tooltip'
+import { useTranslation } from 'react-i18next'
 
 const MaterialUISwitch = styled(Switch)(() => ({
   width: 62,
@@ -55,17 +56,20 @@ const MaterialUISwitch = styled(Switch)(() => ({
 }))
 
 export default function TranslateSwitch() {
-    
+  const { i18n, t } = useTranslation()
+
   const handleToggle = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
+      i18n.changeLanguage('pt')
       console.log('Switched to Portuguese')
     } else {
+      i18n.changeLanguage('en')
       console.log('Switched to English')
     }
   }
 
   return (
-    <Tooltip title="Switch between English and Portuguese" placement="top" className='pl-8'>
+    <Tooltip title={t('switch_language_tooltip')} placement="top" className='pl-8'>
       <FormGroup>
         <FormControlLabel
           label=""
