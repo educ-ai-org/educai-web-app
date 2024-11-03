@@ -7,6 +7,8 @@ import Home from './pages/Home.tsx'
 import LandingPage from './pages/LandingPage'
 import Login from './pages/Login'
 import Turma from './pages/Turma'
+import i18n from './i18n.ts'
+import { I18nextProvider } from 'react-i18next'
 
 import {
   createBrowserRouter,
@@ -69,8 +71,10 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
+    <I18nextProvider i18n={i18n}>
       <Outlet />
       <RouterProvider router={router} />
+    </I18nextProvider>
     </ThemeProvider>
   </React.StrictMode>,
 )

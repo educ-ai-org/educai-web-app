@@ -103,8 +103,8 @@ export default function Dictionary() {
                     <Box sx={{
                         display: 'flex',
                         alignItems: 'center',
-                    }}>                    
-                    <img src='/iconsPages/iconDictionary.svg' alt='Ícone de livro' 
+                    }}>
+                    <img src='/iconsPages/iconDictionary.svg' alt='Ícone de livro'
                     style={{
                         marginRight: '14px',
                     }} />

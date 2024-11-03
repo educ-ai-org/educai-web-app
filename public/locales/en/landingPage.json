@@ -1,0 +1,72 @@
+{
+  "navbar": {
+    "home": "HOME",
+    "solutions": "SOLUTIONS",
+    "pricing": "PRICING",
+    "about_us": "ABOUT US",
+    "contact": "CONTACT",
+    "login": "LOGIN"
+  },
+  "home": {
+    "welcome_message": "Welcome to our website",
+    "main_text": "Transform your language teaching",
+    "contact_us": "CONTACT US",
+    "try_demo": "TRY A DEMO",
+    "changing_way": "CHANGING THE WAY YOU",
+    "way": "WAY",
+    "learn": "LEARN",
+    "power_ai": "WITH THE POWER OF AI",
+    "no_class_found": "Oops! No classes found.. 😕",
+    "invalid_credentials": "Invalid credentials, please try again."
+  },
+  "solutions": {
+    "exercise_creation": "Create Exercises In Minutes",
+    "student_engagement": "Students More Engaged",
+    "language_focus": "Focus On Language Practice",
+    "realtime_feedback": "We Believe In Realtime Feedbacks",
+    "exercies": "Exercises",
+    "engaged": "Engaged",
+    "practice": "Practice",
+    "feedbacks": "Feedbacks",
+    "with_ai": "With AI Copilot"
+  },
+  "pricing": {
+    "choose_plan": "CHOOSE YOUR PLAN",
+    "revolution": "revolution",
+    "join_with_us": "JOIN WITH US",
+    "plus": "PLUS",
+    "premium": "PREMIUM",
+    "month": "/month",
+    "unlimited_classes": "Unlimited Classes",
+    "unlimited_students": "Unlimited Students",
+    "ai_chatbot": "AI chatbot for students",
+    "learn_more": "LEARN MORE",
+    "plan": "PLAN",
+    "ready_to": "Ready to  ",
+    "join": "join",
+    "teaching": "the language teaching revolution"
+  },
+  "team": {
+    "gustavo": "Gustavo",
+    "gustavo_role": "AI Engineer",
+    "julia": "Julia",
+    "julia_role": "Designer and Front-End",
+    "luiza": "Luiza",
+    "luiza_role": "Back-End",
+    "vitor": "Vitor",
+    "vitor_role": "DevOps",
+    "diego": "Diego",
+    "diego_role": "Back-End",
+    "erick": "Erick",
+    "erick_role": "Front-End"
+  },
+  "footer": {
+    "copyright": "© 2024 Copyright by educ.ai"
+  },
+  "about_us": {
+    "mission_statement": "OUR MISSION IS TO INNOVATE LANGUAGE TEACHING IN BRAZIL, BELIEVING THAT THE AI AND HUMAN CONNECTION IS THE KEY."
+  },
+  "contact": {
+    "our_team": "OUR TEAM"
+  }
+}

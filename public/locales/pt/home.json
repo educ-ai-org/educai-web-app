@@ -1,0 +1,23 @@
+{
+  "home": {
+    "title": "Turmas",
+    "no_class_found": "Nenhuma turma encontrada",
+    "invalid_credentials": "Credenciais inválidas. Por favor, tente novamente."
+  },
+  "page_header": {
+    "posts": "Posts",
+    "atividades": "Atividades",
+    "pessoas": "Pessoas",
+    "search_placeholder": "Buscar turmas"
+  },
+  "turma": {
+    "edit": "Editar",
+    "delete": "Excluir",
+    "subject": "Disciplina",
+    "next_submission": "Próxima entrega",
+    "students_count": "Quantidade de alunos",
+    "delete_confirmation": "Tem certeza de que deseja excluir a turma: {{title}}?",
+    "name": "Nome",
+    "update": "Atualizar"
+  }
+}

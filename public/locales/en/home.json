@@ -1,0 +1,27 @@
+{
+  "home": {
+    "title": "Classrooms",
+    "no_class_found": "No class found",
+    "invalid_credentials": "Invalid credentials. Please try again."
+  },
+  "page_header": {
+    "posts": "Posts",
+    "atividades": "Activities",
+    "pessoas": "People",
+    "search_placeholder": "Search for classrooms"
+  },
+  "turma": {
+    "edit": "Edit",
+    "delete": "Delete",
+    "subject": "Subject",
+    "next_submission": "Next Submission",
+    "students_count": "Number of Students",
+    "delete_confirmation": "Are you sure you want to delete the classroom: {{title}}?",
+    "name": "Name",
+    "update": "Update",
+    "cancel": "Cancel",
+    "no": "No",
+    "yes": "Yes",
+    "fill_updated_info": "Fill in the fields below with the updated information"
+  }
+}

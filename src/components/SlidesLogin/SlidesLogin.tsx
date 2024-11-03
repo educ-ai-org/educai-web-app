@@ -5,8 +5,11 @@ import 'swiper/css/navigation'
 import '../../App.css'
 import { Autoplay, Pagination, Navigation } from 'swiper/modules'
 import Typography from '../Typography/Typography'
+import { useTranslation } from 'react-i18next'
 
 export default function SlideLogin() {
+  const { t } = useTranslation(['login'])
+
   return (
       <Swiper
         spaceBetween={30}
@@ -22,25 +25,22 @@ export default function SlideLogin() {
         className='mySwiper swiper-login'
       >
         <SwiperSlide className='swiper-slide-login'>
-          <img src='./Illustration/IlustracaoLogin.svg' alt='Mulher tendo ideias junto com a IA' />
-          <Typography variant='h3' color='white'>Revolucionando a Educacão</Typography>
-          <Typography variant='body2' color='white'>A IA que transforma seu jeito de aprender idiomas. Tornando-o mais interativo, adaptável, eficaz.</Typography>
+          <img src='./Illustration/IlustracaoLogin.svg' alt={t('slide_login.revolutionizing_education')} />
+          <Typography variant='h3' color='white'>{t('slide_login.revolutionizing_education')}</Typography>
+          <Typography variant='body2' color='white'>{t('slide_login.education_description')}</Typography>
         </SwiperSlide>
 
         <SwiperSlide className='swiper-slide-login'>
-          <img src='./Illustration/illustrationSlide2.svg' alt='Mulher aprendendo um novo idioma através do computador' />
-          <Typography variant='h3' color='white'>Idiomas ao Seu Alcance</Typography>
-          <Typography variant='body2' color='white'>
-            Explore novos idiomas com suporte de IA. Personalizado para o seu aprendizado fluir naturalmente.</Typography>
+          <img src='./Illustration/illustrationSlide2.svg' alt={t('slide_login.languages_at_your_reach')} />
+          <Typography variant='h3' color='white'>{t('slide_login.languages_at_your_reach')}</Typography>
+          <Typography variant='body2' color='white'>{t('slide_login.languages_description')}</Typography>
         </SwiperSlide>
 
         <SwiperSlide className='swiper-slide-login'>
-          <img src='./Illustration/illustrationSlide3.svg' alt='Mulher realizando testes online' />
-          <Typography variant='h3' color='white'>Fluência Inteligente</Typography>
-          <Typography variant='body2' color='white'>
-            IA que entende seu ritmo. Aprenda idiomas com atividades que se adaptam a você.</Typography>
+          <img src='./Illustration/illustrationSlide3.svg' alt={t('slide_login.smart_fluency')} />
+          <Typography variant='h3' color='white'>{t('slide_login.smart_fluency')}</Typography>
+          <Typography variant='body2' color='white'>{t('slide_login.fluency_description')}</Typography>
         </SwiperSlide>
-
       </Swiper>
   )
 }

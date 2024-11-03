@@ -1,0 +1,74 @@
+{
+  "navbar": {
+    "home": "INÍCIO",
+    "solutions": "SOLUÇÕES",
+    "pricing": "PLANOS",
+    "about_us": "SOBRE NÓS",
+    "contact": "CONTATO",
+    "login": "ENTRAR"
+  },
+  "home": {
+    "welcome_message": "Bem-vindo ao nosso site",
+    "main_text": "Transforme seu ensino de línguas",
+    "contact_us": "ENTRE EM CONTATO",
+    "try_demo": "EXPERIMENTE UMA DEMO",
+    "changing_way": "MUDANDO A MANEIRA COMO VOCÊ",
+    "way": "MANEIRA",
+    "learn": "APRENDE",
+    "power_ai": "COM O PODER DA IA",
+    "no_class_found": "Poxa! Nenhuma turma encontrada.. 😕",
+    "invalid_credentials": "Credenciais inválidas, por favor tente novamente."
+  },
+  "solutions": {
+    "exercise_creation": "Crie Exercícios em Minutos",
+    "student_engagement": "Estudantes Mais Engajados",
+    "language_focus": "Foco na Prática de Idiomas",
+    "realtime_feedback": "Acreditamos em Feedbacks em Tempo Real",
+    "exercises": "Exercícios",
+    "engaged": "Engajados",
+    "practice": "Prática",
+    "feedbacks": "Feedbacks",
+    "with_ai": "Com um copiloto de IA"
+  },
+  "pricing": {
+    "choose_plan": "ESCOLHA SEU PLANO",
+    "ready_to+": "Pronto para se juntar à revolução no ensino de línguas?",
+    "revolution": "revolução",
+    "join_with_us": "JUNTE-SE A NÓS",
+    "plus": "PLUS",
+    "premium": "PREMIUM",
+    "month": "/mês",
+    "unlimited_classes": "Aulas Ilimitadas",
+    "unlimited_students": "Alunos Ilimitados",
+    "ai_chatbot": "Chatbot IA para alunos",
+    "learn_more": "SAIBA MAIS",
+    "plan": "PLAN",
+    "ready_to": "Pronto para  ",
+    "join": "se juntar",
+    "teaching": "a revolução no ensino de línguas"
+
+  },
+  "team": {
+    "gustavo": "Gustavo",
+    "gustavo_role": "Engenheiro de IA",
+    "julia": "Julia",
+    "julia_role": "Designer e Front-End",
+    "luiza": "Luiza",
+    "luiza_role": "Back-End",
+    "vitor": "Vitor",
+    "vitor_role": "DevOps",
+    "diego": "Diego",
+    "diego_role": "Back-End",
+    "erick": "Erick",
+    "erick_role": "Front-End"
+  },
+  "footer": {
+    "copyright": "© 2024 Direitos autorais por educ.ai"
+  },
+  "about_us": {
+    "mission_statement": "NOSSA MISSÃO É INOVAR O ENSINO DE LÍNGUAS NO BRASIL, ACREDITANDO QUE A CONEXÃO ENTRE IA E HUMANOS É A CHAVE."
+  },
+  "contact": {
+    "our_team": "NOSSO TIME"
+  }
+}
