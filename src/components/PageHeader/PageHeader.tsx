@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom'
 import Skeleton from '@mui/lab/Skeleton'
 import SearchBar from '../SearchBar/SearchBar'
 import NewClassroomModal from './NewClassroomModal'
-import { useTranslation } from 'react-i18next'
 
 type Tab = 'posts' | 'atividades' | 'pessoas'
 
@@ -29,7 +28,6 @@ type PageHeaderProps = {
 
 export default function PageHeader(PageHeaderProps: PageHeaderProps) {
   const { title, showButton, search, createClassroom, iconPath } = PageHeaderProps
-  const { t } = useTranslation(['home'])
 
   const tabName: { [key: string]: Tab } = {
     posts: 'posts',
@@ -61,7 +59,7 @@ export default function PageHeader(PageHeaderProps: PageHeaderProps) {
     }
   }
 
-  const isTabsNecessary = title === t('page_header.turmas') || title === 'Falando com o Edu'
+  const isTabsNecessary = title === 'Turmas' || title === 'Falando com o Edu'
 
   const handleChange = (_e: React.SyntheticEvent, newTab: Tab) => {
     const url = new URL(window.location.href)
@@ -80,7 +78,7 @@ export default function PageHeader(PageHeaderProps: PageHeaderProps) {
         justifyContent: 'space-between'
       }}>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-          <img src={iconPath ? iconPath : '/iconsPages/turma.svg'} alt={t('page_header.pessoas')} />
+          <img src={iconPath ? iconPath : '/iconsPages/turma.svg'} alt='Pessoas agrupadas' />
           <Typography variant='h5' sx={{
             fontWeight: '700'
           }}>
@@ -108,9 +106,9 @@ export default function PageHeader(PageHeaderProps: PageHeaderProps) {
                   onChange={handleChange}
                   value={tab}
                 >
-                  <Tab label={t('page_header.posts')} value='posts' />
-                  <Tab label={t('page_header.atividades')} value='atividades' />
-                  <Tab label={t('page_header.pessoas')} value='pessoas' />
+                  <Tab label='Posts' value='posts' />
+                  <Tab label='Atividades' value='atividades' />
+                  <Tab label='Pessoas' value='pessoas' />
                 </Tabs>
               </Box>
             </TabContext>
@@ -123,7 +121,7 @@ export default function PageHeader(PageHeaderProps: PageHeaderProps) {
               onSearch={search.onSearch}
               value={search.searchValue}
               setValue={search.setSearchValue}
-              placeholder={t('page_header.search_placeholder')}
+              placeholder='Nome da Turma'
             />
           </Box>
         }

@@ -1,4 +1,4 @@
-import Box from '@mui/material/Box'
+import Box from '@mui/material/Box/Box'
 import Question from '../../components/Question/Question'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
@@ -13,7 +13,6 @@ import { LuPlusCircle } from 'react-icons/lu'
 import { BsStars } from 'react-icons/bs'
 import Modal from '../../components/Modal/Modal'
 import { useNavigate } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
 
 type QuestionProps = {
   questions?: QuestionType[]
@@ -21,7 +20,6 @@ type QuestionProps = {
 
 export default function CriarAtividade(props: QuestionProps) {
   const { questions: q } = props
-  const { t } = useTranslation()
 
   const client = useClient()
   const navigate = useNavigate()
@@ -32,35 +30,41 @@ export default function CriarAtividade(props: QuestionProps) {
   const [endDate, setEndDate] = useState<string | null>(null)
   const [description, setDescription] = useState('')
   const url = new URL(window.location.href)
-  const pathSegments = url.pathname.split('/')
-  const classroomId = pathSegments[pathSegments.length - 1]
+	const pathSegments = url.pathname.split('/')
+	const classroomId = pathSegments[pathSegments.length - 1]
   const [openModal, setOpenModal] = useState<boolean>(false)
   const [finishButtonIsEnabled, setFinishButtonIsEnabled] = useState<boolean>(false)
   const [createInProgress, setCreateInProgress] = useState<boolean>(false)
 
-  const [questions, setQuestions] = useState<QuestionType[]>(q || [
-    {
-      description: '',
-      correctAnswerKey: 'a',
-      options: [
-        { key: 'a', description: '' },
-        { key: 'b', description: '' },
-        { key: 'c', description: '' },
-        { key: 'd', description: '' }
-      ]
-    }
-  ])
+  const [questions, setQuestions] = useState<QuestionType[]>(
+    q || [
+      {
+        description: '',
+        correctAnswerKey: 'a',
+        options: [
+          { key: 'a', description: '' },
+          { key: 'b', description: '' },
+          { key: 'c', description: '' },
+          { key: 'd', description: '' }
+        ]
+      }
+    ]
+  )
 
   useEffect(() => {
     const allQuestionsAreComplete = questions.every(q => q.description && q.options.every(o => o.description))
 
-    setFinishButtonIsEnabled(allQuestionsAreComplete && questions.length > 0)
+    if(allQuestionsAreComplete && questions.length > 0) {
+      setFinishButtonIsEnabled(true)
+    } else {
+      setFinishButtonIsEnabled(false)
+    }
   }, [questions])
 
   const handleCreateClassWork = async () => {
     setCreateInProgress(true)
 
-    if (endDate) {
+    if(endDate) {
       const classWork: Classwork = {
         title,
         datePosting,
@@ -69,11 +73,10 @@ export default function CriarAtividade(props: QuestionProps) {
         questions
       }
 
-      if (classroomId) {
+      if (classroomId)
         await client.createClassWork(classWork, classroomId).then(() => {
           navigate('/turma/' + classroomId + '?tab=atividades')
         })
-      }
     }
 
     setCreateInProgress(false)
@@ -150,7 +153,7 @@ export default function CriarAtividade(props: QuestionProps) {
   }, [classroomId, client])
 
   const handleAddQuestion = (question?: QuestionType) => {
-    if (question) {
+    if(question) {
       setOpenModal(false)
       return setQuestions([...questions, question])
     }
@@ -181,13 +184,13 @@ export default function CriarAtividade(props: QuestionProps) {
             justifyContent: 'space-between',
             alignItems: 'center'
           }}>
-            <Typography sx={{ fontWeight: 700, fontSize: 18 }}>{t('turma.criar_questionario')}</Typography>
+            <Typography sx={{ fontWeight: 700, fontSize: 18 }}>Criar questionário</Typography>
             <Box sx={{ display: 'flex', gap: '16px' }}>
               <Button
                 onClick={() => setOpenModal(true)}
                 variant="contained"
-                startIcon={<LuPlusCircle color='#6730EC' size={22} />}
-                endIcon={<BsStars color='#6730EC' size={20} />}
+                startIcon={<LuPlusCircle color='#6730EC' size={22}/>}
+                endIcon={<BsStars color='#6730EC' size={20}/>}
                 sx={{
                   display: 'inline-flex',
                   gap: '8px',
@@ -204,7 +207,7 @@ export default function CriarAtividade(props: QuestionProps) {
                   }
                 }}
               >
-                {t('modal.texto_botao_gerar')}
+                Gerar Questões
               </Button>
 
               <FinalizarDialog
@@ -226,7 +229,7 @@ export default function CriarAtividade(props: QuestionProps) {
             sx={{ textTransform: 'none', backgroundColor: '#7750DE', borderRadius: '10px', padding: '8px', fontWeight: 600, marginBottom: '12px' }}
             variant='contained'
             onClick={() => handleAddQuestion()}>
-              {t('turma.adicionar_nova_questao')}
+              Adicionar nova questão
           </Button>
 
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: '16px', paddingBottom: '20px' }}>
@@ -248,8 +251,8 @@ export default function CriarAtividade(props: QuestionProps) {
 
       <Modal
         width='50%'
-        titulo={t('modal.gerar_questao')}
-        textoBotaoAbrirModal={t('modal.texto_botao_gerar')}
+        titulo='Gerar questão com IA'
+        textoBotaoAbrirModal='Gerar questão IA'
         altIcone=''
         variantButton='none'
         iconeReact={
@@ -261,7 +264,7 @@ export default function CriarAtividade(props: QuestionProps) {
         onClose={() => setOpenModal(false)}
         onOpen={() => setOpenModal(true)}
       >
-        <GerarQuestaoModal handleAddQuestion={handleAddQuestion} handleCancel={() => setOpenModal(false)} />
+        <GerarQuestaoModal handleAddQuestion={handleAddQuestion} handleCancel={() => setOpenModal(false)}/>
       </Modal>
     </>
   )
