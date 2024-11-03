@@ -9,6 +9,7 @@ import LandingPagePrincing from '../components/LandingPagePricing/LandingPagePri
 import Footer from '../components/Footer/Footer'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import TranslateSwitch from '../components/Switch/Switch'
 
 export default function LandingPage() {
     const { t } = useTranslation(['landingPage'])
@@ -23,20 +24,20 @@ export default function LandingPage() {
             {/* Home */}
             <div className='flex flex-col h-screen items-center bg-dark'>
                 <div className='flex flex-col w-full h-full max-w-screen-xl'>
-                    <div className='flex w-full h-[15%] items-center justify-between px-10'>
-
-                        <div className='flex-1'>
-                            <Logo variant='padraoWhite' width='lg' />
-                        </div>
-
-                        <div className='flex w-[70%] justify-center h-[40%]'>
-                            <NavBar />
-                        </div>
-
-                        <div className='flex-1 flex justify-end'>
-                            <Button variant='primary' onClick={handleClickLogin}>{t('navbar.login')}</Button>
-                        </div>
+                <div className='flex w-full h-[15%] items-center justify-between'>
+                    <div className='flex-1'>
+                        <Logo variant='padraoWhite' width='lg'/>
                     </div>
+
+                    <div className='flex w-[70%] justify-center h-[40%]'>
+                        <NavBar />
+                    </div>
+
+                    <div className='flex-1 flex justify-end items-start'>
+                        <Button variant='primary' onClick={handleClickLogin}>{t('navbar.login')}</Button>
+                        <TranslateSwitch />
+                    </div>
+                </div>
 
                     <div className='flex flex-col w-full h-[85%] bg-[url(/Gradientes/gradienteHome.png)] bg-no-repeat bg-center justify-center items-center'>
                         <MainTextLogo />
