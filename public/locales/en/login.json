@@ -1,0 +1,18 @@
+{
+  "login": {
+    "fill_all_fields": "Please fill in all fields",
+    "invalid_credentials": "Invalid credentials",
+    "email": "Email",
+    "password": "Password",
+    "keep_me_connected": "Keep me connected",
+    "login": "Login"
+  },
+  "slide_login": {
+    "revolutionizing_education": "Revolutionizing Education",
+    "education_description": "Transform the way you learn with innovative technologies.",
+    "languages_at_your_reach": "Languages at Your Reach",
+    "languages_description": "Learn new languages in an accessible and efficient way.",
+    "smart_fluency": "Smart Fluency",
+    "fluency_description": "Develop your fluency with smart tools."
+  }
+}

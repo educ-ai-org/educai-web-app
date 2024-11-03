@@ -1,0 +1,18 @@
+{
+  "login": {
+    "fill_all_fields": "Por favor, preencha todos os campos",
+    "invalid_credentials": "Credenciais inválidas",
+    "email": "E-mail",
+    "password": "Senha",
+    "keep_me_connected": "Mantenha-me conectado",
+    "login": "Entrar"
+  },
+  "slide_login": {
+    "revolutionizing_education": "Revolucionando a Educação",
+    "education_description": "Transforme a forma como você aprende com tecnologias inovadoras.",
+    "languages_at_your_reach": "Idiomas ao Seu Alcance",
+    "languages_description": "Aprenda novos idiomas de forma acessível e eficiente.",
+    "smart_fluency": "Fluência Inteligente",
+    "fluency_description": "Desenvolva sua fluência com ferramentas inteligentes."
+  }
+}

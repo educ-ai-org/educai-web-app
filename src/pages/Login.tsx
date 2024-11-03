@@ -23,7 +23,7 @@ import { useTranslation } from 'react-i18next'
 export default function Login() {
     const client = useClient()
     const navigate = useNavigate()
-    const { t } = useTranslation()
+    const { t } = useTranslation(['login'])
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [showPassword, setShowPassword] = useState(false)

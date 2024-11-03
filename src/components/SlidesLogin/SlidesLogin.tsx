@@ -8,7 +8,7 @@ import Typography from '../Typography/Typography'
 import { useTranslation } from 'react-i18next'
 
 export default function SlideLogin() {
-  const { t } = useTranslation()
+  const { t } = useTranslation(['login'])
 
   return (
       <Swiper
