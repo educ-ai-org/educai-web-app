@@ -54,13 +54,13 @@ export default function LandingPage() {
             <div className='flex flex-col h-screen items-center justify-center bg-dark'>
                 <div className='flex w-[85%] flex-wrap justify-between gap-y-16'>
                     <LpCard figure='/IconCards/iconCard01.svg' iconSide='/IconCards/miniIconCard01.svg'
-                        title={<>{t('solutions.exercise_creation')} <span className='text-purple-300'>{t('solutions.exercises')}</span></>} subTitle={t('solutions.with_ai')} />
+                        title={<>{t('solutions.exercise_creation')} <span className='text-purple-300'></span></>} subTitle={t('solutions.with_ai')} />
                     <LpCard figure='/IconCards/iconCard02.svg' iconSide='/IconCards/miniIconCard02.svg'
-                        title={<>{t('solutions.student_engagement')} <span className='text-purple-300'>{t('solutions.engaged')}</span></>} subTitle={t('solutions.with_ai')} />
+                        title={<>{t('solutions.student_engagement')} <span className='text-purple-300'></span></>} subTitle={t('solutions.with_ai')} />
                     <LpCard figure='/IconCards/iconCard03.svg' iconSide='/IconCards/miniIconCard03.svg'
-                        title={<>{t('solutions.language_focus')} <span className='text-purple-300'>{t('solutions.practice')}</span></>} subTitle={t('solutions.with_ai')} />
+                        title={<>{t('solutions.language_focus')} <span className='text-purple-300'></span></>} subTitle={t('solutions.with_ai')} />
                     <LpCard figure='/IconCards/iconCard04.svg' iconSide='/IconCards/miniIconCard04.svg'
-                        title={<>{t('solutions.realtime_feedback')} <span className='text-purple-300'>{t('solutions.feedbacks')}</span></>} subTitle={t('solutions.with_ai')} />
+                        title={<>{t('solutions.realtime_feedback')} <span className='text-purple-300'></span></>} subTitle={t('solutions.with_ai')} />
                 </div>
             </div>
 
@@ -92,7 +92,7 @@ export default function LandingPage() {
             <div className='flex flex-col h-screen items-center bg-dark'>
                 <div className='flex flex-col cp w-[80%] h-full justify-center items-center gap-3'>
                     <Typography variant='lp-team-title'>{t('contact.our_team')}</Typography>
-                    <img src='./Logos/logoSemIcon.svg' alt='Logo'></img>
+                    <img src='./logos/logoSemIcon.svg' alt='Logo'></img>
                     <CardTeam />
                 </div>
             </div>
