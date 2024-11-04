@@ -167,7 +167,6 @@ export default class Client {
     return response.data
   }
 
-  // outros métodos vcs devem criar um tipo na pasta types, copiem o UserLogin e alterem conforme a necessidade
   async createClassWork(
     classWork: Classwork,
     classroomId: string
@@ -180,7 +179,7 @@ export default class Client {
 
   async getClassWorksByClassroom(classroomId: string, userId?: string): Promise<Classwork[]> {
     if (userId) {
-      return (await this.axios.get(`/classroom/${classroomId}/classworks/${userId}`)).data
+      return (await this.axios.get(`/classroom/${classroomId}/student-classworks`)).data
     }
 
     return (await this.axios.get(`/classroom/${classroomId}/classworks`)).data
@@ -220,7 +219,6 @@ export default class Client {
   async addAnswers(
     answers: SendAnswerData,
     headers: {
-      userId: string
       classworkId: string
     }): Promise<void> {
     return await this.axios.post('/classwork/answer', answers, { headers })
@@ -237,8 +235,8 @@ export default class Client {
     return classroom.participants
   }
 
-  async getUserAnswers(classworkId: string, userId: string) {
-    return (await this.axios.get(`/classwork/${classworkId}/answer/${userId}`)).data
+  async getUserAnswers(classworkId: string) {
+    return (await this.axios.get(`/classwork/${classworkId}/answer}`)).data
   }
 
   async getAnswersStatus(classworkId: string): Promise<UsersType> {

@@ -122,12 +122,6 @@ export default function Post(post: PostProps) {
         return date.toLocaleDateString('pt-BR')
     }
 
-    const handleUrl = () => {
-        client.getUrlArquivoPost(id).then((data: string) => {
-            window.location.href= data.trim()
-        })
-    }
-
     return (
         <Box sx={{ width: '100%', height: '24vh', border: '1px solid #BEBEBE', borderRadius: '10px' }}>
             <Box sx={{
@@ -168,13 +162,13 @@ export default function Post(post: PostProps) {
             <Box sx={{ width: '100%', height: '65%', padding: '16px', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '10px', color: '#5E5E5E' }}>
                 <Typography sx={{ fontSize: '14px' }}>Data de publicação: <b>{formatDate(datePosting)}</b></Typography>
                 {description && <Typography sx={{ fontSize: '14px' }}>{description}</Typography>}
-                {originalFileName && <Typography onClick={handleUrl} sx={{
+                {originalFileName && <Typography sx={{
                     fontSize: '14px',
                     textDecoration: 'underline',
                     cursor: 'pointer',
                     fontWeight: 'bold',
                     color: '#6730EC'
-                }}>{originalFileName}</Typography>}
+                }}><a href={file}>{originalFileName}</a></Typography>}
             </Box>
 
             <Box>
