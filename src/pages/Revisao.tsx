@@ -15,9 +15,9 @@ export default function Revisao() {
 
 	useEffect(() => {
 		if(auth.role == 'TEACHER' && auth.student) {
-			client.getUserAnswers(classworkId, auth.student).then((res) => setClasswork(res))
+			client.getUserAnswers(classworkId).then((res) => setClasswork(res))
 		}else{
-			client.getUserAnswers(classworkId, auth.id).then((res) => setClasswork(res))
+			client.getUserAnswers(classworkId).then((res) => setClasswork(res))
 		}
 	}, [classworkId, client, auth])
 
@@ -54,7 +54,7 @@ export default function Revisao() {
 
 		return ''
 	}
-	
+
 	return (
 		<Box sx={{ display: 'flex', flexDirection: 'column', gap: '16px', padding: '16px 42px' }}>
 			<Typography sx={{ fontSize: 18, fontWeight: 800 }}>{classwork?.classwork.title}</Typography>
@@ -78,9 +78,9 @@ export default function Revisao() {
 
 					<Box sx={{ display: 'flex', flexDirection: 'column' }}>
 						{question.options.map(option => (
-							<Box sx={{ 
-								display: 'flex', 
-								alignItems: 'center', 
+							<Box sx={{
+								display: 'flex',
+								alignItems: 'center',
 								justifyContent: 'space-between',
 								backgroundColor: getQuestionColor(question?.id, option.key),
 								padding: '4px 26px',
@@ -93,15 +93,15 @@ export default function Revisao() {
 									<Typography sx={{ fontSize: 14, fontWeight: 500 }}>{option.description}</Typography>
 								</Box>
 
-								{getQuestionType(question?.id, option.key) && 
+								{getQuestionType(question?.id, option.key) &&
 									<Box sx={{ display: 'flex', alignItems: 'center', gap: '46px', marginRight: '24px' }}>
 										<Typography sx={{ fontSize: 16, fontWeight: 500, color: getQuestionType(question?.id, option.key) === 'CORRECT' ? '#005600' : '#D30000' }}>
 											{getQuestionType(question?.id, option.key) === 'CORRECT' ? 'Correta' : 'Errada'}
 										</Typography>
 
 										{
-											getQuestionType(question?.id, option.key) === 'CORRECT' 
-												? <IoIosCheckmarkCircleOutline size={22} color='#005600' /> 
+											getQuestionType(question?.id, option.key) === 'CORRECT'
+												? <IoIosCheckmarkCircleOutline size={22} color='#005600' />
 												: <IoIosCloseCircleOutline size={22} color='#D30000' />
 										}
 									</Box>
