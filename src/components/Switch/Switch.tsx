@@ -18,7 +18,7 @@ const MaterialUISwitch = styled(Switch)(() => ({
       color: '#fff',
       transform: 'translateX(22px)',
       '& .MuiSwitch-thumb:before': {
-        backgroundImage: 'url(../../../public/iconsPages/bandeira-brasil.png)',
+        backgroundImage: 'url(./public/iconsPages/bandeira-brasil.png)',
         backgroundSize: '25px 18px',
       },
       '& + .MuiSwitch-track': {
@@ -44,7 +44,7 @@ const MaterialUISwitch = styled(Switch)(() => ({
       top: 0,
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
-      backgroundImage: 'url(../../../public/iconsPages/bandeira-usa.png)',
+      backgroundImage: 'url(./public/iconsPages/bandeira-usa.png)',
       backgroundSize: '25px 18px',
     },
   },

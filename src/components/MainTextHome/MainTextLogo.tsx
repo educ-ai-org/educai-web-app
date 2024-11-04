@@ -12,7 +12,7 @@ export default function MainTextLogo() {
             </Typography>
 
             <Typography variant="body1">
-                {t('home.power_ai')} <span className='bg-gradient-to-b from-violet-900 to-violet-500 text-transparent bg-clip-text'>AI</span>
+                {t('home.power_ai')}
             </Typography>
         </div>
     )
