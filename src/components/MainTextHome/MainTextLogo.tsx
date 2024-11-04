@@ -8,7 +8,7 @@ export default function MainTextLogo() {
         <div className='flex flex-col items-center text-white text-center gap-y-8'>
             <Typography variant='lp-title'>
                 {t('home.changing_way')} <br />
-                <span className=' bg-gradient-to-b from-violet-900 to-violet-500 text-transparent bg-clip-text'>{t('home.way')}</span> {t('home.learn')}
+                <span className=' bg-gradient-to-b from-violet-900 to-violet-500 text-transparent bg-clip-text'>{t('home.learn')}</span>
             </Typography>
 
             <Typography variant="body1">
