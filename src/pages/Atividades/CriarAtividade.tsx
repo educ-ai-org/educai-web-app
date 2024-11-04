@@ -150,7 +150,8 @@ export default function CriarAtividade(props: QuestionProps) {
     if (classroomId) {
       client.getClassroomById(classroomId).then((res) => setTurma(res))
     }
-  }, [classroomId, client])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [classroomId])
 
   const handleAddQuestion = (question?: QuestionType) => {
     if(question) {
