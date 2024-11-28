@@ -13,11 +13,7 @@ import { LoadingButton } from '@mui/lab'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios'
-
-export type Messages = {
-  message: string
-  isUser: boolean
-}
+import { Messages } from '../lib/types/Messages'
 
 export default function TalkWithEdu() {
   const { recording, audioBlobUrl, startRecording, stopRecording } = useAudioRecorder()
@@ -26,7 +22,7 @@ export default function TalkWithEdu() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [response, setResponse] = useState<string>()
   const client = useAiClient()
-  const [messages, setMessages] = useState<Messages[]>([])
+  const [messages, setMessages] = useState<Messages>([])
   const [pdfLink, setPdfLink] = useState<string>('')
   const [isFeedbackLoading, setFeedbackLoading] = useState<boolean>(false)
 
@@ -82,8 +78,9 @@ export default function TalkWithEdu() {
         const fileName = uuidv4() + '.mp3'
         const transcribeResponse = await client.transcribe(audioBuffer, fileName)
         setTranscription(transcribeResponse.data.text)
-        const eduResponse = await client.getResponse(transcribeResponse.data.text)
-        setResponse(eduResponse.response)
+        const eduResponse = await client.getResponse([...messages, { role: 'User', content: transcribeResponse.data.text }])
+        const lastEduMessage = eduResponse[eduResponse.length - 1]
+        setResponse(lastEduMessage.content)
         setIsLoading(false)
       } catch (error) {
         setIsLoading(false)
@@ -99,11 +96,11 @@ export default function TalkWithEdu() {
   }, [audioBlobUrl])
 
   useEffect(() => {
-    if (transcription && !messages.some(msg => msg.message === transcription && msg.isUser)) {
-      setMessages([...messages, { message: transcription, isUser: true }])
+    if (transcription && !messages.some(msg => msg.content === transcription && msg.role === 'User')) {
+      setMessages([...messages, { role: 'User',content: transcription }])
     }
     if (response) {
-      setMessages([...messages, { message: response, isUser: false }])
+      setMessages([...messages, { content: response, role: 'Assistant' }])
       fetchTTS(response).then(playAudio).catch(console.error)
     }
   }, [transcription, response])
@@ -130,7 +127,7 @@ export default function TalkWithEdu() {
                 sx={{
                   width: '100%',
                   display: 'flex',
-                  justifyContent: message.isUser ? 'flex-end' : 'flex-start',
+                  justifyContent: message.role === 'User' ? 'flex-start' : 'flex-end',
                   marginBottom: '8px'
                 }}>
                 <Box
@@ -138,11 +135,11 @@ export default function TalkWithEdu() {
                     width: '50%',
                     padding: '8px',
                     borderRadius: '8px',
-                    backgroundColor: message.isUser ? '#DED1FF' : '#6730EC',
-                    color: message.isUser ? 'black' : 'white'
+                    backgroundColor: message.role === 'User' ? '#7750DE' : '#E5E5E5',
+                    color: message.role === 'User' ? 'white' : 'black',
                   }}>
                   <Typography variant='body1'>
-                    {message.message}
+                    {message.content}
                   </Typography>
                 </Box>
               </Box>

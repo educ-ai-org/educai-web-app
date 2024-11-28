@@ -1,6 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios'
 import { UserLogin } from '../types/Login'
-import { EduResponse } from '../types/EduResponse'
 import { TurmaType } from '../types/Turma'
 import { LeaderboardType } from '../types/Leaderboard'
 import { PostType } from '../types/Post'
@@ -12,7 +11,7 @@ import { AnswerType } from '../types/Answer'
 import { SendAnswerData } from '../types/SendAnswerData'
 import { UsersType } from '../types/User'
 import { Participant } from '../types/Participant'
-import { Messages } from '../../pages/TalkWithEdu'
+import { Messages } from '../types/Messages'
 
 type ClientProps = {
   clientType: 'ia-api' | 'api',
@@ -151,10 +150,9 @@ export default class Client {
   }
 
   async getResponse(
-    question: string
-  ): Promise<EduResponse> {
-    const request = await this.axios.post('edu-response', { question })
-    console.log(request)
+    messages: Messages
+  ): Promise<Messages> {
+    const request = await this.axios.post('edu-response', { messages, openai: true })
     return request.data
   }
 
@@ -255,7 +253,7 @@ export default class Client {
   }
 
   async getFeedback(
-    messages: Messages[],
+    messages: Messages,
     studentName: string
   ): Promise<AxiosResponse<ArrayBuffer>> {
 
