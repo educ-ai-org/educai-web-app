@@ -78,9 +78,8 @@ export default function TalkWithEdu() {
         const fileName = uuidv4() + '.mp3'
         const transcribeResponse = await client.transcribe(audioBuffer, fileName)
         setTranscription(transcribeResponse.data.text)
-        const eduResponse = await client.getResponse([...messages, { role: 'User', content: transcribeResponse.data.text }])
-        const lastEduMessage = eduResponse[eduResponse.length - 1]
-        setResponse(lastEduMessage.content)
+        const eduResponse = await client.getResponse([...messages, { role: 'user', content: transcribeResponse.data.text }])
+        setResponse(eduResponse)
         setIsLoading(false)
       } catch (error) {
         setIsLoading(false)
@@ -96,12 +95,14 @@ export default function TalkWithEdu() {
   }, [audioBlobUrl])
 
   useEffect(() => {
-    if (transcription && !messages.some(msg => msg.content === transcription && msg.role === 'User')) {
-      setMessages([...messages, { role: 'User',content: transcription }])
+    if (transcription && !messages.some(msg => msg.content === transcription && msg.role === 'user')) {
+      setMessages([...messages, { role: 'user',content: transcription }])
+      console.log(messages, 'if 1')
     }
     if (response) {
-      setMessages([...messages, { content: response, role: 'Assistant' }])
+      setMessages([...messages, { content: response, role: 'assistant' }])
       fetchTTS(response).then(playAudio).catch(console.error)
+      console.log(messages, 'if 2')
     }
   }, [transcription, response])
 
@@ -127,7 +128,7 @@ export default function TalkWithEdu() {
                 sx={{
                   width: '100%',
                   display: 'flex',
-                  justifyContent: message.role === 'User' ? 'flex-start' : 'flex-end',
+                  justifyContent: message.role === 'user' ? 'flex-end' : 'flex-start',
                   marginBottom: '8px'
                 }}>
                 <Box
@@ -135,8 +136,8 @@ export default function TalkWithEdu() {
                     width: '50%',
                     padding: '8px',
                     borderRadius: '8px',
-                    backgroundColor: message.role === 'User' ? '#7750DE' : '#E5E5E5',
-                    color: message.role === 'User' ? 'white' : 'black',
+                    backgroundColor: message.role === 'user' ? '#7750DE' : '#E5E5E5',
+                    color: message.role === 'user' ? 'white' : 'black',
                   }}>
                   <Typography variant='body1'>
                     {message.content}

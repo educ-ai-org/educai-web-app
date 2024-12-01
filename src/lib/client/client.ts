@@ -151,9 +151,9 @@ export default class Client {
 
   async getResponse(
     messages: Messages
-  ): Promise<Messages> {
+  ): Promise<string> {
     const request = await this.axios.post('edu-response', { messages, openai: true })
-    return request.data
+    return request.data.response
   }
 
   async uploadFile(formData: FormData): Promise<{ url: string }> {
