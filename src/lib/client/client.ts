@@ -191,7 +191,12 @@ export default class Client {
     payload.audio && formData.append('audio', payload.audio)
     payload.document &&  formData.append('document', payload.document)
 
-    return (await this.axios.post('/generate-educational-resource', formData, { responseType: 'arraybuffer' }))
+    return (await this.axios.post('/generate-educational-resource', formData, {
+      responseType: 'arraybuffer',
+      params: {
+        model: 'openai:gpt-4o',
+      }
+    }))
   }
 
   async generateQuestion(payload: GenerateQuestionPayload): Promise<Question[]> {
