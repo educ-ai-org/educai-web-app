@@ -1,6 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios'
 import { UserLogin } from '../types/Login'
-import { EduResponse } from '../types/EduResponse'
 import { TurmaType } from '../types/Turma'
 import { LeaderboardType } from '../types/Leaderboard'
 import { PostType } from '../types/Post'
@@ -12,7 +11,7 @@ import { AnswerType } from '../types/Answer'
 import { SendAnswerData } from '../types/SendAnswerData'
 import { UsersType } from '../types/User'
 import { Participant } from '../types/Participant'
-import { Messages } from '../../pages/TalkWithEdu'
+import { Messages } from '../types/Messages'
 
 type ClientProps = {
   clientType: 'ia-api' | 'api',
@@ -151,11 +150,10 @@ export default class Client {
   }
 
   async getResponse(
-    question: string
-  ): Promise<EduResponse> {
-    const request = await this.axios.post('edu-response', { question })
-    console.log(request)
-    return request.data
+    messages: Messages
+  ): Promise<string> {
+    const request = await this.axios.post('edu-response', { messages, openai: true })
+    return request.data.response
   }
 
   async uploadFile(formData: FormData): Promise<{ url: string }> {
@@ -193,7 +191,12 @@ export default class Client {
     payload.audio && formData.append('audio', payload.audio)
     payload.document &&  formData.append('document', payload.document)
 
-    return (await this.axios.post('/generate-educational-resource', formData, { responseType: 'arraybuffer' }))
+    return (await this.axios.post('/generate-educational-resource', formData, {
+      responseType: 'arraybuffer',
+      params: {
+        model: 'openai:gpt-4o',
+      }
+    }))
   }
 
   async generateQuestion(payload: GenerateQuestionPayload): Promise<Question[]> {
@@ -209,7 +212,7 @@ export default class Client {
     payload.relatedTheme && formData.append('relatedTheme', payload.relatedTheme)
     payload.numberOfQuestions && formData.append('numberOfQuestions', payload.numberOfQuestions.toString())
 
-    return (await this.axios.post('/generate-questions', formData)).data
+    return (await this.axios.post('/generate-questions', formData, {})).data
   }
 
   async getWordDefinition(word: string): Promise<DictonaryResponse> {
@@ -255,7 +258,7 @@ export default class Client {
   }
 
   async getFeedback(
-    messages: Messages[],
+    messages: Messages,
     studentName: string
   ): Promise<AxiosResponse<ArrayBuffer>> {
 

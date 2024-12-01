@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import Box from '@mui/material/Box/Box'
+import Box from '@mui/material/Box'
 import Layout from './Layout'
 import PageHeader from '../components/PageHeader/PageHeader'
 import TalkButton from '../components/TalkButton/TalkButton'
@@ -11,13 +11,10 @@ import Typography from '@mui/material/Typography'
 import { AuthContext } from '../contexts/AuthContext'
 import { LoadingButton } from '@mui/lab'
 import { ToastContainer, toast } from 'react-toastify'
+import { motion, AnimatePresence } from 'framer-motion'
 import 'react-toastify/dist/ReactToastify.css'
 import axios from 'axios'
-
-export type Messages = {
-  message: string
-  isUser: boolean
-}
+import { Messages } from '../lib/types/Messages'
 
 export default function TalkWithEdu() {
   const { recording, audioBlobUrl, startRecording, stopRecording } = useAudioRecorder()
@@ -26,7 +23,7 @@ export default function TalkWithEdu() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [response, setResponse] = useState<string>()
   const client = useAiClient()
-  const [messages, setMessages] = useState<Messages[]>([])
+  const [messages, setMessages] = useState<Messages>([])
   const [pdfLink, setPdfLink] = useState<string>('')
   const [isFeedbackLoading, setFeedbackLoading] = useState<boolean>(false)
 
@@ -82,8 +79,8 @@ export default function TalkWithEdu() {
         const fileName = uuidv4() + '.mp3'
         const transcribeResponse = await client.transcribe(audioBuffer, fileName)
         setTranscription(transcribeResponse.data.text)
-        const eduResponse = await client.getResponse(transcribeResponse.data.text)
-        setResponse(eduResponse.response)
+        const eduResponse = await client.getResponse([...messages, { role: 'user', content: transcribeResponse.data.text }])
+        setResponse(eduResponse)
         setIsLoading(false)
       } catch (error) {
         setIsLoading(false)
@@ -99,11 +96,11 @@ export default function TalkWithEdu() {
   }, [audioBlobUrl])
 
   useEffect(() => {
-    if (transcription && !messages.some(msg => msg.message === transcription && msg.isUser)) {
-      setMessages([...messages, { message: transcription, isUser: true }])
+    if (transcription && !messages.some(msg => msg.content === transcription && msg.role === 'user')) {
+      setMessages(prev => [...prev, { role: 'user', content: transcription }])
     }
     if (response) {
-      setMessages([...messages, { message: response, isUser: false }])
+      setMessages(prev => [...prev, { content: response, role: 'assistant' }])
       fetchTTS(response).then(playAudio).catch(console.error)
     }
   }, [transcription, response])
@@ -119,36 +116,79 @@ export default function TalkWithEdu() {
 
   return (
     <Layout>
-      <Box sx={{ width: '100%' }} >
-        <Box sx={{ width: '100%', justifyContent: 'center', display: 'flex' }}>
-          <PageHeader title='Falando com o Edu' />
-        </Box>
-        <Box sx={{ width: '100%', height: '89%', display: 'flex', padding: '24px', flexDirection: 'column' }}>
-          <Box sx={{ width: '100%', height: '80%', overflowY: 'scroll' }}>
-            {messages.map((message, index) => (
-              <Box key={index}
-                sx={{
-                  width: '100%',
-                  display: 'flex',
-                  justifyContent: message.isUser ? 'flex-end' : 'flex-start',
-                  marginBottom: '8px'
-                }}>
-                <Box
-                  sx={{
-                    width: '50%',
-                    padding: '8px',
-                    borderRadius: '8px',
-                    backgroundColor: message.isUser ? '#DED1FF' : '#6730EC',
-                    color: message.isUser ? 'black' : 'white'
-                  }}>
-                  <Typography variant='body1'>
-                    {message.message}
-                  </Typography>
-                </Box>
-              </Box>
-            ))}
+      <Box
+        sx={{
+          width: '100%',
+          minHeight: '80vh',
+          display: 'flex',
+          flexDirection: 'column',
+          background: 'linear-gradient(135deg, #f6f7f8 0%, #e6e9f0 100%)',
+          overflow: 'hidden'
+        }}
+      >
+        <PageHeader title='Falando com o Edu' />
+
+        <Box
+          sx={{
+            flex: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            padding: '24px',
+            gap: 2
+          }}
+        >
+          <Box
+            sx={{
+              flex: 1,
+              overflowY: 'auto',
+              borderRadius: 3,
+              boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)',
+              padding: 2,
+              background: 'white'
+            }}
+          >
+            <AnimatePresence>
+              {messages.map((message, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, translateY: 20 }}
+                  animate={{ opacity: 1, translateY: 0 }}
+                  transition={{ duration: 0.3, delay: index * 0.1 }}
+                  style={{
+                    display: 'flex',
+                    justifyContent: message.role === 'user' ? 'flex-end' : 'flex-start',
+                    marginBottom: '12px'
+                  }}
+                >
+                  <Box
+                    sx={{
+                      maxWidth: '70%',
+                      padding: '12px',
+                      borderRadius: '12px',
+                      backgroundColor: message.role === 'user' ? '#7750DE' : '#F0F0F0',
+                      color: message.role === 'user' ? 'white' : 'black',
+                      boxShadow: message.role === 'user'
+                        ? '0 4px 6px rgba(119, 80, 222, 0.2)'
+                        : '0 2px 4px rgba(0,0,0,0.1)'
+                    }}
+                  >
+                    <Typography variant='body1' sx={{ lineHeight: 1.5 }}>
+                      {message.content}
+                    </Typography>
+                  </Box>
+                </motion.div>
+              ))}
+            </AnimatePresence>
           </Box>
-          <Box sx={{ width: '100%', height: '20%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', marginTop: '24px' }}>
+
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 2
+            }}
+          >
             <TalkButton
               loading={isLoading}
               recording={recording || false}
@@ -156,37 +196,50 @@ export default function TalkWithEdu() {
               startRecording={startRecording}
               stopRecording={stopRecording}
             />
+
             <LoadingButton
-              sx={{ width: '24vw', padding: '8px', borderRadius: '10px' }}
-              color='primary'
+              sx={{ width: '24vw', padding: '16px', borderRadius: '10px', marginTop: '24px' }}
               variant='text'
               loading={isFeedbackLoading}
               onClick={handleGetFeedback}
-            >Terminar conversa</LoadingButton>
+            >
+              Terminar conversa
+            </LoadingButton>
+
             {pdfLink && (
-              <a
-                style={{ color: '#7750DE', fontWeight: 400, fontSize: 14, textDecoration: 'underline' }}
+              <motion.a
                 href={pdfLink}
-                download={`feedback-${username}-${new Date().toLocaleDateString('pt-BR').split('/').reverse().join('-')}.pdf`}>
+                download={`feedback-${username}-${new Date().toLocaleDateString('pt-BR').split('/').reverse().join('-')}.pdf`}
+                style={{
+                  color: '#7750DE',
+                  fontWeight: 600,
+                  fontSize: 14,
+                  textDecoration: 'underline',
+                  cursor: 'pointer'
+                }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+              >
                 Clique aqui para ver o seu feedback
-              </a>
+              </motion.a>
             )}
           </Box>
         </Box>
+
+        <ToastContainer
+          position='bottom-right'
+          autoClose={2600}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme='light'
+        />
       </Box>
-      <ToastContainer
-        position='bottom-right'
-        autoClose={2600}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme='light'
-      />
     </Layout>
   )
 }
-
