@@ -212,7 +212,7 @@ export default class Client {
     payload.relatedTheme && formData.append('relatedTheme', payload.relatedTheme)
     payload.numberOfQuestions && formData.append('numberOfQuestions', payload.numberOfQuestions.toString())
 
-    return (await this.axios.post('/generate-questions', formData)).data
+    return (await this.axios.post('/generate-questions', formData, {})).data
   }
 
   async getWordDefinition(word: string): Promise<DictonaryResponse> {
