@@ -87,6 +87,13 @@ export default function FinalizarDialog(props: FinalizarDialogProps) {
                   backgroundColor: '#FFF',
                 },
               }}
+              slotProps={{
+                popper: {
+                  sx: {
+                    zIndex: 100000,
+                  },
+                },
+              }}
               label="Selecione o prazo de entrega"
               value={endDate}
               format="DD/MM/YYYY"

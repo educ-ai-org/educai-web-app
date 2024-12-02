@@ -23,7 +23,64 @@ export default function TalkWithEdu() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [response, setResponse] = useState<string>()
   const client = useAiClient()
-  const [messages, setMessages] = useState<Messages>([])
+  const [messages, setMessages] = useState<Messages>([
+    {
+      role: 'assistant',
+      content: 'Olá! Como posso te ajudar hoje?'
+    },
+    {
+      role: 'user',
+      content: 'Olá, Edu! Gostaria de saber mais sobre o curso de Engenharia de Software'
+    },
+    {
+      role: 'assistant',
+      content: 'Olá! Como posso te ajudar hoje?'
+    },
+    {
+      role: 'user',
+      content: 'Olá, Edu! Gostaria de saber mais sobre o curso de Engenharia de Software'
+    },
+    {
+      role: 'assistant',
+      content: 'Olá! Como posso te ajudar hoje?'
+    },
+    {
+      role: 'user',
+      content: 'Olá, Edu! Gostaria de saber mais sobre o curso de Engenharia de Software'
+    },
+    {
+      role: 'assistant',
+      content: 'Olá! Como posso te ajudar hoje?'
+    },
+    {
+      role: 'user',
+      content: 'Olá, Edu! Gostaria de saber mais sobre o curso de Engenharia de Software'
+    },
+    {
+      role: 'assistant',
+      content: 'Olá! Como posso te ajudar hoje?'
+    },
+    {
+      role: 'user',
+      content: 'Olá, Edu! Gostaria de saber mais sobre o curso de Engenharia de Software'
+    },
+    {
+      role: 'assistant',
+      content: 'Olá! Como posso te ajudar hoje?'
+    },
+    {
+      role: 'user',
+      content: 'Olá, Edu! Gostaria de saber mais sobre o curso de Engenharia de Software'
+    },
+    {
+      role: 'assistant',
+      content: 'Olá! Como posso te ajudar hoje?'
+    },
+    {
+      role: 'user',
+      content: 'Olá, Edu! Gostaria de saber mais sobre o curso de Engenharia de Software'
+    },
+  ])
   const [pdfLink, setPdfLink] = useState<string>('')
   const [isFeedbackLoading, setFeedbackLoading] = useState<boolean>(false)
 
@@ -140,11 +197,12 @@ export default function TalkWithEdu() {
           <Box
             sx={{
               flex: 1,
-              overflowY: 'auto',
+              overflowY: 'scroll',
               borderRadius: 3,
               boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)',
               padding: 2,
-              background: 'white'
+              background: 'white',
+              maxHeight: { xs: '50vh', sm: '58vh', md: '65vh', lg: '58vh', xl: '68vh' },
             }}
           >
             <AnimatePresence>

@@ -150,7 +150,7 @@ export default function ClassWorksPage(props: ClassWorksPageProps) {
                 ))}
                 {classWorks.length === 0 && !loading && (
                     <Typography variant='h6' align='center' sx={{ fontSize: '16px' }}>
-                        Poxa! Nenhum post publicado ainda.. 😕
+                        Poxa! Nenhuma atividade publicada ainda.. 😕
                     </Typography>
                 )}
                 {loading && (
