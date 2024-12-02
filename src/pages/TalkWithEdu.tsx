@@ -23,64 +23,7 @@ export default function TalkWithEdu() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [response, setResponse] = useState<string>()
   const client = useAiClient()
-  const [messages, setMessages] = useState<Messages>([
-    {
-      role: 'assistant',
-      content: 'Olá! Como posso te ajudar hoje?'
-    },
-    {
-      role: 'user',
-      content: 'Olá, Edu! Gostaria de saber mais sobre o curso de Engenharia de Software'
-    },
-    {
-      role: 'assistant',
-      content: 'Olá! Como posso te ajudar hoje?'
-    },
-    {
-      role: 'user',
-      content: 'Olá, Edu! Gostaria de saber mais sobre o curso de Engenharia de Software'
-    },
-    {
-      role: 'assistant',
-      content: 'Olá! Como posso te ajudar hoje?'
-    },
-    {
-      role: 'user',
-      content: 'Olá, Edu! Gostaria de saber mais sobre o curso de Engenharia de Software'
-    },
-    {
-      role: 'assistant',
-      content: 'Olá! Como posso te ajudar hoje?'
-    },
-    {
-      role: 'user',
-      content: 'Olá, Edu! Gostaria de saber mais sobre o curso de Engenharia de Software'
-    },
-    {
-      role: 'assistant',
-      content: 'Olá! Como posso te ajudar hoje?'
-    },
-    {
-      role: 'user',
-      content: 'Olá, Edu! Gostaria de saber mais sobre o curso de Engenharia de Software'
-    },
-    {
-      role: 'assistant',
-      content: 'Olá! Como posso te ajudar hoje?'
-    },
-    {
-      role: 'user',
-      content: 'Olá, Edu! Gostaria de saber mais sobre o curso de Engenharia de Software'
-    },
-    {
-      role: 'assistant',
-      content: 'Olá! Como posso te ajudar hoje?'
-    },
-    {
-      role: 'user',
-      content: 'Olá, Edu! Gostaria de saber mais sobre o curso de Engenharia de Software'
-    },
-  ])
+  const [messages, setMessages] = useState<Messages>([])
   const [pdfLink, setPdfLink] = useState<string>('')
   const [isFeedbackLoading, setFeedbackLoading] = useState<boolean>(false)
 
