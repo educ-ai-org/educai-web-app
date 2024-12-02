@@ -26,7 +26,7 @@ export default function CriarAtividade(props: QuestionProps) {
   const [title, setTitle] = useState('')
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_turma, setTurma] = useState<TurmaType>()
-  const datePosting = new Date().toISOString().split('T')[0]
+  const datePosting = new Date().toLocaleString('sv-SE', { timeZone: 'America/Sao_Paulo' }).replace(' ', 'T')
   const [endDate, setEndDate] = useState<string | null>(null)
   const [description, setDescription] = useState('')
   const url = new URL(window.location.href)

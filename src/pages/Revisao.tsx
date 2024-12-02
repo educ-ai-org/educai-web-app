@@ -8,18 +8,18 @@ import { ReviewClasswork } from '../lib/types/ReviewClasswork'
 import { formatDate } from '../utils/formartDate'
 
 export default function Revisao() {
-	const auth= useContext(AuthContext)
+	const auth = useContext(AuthContext)
 	const client = useClient()
 	const classworkId = new URLSearchParams(useLocation().search).get('classWorkId') ?? ''
 	const [classwork, setClasswork] = useState<ReviewClasswork>()
 
 	useEffect(() => {
 		if(auth.role == 'TEACHER' && auth.student) {
-			client.getUserAnswers(classworkId).then((res) => setClasswork(res))
+			client.getUserAnswers(classworkId, auth.student).then((res) => setClasswork(res))
 		}else{
 			client.getUserAnswers(classworkId).then((res) => setClasswork(res))
 		}
-	}, [classworkId, client, auth])
+	}, [])
 
 	const getQuestionColor = (questionId?: string, currentOptionKey?: string): string => {
 		const correctKey = classwork?.classwork.questions.find(question => question.id === questionId)?.correctAnswerKey

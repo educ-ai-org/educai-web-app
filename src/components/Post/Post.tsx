@@ -15,6 +15,7 @@ import Button from '@mui/material/Button/Button'
 import { AuthContext } from '../../contexts/AuthContext'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { formatDate } from '../../utils/formartDate'
 
 interface PostProps extends PostType {
     updatePost: () => void
@@ -115,11 +116,6 @@ export default function Post(post: PostProps) {
             updatePost()
             sucessToast('Post atualizado com sucesso!')
         })
-    }
-
-    const formatDate = (dateString: string): string => {
-        const date = new Date(dateString)
-        return date.toLocaleDateString('pt-BR')
     }
 
     return (

@@ -59,7 +59,7 @@ export default function AnswerQuestionPage() {
   }, [completedQuestion])
 
   const handleSendAnswers = () => {
-    const datePosting = new Date().toISOString()
+    const datePosting = new Date().toLocaleString('sv-SE', { timeZone: 'America/Sao_Paulo' }).replace(' ', 'T')
     setCompletedQuestion({ datePosting, questionAnswers: answers })
   }
 

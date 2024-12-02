@@ -55,7 +55,7 @@ export default function PostsPage(props: postsPageProps) {
     }
 
     useEffect(() => {
-        setDatePosting(new Date().toISOString())
+        setDatePosting(new Date().toLocaleString('sv-SE', { timeZone: 'America/Sao_Paulo' }).replace(' ', 'T'))
     }, [])
 
     useEffect(() => {

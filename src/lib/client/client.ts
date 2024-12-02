@@ -12,6 +12,7 @@ import { SendAnswerData } from '../types/SendAnswerData'
 import { UsersType } from '../types/User'
 import { Participant } from '../types/Participant'
 import { Messages } from '../types/Messages'
+import { ReviewClasswork } from '../types/ReviewClasswork'
 
 type ClientProps = {
   clientType: 'ia-api' | 'api',
@@ -238,8 +239,12 @@ export default class Client {
     return classroom.participants
   }
 
-  async getUserAnswers(classworkId: string) {
-    return (await this.axios.get(`/classwork/${classworkId}/answer}`)).data
+  async getUserAnswers(classworkId: string, studentId?: string): Promise<ReviewClasswork> {
+    if(studentId) {
+      return (await this.axios.get(`/classwork/${classworkId}/answers/${studentId}`)).data
+    }
+
+    return (await this.axios.get(`/classwork/${classworkId}/answer`)).data
   }
 
   async getAnswersStatus(classworkId: string): Promise<UsersType> {

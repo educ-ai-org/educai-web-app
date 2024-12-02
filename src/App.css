@@ -136,3 +136,7 @@
 .Toastify__toast-body {
   font-family: 'Montserrat', Helvetica Neue, Helvetica, Arial, sans-serif;
 }
+
+.css-1anqmj6-MuiPopper-root-MuiPickersPopper-root {
+  z-index: 100000;
+}
