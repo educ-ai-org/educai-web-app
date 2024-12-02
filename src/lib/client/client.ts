@@ -241,7 +241,7 @@ export default class Client {
 
   async getUserAnswers(classworkId: string, studentId?: string): Promise<ReviewClasswork> {
     if(studentId) {
-      return (await this.axios.get(`/classwork/${classworkId}/answers/${studentId}`)).data
+      return (await this.axios.get(`/classwork/${classworkId}/answer/${studentId}`)).data
     }
 
     return (await this.axios.get(`/classwork/${classworkId}/answer`)).data
