@@ -19,7 +19,7 @@ import { Messages } from '../lib/types/Messages'
 export default function TalkWithEdu() {
   const { recording, audioBlobUrl, startRecording, stopRecording } = useAudioRecorder()
   const { username } = useContext(AuthContext)
-  const [transcription, setTranscription] = useState<string>('')
+  // const [transcription, setTranscription] = useState<string>('')
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [response, setResponse] = useState<string>()
   const client = useAiClient()
@@ -78,7 +78,8 @@ export default function TalkWithEdu() {
         const audioBuffer = await fetch(audioBlobUrl).then(response => response.arrayBuffer())
         const fileName = uuidv4() + '.mp3'
         const transcribeResponse = await client.transcribe(audioBuffer, fileName)
-        setTranscription(transcribeResponse.data.text)
+        // setTranscription(transcribeResponse.data.text)
+        setMessages(prev => [...prev, { role: 'user', content: transcribeResponse.data.text }])
         const eduResponse = await client.getResponse([...messages, { role: 'user', content: transcribeResponse.data.text }])
         setResponse(eduResponse)
         setIsLoading(false)
@@ -96,14 +97,14 @@ export default function TalkWithEdu() {
   }, [audioBlobUrl])
 
   useEffect(() => {
-    if (transcription && !messages.some(msg => msg.content === transcription && msg.role === 'user')) {
-      setMessages(prev => [...prev, { role: 'user', content: transcription }])
-    }
+    // if (transcription && messages[messages.length - 1]?.role !== 'user') {
+    //   setMessages(prev => [...prev, { role: 'user', content: transcription }])
+    // }
     if (response) {
       setMessages(prev => [...prev, { content: response, role: 'assistant' }])
       fetchTTS(response).then(playAudio).catch(console.error)
     }
-  }, [transcription, response])
+  }, [response])
 
   const handleGetFeedback = async () => {
     setFeedbackLoading(true)
