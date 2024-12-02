@@ -12,25 +12,21 @@ interface QuestionProps {
     index: number
     handleChangeAlternativeDescription: (key: string, value: string) => void
     handleChangeQuestionDescription: (value: string) => void
+    handleCorrectAnswerKey: (index: number, key: string) => void
     handleDeleteAlternative: (key: string) => void
     handleAddAlternative: () => void
     deleteQuestion?: () => void
 }
 
 export default function Question(props: QuestionProps) {
-    const { question, index, handleChangeQuestionDescription, handleChangeAlternativeDescription, deleteQuestion, handleAddAlternative, handleDeleteAlternative } = props
+    const { question, index, handleChangeQuestionDescription, handleChangeAlternativeDescription, deleteQuestion, handleAddAlternative, handleDeleteAlternative, handleCorrectAnswerKey } = props
 
     const [questionIsComplete, setQuestionIsComplete] = useState<boolean>(false)
-    const [correctAnswerKey, setCorrectAnswerKey] = useState(question.correctAnswerKey)
 
     useEffect(() => {
         const isComplete = question.options.every(option => option.description !== '') && question.description !== ''
         setQuestionIsComplete(isComplete)
     }, [question])
-
-    const handleSetCorretAnswerKey = (correctAnswerKey: string) => {
-        setCorrectAnswerKey(correctAnswerKey)
-    }
 
     return (
         <Box sx={{ width: '100%', display: 'flex', padding: '24px', border: '1px solid #BEBEBE', borderRadius: '8px', flexDirection: 'column', gap: '8px' }} >
@@ -47,14 +43,14 @@ export default function Question(props: QuestionProps) {
             </Box>
             <TextField size='small' spellCheck={false} multiline value={question.description} onChange={(e) => handleChangeQuestionDescription?.(e.target.value)} />
             <Box sx={{ borderBottom: '1px solid #BEBEBE', marginTop: '12px', gap: '16px', display: 'flex', flexDirection: 'column' }}>
-                {question.options.map((option, index) => (
+                {question.options.map((option, key) => (
                     <Option
                         optionKey={option.key}
-                        key={index}
+                        key={key}
                         description={option.description}
-                        correctAnswerKey={correctAnswerKey}
+                        correctAnswerKey={question.correctAnswerKey}
                         handleChangeName={(value) => handleChangeAlternativeDescription(option.key, value)}
-                        handleSelectAlternative={() => handleSetCorretAnswerKey(option.key)}
+                        handleSelectAlternative={() => handleCorrectAnswerKey(index, option.key)}
                         handleDeleteAlternative={() => handleDeleteAlternative(option.key)}
                     />
                 ))}

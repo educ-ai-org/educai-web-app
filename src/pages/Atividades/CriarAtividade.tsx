@@ -141,6 +141,17 @@ export default function CriarAtividade(props: QuestionProps) {
     setQuestions(newQuestions)
   }
 
+  const handleCorrectAnswerKey = (questionIndex: number, key: string) => {
+    const newQuestions = questions.map((q, i) => {
+      if (i === questionIndex) {
+        return { ...q, correctAnswerKey: key }
+      }
+      return q
+    })
+
+    setQuestions(newQuestions)
+  }
+
   const deleteQuestion = (index: number) => {
     const newQuestions = questions.filter((_q, i) => i !== index)
     setQuestions(newQuestions)
@@ -236,7 +247,8 @@ export default function CriarAtividade(props: QuestionProps) {
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: '16px', paddingBottom: '20px' }}>
             {questions.map((q, i) => (
               <Question
-                index={i}
+              index={i}
+                handleCorrectAnswerKey={(index, key) => handleCorrectAnswerKey(index, key)}
                 handleAddAlternative={() => handleAddAlternative(i)}
                 handleDeleteAlternative={(j) => handleDeleteAlternative(i, j)}
                 handleChangeQuestionDescription={(value) => handleChangeQuestionDescription(value, i)}
