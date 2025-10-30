@@ -446,17 +446,24 @@ The project uses GitHub Actions for continuous integration and deployment:
 ### Manual Deployment
 
 #### Docker Deployment
+The project is designed to run in a Docker container using nginx. While a Dockerfile is not included in the repository, the deployment follows this pattern:
+
 ```bash
-# Build the application
+# 1. Build the application
 npm run build
 
-# Build Docker image (Dockerfile not included, but uses nginx:alpine)
-# Copy dist/ to nginx html directory
-# Use nginx.conf for configuration
+# 2. Create a Dockerfile (example):
+# FROM nginx:alpine
+# COPY dist/ /usr/share/nginx/html
+# COPY nginx.conf /etc/nginx/conf.d/default.conf
+# EXPOSE 80
 
-# Run container
+# 3. Build and run Docker image
+docker build -t educai-web-app .
 docker run -d -p 80:80 educai-web-app
 ```
+
+The provided `nginx.conf` file should be used for nginx configuration in the container.
 
 #### Static Hosting
 The `dist/` folder can be deployed to any static hosting service:
